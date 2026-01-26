@@ -1,0 +1,159 @@
+#T#2ndPassProperties
+[ThryWideEnum(Opaque, 0, Cutout, 1, TransClipping, 9, Fade, 2, Transparent, 3, Additive, 4, Soft Additive, 5, Multiplicative, 6, 2x Multiplicative, 7)]_ModeTwoPass ("Rendering Preset--{on_value_actions:[
+{value:0,actions:[{type:SET_PROPERTY,data:_AlphaForceOpaque2=1}, {type:SET_PROPERTY,data:_BlendOp2=0}, {type:SET_PROPERTY,data:_BlendOpAlpha2=4}, {type:SET_PROPERTY,data:_TwoPassAlphaCutoff=0},  		{type:SET_PROPERTY,data:_SrcBlend2=1}, {type:SET_PROPERTY,data:_DstBlend2=0},  {type:SET_PROPERTY,data:_SrcBlendAlpha2=1}, {type:SET_PROPERTY,data:_DstBlendAlpha2=1},  {type:SET_PROPERTY,data:_AddSrcBlend2=1}, {type:SET_PROPERTY,data:_AddDstBlend2=1}, {type:SET_PROPERTY,data:_AddSrcBlendAlpha2=0}, {type:SET_PROPERTY,data:_AddDstBlendAlpha2=1}, {type:SET_PROPERTY,data:_AlphaToCoverage2=0},  {type:SET_PROPERTY,data:_ZWrite2=1}, {type:SET_PROPERTY,data:_ZTest2=4},   {type:SET_PROPERTY,data:_AlphaPremultiply2=0}]},
+{value:1,actions:[{type:SET_PROPERTY,data:_AlphaForceOpaque2=0}, {type:SET_PROPERTY,data:_BlendOp2=0}, {type:SET_PROPERTY,data:_BlendOpAlpha2=4}, {type:SET_PROPERTY,data:_TwoPassAlphaCutoff=.5}, 		{type:SET_PROPERTY,data:_SrcBlend2=1}, {type:SET_PROPERTY,data:_DstBlend2=0},  {type:SET_PROPERTY,data:_SrcBlendAlpha2=1}, {type:SET_PROPERTY,data:_DstBlendAlpha2=1},  {type:SET_PROPERTY,data:_AddSrcBlend2=1}, {type:SET_PROPERTY,data:_AddDstBlend2=1}, {type:SET_PROPERTY,data:_AddSrcBlendAlpha2=0}, {type:SET_PROPERTY,data:_AddDstBlendAlpha2=1}, {type:SET_PROPERTY,data:_AlphaToCoverage2=0},  {type:SET_PROPERTY,data:_ZWrite2=1}, {type:SET_PROPERTY,data:_ZTest2=4},   {type:SET_PROPERTY,data:_AlphaPremultiply2=0}]},
+{value:9,actions:[{type:SET_PROPERTY,data:_AlphaForceOpaque2=0}, {type:SET_PROPERTY,data:_BlendOp2=0}, {type:SET_PROPERTY,data:_BlendOpAlpha2=4}, {type:SET_PROPERTY,data:_TwoPassAlphaCutoff=0.01},  	{type:SET_PROPERTY,data:_SrcBlend2=5}, {type:SET_PROPERTY,data:_DstBlend2=10}, {type:SET_PROPERTY,data:_SrcBlendAlpha2=1}, {type:SET_PROPERTY,data:_DstBlendAlpha2=1},  {type:SET_PROPERTY,data:_AddSrcBlend2=5}, {type:SET_PROPERTY,data:_AddDstBlend2=1}, {type:SET_PROPERTY,data:_AddSrcBlendAlpha2=0}, {type:SET_PROPERTY,data:_AddDstBlendAlpha2=1}, {type:SET_PROPERTY,data:_AlphaToCoverage2=0},  {type:SET_PROPERTY,data:_ZWrite2=1}, {type:SET_PROPERTY,data:_ZTest2=4},   {type:SET_PROPERTY,data:_AlphaPremultiply2=0}]},
+{value:2,actions:[{type:SET_PROPERTY,data:_AlphaForceOpaque2=0}, {type:SET_PROPERTY,data:_BlendOp2=0}, {type:SET_PROPERTY,data:_BlendOpAlpha2=4}, {type:SET_PROPERTY,data:_TwoPassAlphaCutoff=0.002},  	{type:SET_PROPERTY,data:_SrcBlend2=5}, {type:SET_PROPERTY,data:_DstBlend2=10}, {type:SET_PROPERTY,data:_SrcBlendAlpha2=1}, {type:SET_PROPERTY,data:_DstBlendAlpha2=1},  {type:SET_PROPERTY,data:_AddSrcBlend2=5}, {type:SET_PROPERTY,data:_AddDstBlend2=1}, {type:SET_PROPERTY,data:_AddSrcBlendAlpha2=0}, {type:SET_PROPERTY,data:_AddDstBlendAlpha2=1}, {type:SET_PROPERTY,data:_AlphaToCoverage2=0},  {type:SET_PROPERTY,data:_ZWrite2=0}, {type:SET_PROPERTY,data:_ZTest2=4},   {type:SET_PROPERTY,data:_AlphaPremultiply2=0}]},
+{value:3,actions:[{type:SET_PROPERTY,data:_AlphaForceOpaque2=0}, {type:SET_PROPERTY,data:_BlendOp2=0}, {type:SET_PROPERTY,data:_BlendOpAlpha2=4}, {type:SET_PROPERTY,data:_TwoPassAlphaCutoff=0},  		{type:SET_PROPERTY,data:_SrcBlend2=1}, {type:SET_PROPERTY,data:_DstBlend2=10}, {type:SET_PROPERTY,data:_SrcBlendAlpha2=1}, {type:SET_PROPERTY,data:_DstBlendAlpha2=1},  {type:SET_PROPERTY,data:_AddSrcBlend2=1}, {type:SET_PROPERTY,data:_AddDstBlend2=1}, {type:SET_PROPERTY,data:_AddSrcBlendAlpha2=0}, {type:SET_PROPERTY,data:_AddDstBlendAlpha2=1}, {type:SET_PROPERTY,data:_AlphaToCoverage2=0},  {type:SET_PROPERTY,data:_ZWrite2=0}, {type:SET_PROPERTY,data:_ZTest2=4},   {type:SET_PROPERTY,data:_AlphaPremultiply2=1}]},
+{value:4,actions:[{type:SET_PROPERTY,data:_AlphaForceOpaque2=0}, {type:SET_PROPERTY,data:_BlendOp2=0}, {type:SET_PROPERTY,data:_BlendOpAlpha2=4}, {type:SET_PROPERTY,data:_TwoPassAlphaCutoff=0},  		{type:SET_PROPERTY,data:_SrcBlend2=1}, {type:SET_PROPERTY,data:_DstBlend2=1},  {type:SET_PROPERTY,data:_SrcBlendAlpha2=1}, {type:SET_PROPERTY,data:_DstBlendAlpha2=1},  {type:SET_PROPERTY,data:_AddSrcBlend2=1}, {type:SET_PROPERTY,data:_AddDstBlend2=1}, {type:SET_PROPERTY,data:_AddSrcBlendAlpha2=0}, {type:SET_PROPERTY,data:_AddDstBlendAlpha2=1}, {type:SET_PROPERTY,data:_AlphaToCoverage2=0},  {type:SET_PROPERTY,data:_ZWrite2=0}, {type:SET_PROPERTY,data:_ZTest2=4},   {type:SET_PROPERTY,data:_AlphaPremultiply2=0}]},
+{value:5,actions:[{type:SET_PROPERTY,data:_AlphaForceOpaque2=0}, {type:SET_PROPERTY,data:_BlendOp2=0}, {type:SET_PROPERTY,data:_BlendOpAlpha2=4}, {type:SET_PROPERTY,data:_TwoPassAlphaCutoff=0},  		{type:SET_PROPERTY,data:_SrcBlend2=4}, {type:SET_PROPERTY,data:_DstBlend2=1},  {type:SET_PROPERTY,data:_SrcBlendAlpha2=1}, {type:SET_PROPERTY,data:_DstBlendAlpha2=1},  {type:SET_PROPERTY,data:_AddSrcBlend2=4}, {type:SET_PROPERTY,data:_AddDstBlend2=1}, {type:SET_PROPERTY,data:_AddSrcBlendAlpha2=0}, {type:SET_PROPERTY,data:_AddDstBlendAlpha2=1}, {type:SET_PROPERTY,data:_AlphaToCoverage2=0},  {type:SET_PROPERTY,data:_ZWrite2=0}, {type:SET_PROPERTY,data:_ZTest2=4},   {type:SET_PROPERTY,data:_AlphaPremultiply2=0}]},
+{value:6,actions:[{type:SET_PROPERTY,data:_AlphaForceOpaque2=0}, {type:SET_PROPERTY,data:_BlendOp2=0}, {type:SET_PROPERTY,data:_BlendOpAlpha2=4}, {type:SET_PROPERTY,data:_TwoPassAlphaCutoff=0},  		{type:SET_PROPERTY,data:_SrcBlend2=2}, {type:SET_PROPERTY,data:_DstBlend2=0},  {type:SET_PROPERTY,data:_SrcBlendAlpha2=1}, {type:SET_PROPERTY,data:_DstBlendAlpha2=1},  {type:SET_PROPERTY,data:_AddSrcBlend2=2}, {type:SET_PROPERTY,data:_AddDstBlend2=1}, {type:SET_PROPERTY,data:_AddSrcBlendAlpha2=0}, {type:SET_PROPERTY,data:_AddDstBlendAlpha2=1}, {type:SET_PROPERTY,data:_AlphaToCoverage2=0},  {type:SET_PROPERTY,data:_ZWrite2=0}, {type:SET_PROPERTY,data:_ZTest2=4},   {type:SET_PROPERTY,data:_AlphaPremultiply2=0}]},
+{value:7,actions:[{type:SET_PROPERTY,data:_AlphaForceOpaque2=0}, {type:SET_PROPERTY,data:_BlendOp2=0}, {type:SET_PROPERTY,data:_BlendOpAlpha2=4}, {type:SET_PROPERTY,data:_TwoPassAlphaCutoff=0},  		{type:SET_PROPERTY,data:_SrcBlend2=2}, {type:SET_PROPERTY,data:_DstBlend2=3},  {type:SET_PROPERTY,data:_SrcBlendAlpha2=1}, {type:SET_PROPERTY,data:_DstBlendAlpha2=1},  {type:SET_PROPERTY,data:_AddSrcBlend2=2}, {type:SET_PROPERTY,data:_AddDstBlend2=1}, {type:SET_PROPERTY,data:_AddSrcBlendAlpha2=0}, {type:SET_PROPERTY,data:_AddDstBlendAlpha2=1}, {type:SET_PROPERTY,data:_AlphaToCoverage2=0},  {type:SET_PROPERTY,data:_ZWrite2=0}, {type:SET_PROPERTY,data:_ZTest2=4},   {type:SET_PROPERTY,data:_AlphaPremultiply2=0}]}
+}]}]}", Int) = 0
+
+[ThryWideEnum(Off, 0, 1R, 1, 1G, 2, 1B, 3, 1A, 4, 2R, 5, 2G, 6, 2B, 7, 2A, 8, 3R, 9, 3G, 10, 3B, 11, 3A, 12, 4R, 13, 4G, 14, 4B, 15, 4A, 16)] _TwoPassFirstPassGlobalMaskIndex ("First Pass Mask--{reference_property:_TwoPassFirtstPassApplyGlobalMaskBlendType}", Int) = 0
+[HideInInspector][ThryWideEnum(Add, 7, Subtract, 1, Multiply, 2, Divide, 3, Min, 4, Max, 5, Average, 6, Replace, 0)] _TwoPassFirtstPassApplyGlobalMaskBlendType ("Blending", Int) = 0
+[ThryWideEnum(Off, 0, 1R, 1, 1G, 2, 1B, 3, 1A, 4, 2R, 5, 2G, 6, 2B, 7, 2A, 8, 3R, 9, 3G, 10, 3B, 11, 3A, 12, 4R, 13, 4G, 14, 4B, 15, 4A, 16)] _TwoPassSecondPassGlobalMaskIndex ("2nd Pass Mask--{reference_property:_TwoPassSecondPassApplyGlobalMaskBlendType}", Int) = 0
+[HideInInspector][ThryWideEnum(Add, 7, Subtract, 1, Multiply, 2, Divide, 3, Min, 4, Max, 5, Average, 6, Replace, 0)] _TwoPassSecondPassApplyGlobalMaskBlendType ("Blending", Int) = 0
+
+[ToggleUI] _TwoPassOverrideFirstPassColor ("Override main Color", Float) = 0
+[HideInInspector][ThryWideEnum(Off, 0, Theme Color 0, 1, Theme Color 1, 2, Theme Color 2, 3, Theme Color 3, 4, ColorChord 0, 5, ColorChord 1, 6, ColorChord 2, 7, ColorChord 3, 8, AL Theme 0, 9, AL Theme 1, 10, AL Theme 2, 11, AL Theme 3, 12)] _TwoPassColorThemeIndex ("", Int) = 0
+_TwoPassColor ("Color & Alpha--{condition_showS:_TwoPassOverrideFirstPassColor==1}", Color) = (1, 1, 1, 1)
+_TwoPassAlphaCutoff ("Alpha Cutoff", Range(0, 1.001)) = 0.5
+[ToggleUI] _TwoPassAlphaCutoffInvert ("Invert Alpha Cutoff", Float) = 0
+[HideInInspector][ToggleUI]_AlphaPremultiply2 ("Alpha Premultiply", Float) = 0
+[ToggleUI]_AlphaForceOpaque2 ("Force Opaque", Float) = 0
+_TwoPassAlphaPower ("Alpha Power", Range(0, 10)) = 1
+
+#T#2ndPassRenderOptionsProperties
+[HideInInspector] m_start_2ndPassRenderingOptions ("2nd Pass Rendering", Float) = 0
+[DoNotAnimate][Enum(UnityEngine.Rendering.CullMode)] _Cull2 ("Cull", Float) = 2
+[DoNotAnimate][Enum(UnityEngine.Rendering.CompareFunction)] _ZTest2 ("ZTest", Float) = 4
+[DoNotAnimate][Enum(Off, 0, On, 1)] _ZWrite2 ("ZWrite", Int) = 1
+[DoNotAnimate][ThryMask(Thry.ColorMaskFlags)] _ColorMask2 ("Color Mask", Int) = 15
+[HideInInspector] m_end_2ndPassRenderingOptions ("", Float) = 0
+
+[HideInInspector] m_start_blending2 ("2nd Pass Blending--{button_help:{text:Tutorial,action:{type:URL,data:https://www.poiyomi.com/rendering/blending},hover:Documentation}}", Float) = 0
+[DoNotAnimate][Enum(Thry.BlendOp)] _BlendOp2 ("RGB Blend Op", Int) = 0
+[DoNotAnimate][Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend2 ("RGB Source Blend", Int) = 1
+[DoNotAnimate][Enum(UnityEngine.Rendering.BlendMode)] _DstBlend2 ("RGB Destination Blend", Int) = 0
+[DoNotAnimate][Space][ThryHeaderLabel(Additive Blending, 13)]
+[DoNotAnimate][Enum(Thry.BlendOp)] _AddBlendOp2 ("RGB Blend Op", Int) = 4
+[DoNotAnimate][Enum(UnityEngine.Rendering.BlendMode)] _AddSrcBlend2 ("RGB Source Blend", Int) = 1
+[DoNotAnimate][Enum(UnityEngine.Rendering.BlendMode)] _AddDstBlend2 ("RGB Destination Blend", Int) = 1
+
+[DoNotAnimate][HideInInspector] m_start_alphaBlending2 ("2nd Pass Advanced Alpha Blending", Float) = 0
+[DoNotAnimate][Enum(Thry.BlendOp)] _BlendOpAlpha2 ("Alpha Blend Op", Int) = 0
+[DoNotAnimate][Enum(UnityEngine.Rendering.BlendMode)] _SrcBlendAlpha2 ("Alpha Source Blend", Int) = 1
+[DoNotAnimate][Enum(UnityEngine.Rendering.BlendMode)] _DstBlendAlpha2 ("Alpha Destination Blend", Int) = 10
+[DoNotAnimate][Space][ThryHeaderLabel(Additive Blending, 13)]
+[DoNotAnimate][Enum(Thry.BlendOp)]_AddBlendOpAlpha2 ("Alpha Blend Op", Int) = 4
+[DoNotAnimate][Enum(UnityEngine.Rendering.BlendMode)] _AddSrcBlendAlpha2 ("Alpha Source Blend", Int) = 0
+[DoNotAnimate][Enum(UnityEngine.Rendering.BlendMode)] _AddDstBlendAlpha2 ("Alpha Destination Blend", Int) = 1
+[DoNotAnimate][HideInInspector] m_end_alphaBlending2 ("Advanced Alpha Blending", Float) = 0
+[HideInInspector] m_end_blending2 ("Blending", Float) = 0
+
+#T#2ndPassKeywords
+#define SecondPassRunning
+
+#T#2ndPassVariables
+float _TwoPassFirstPassGlobalMaskIndex;
+float _TwoPassSecondPassGlobalMaskIndex;
+float _TwoPassFirtstPassApplyGlobalMaskBlendType;
+float _TwoPassSecondPassApplyGlobalMaskBlendType;
+float _TwoPassOverrideFirstPassColor;
+float4 _TwoPassColor;
+float _TwoPassColorThemeIndex;
+float _TwoPassAlphaCutoff;
+float _TwoPassAlphaCutoffInvert;
+float _ModeTwoPass;
+float _AlphaPremultiply2;
+float _AlphaForceOpaque2;
+float _TwoPassAlphaPower;
+float _AddBlendOp2;
+float _Cull2;
+
+#T#2ndPassFunctions
+//2nd pass Functions
+
+#T#2ndPassFunctionCalls
+//2nd pass functions
+
+#T#PoiStencilTwoProperties
+// Stencils
+[HideInInspector] m_start_Stencil2PassOptions ("2nd Pass Stencil--{button_help:{text:Tutorial,action:{type:URL,data:https://www.poiyomi.com/rendering/stencil},hover:Documentation}}", Float) = 0
+[ThryWideEnum(Simple, 0, Front Face vs Back Face, 1)] _Stencil2Type ("Stencil Type", Float) = 0
+[IntRange] _Stencil2Ref ("Stencil Reference Value", Range(0, 255)) = 0
+[IntRange] _Stencil2ReadMask ("Stencil ReadMask Value", Range(0, 255)) = 255
+[IntRange] _Stencil2WriteMask ("Stencil WriteMask Value", Range(0, 255)) = 255
+[Enum(UnityEngine.Rendering.StencilOp)] _Stencil2PassOp ("Stencil Pass Op--{condition_showS:(_Stencil2Type==0)}", Float) = 0
+[Enum(UnityEngine.Rendering.StencilOp)] _Stencil2FailOp ("Stencil Fail Op--{condition_showS:(_Stencil2Type==0)}", Float) = 0
+[Enum(UnityEngine.Rendering.StencilOp)] _Stencil2ZFailOp ("Stencil ZFail Op--{condition_showS:(_Stencil2Type==0)}", Float) = 0
+[Enum(UnityEngine.Rendering.CompareFunction)] _Stencil2CompareFunction ("Stencil Compare Function--{condition_showS:(_Stencil2Type==0)}", Float) = 8
+
+[HideInInspector] m_start_Stencil2PassBackOptions ("Back--{condition_showS:(_Stencil2Type==1)}", Float) = 0
+[Helpbox(1)] _FFBFStencilHelp0 ("Front Face and Back Face Stencils only work when locked in due to Unity's Stencil managment", Int) = 0
+[Enum(UnityEngine.Rendering.StencilOp)] _Stencil2BackPassOp ("Back Pass Op", Float) = 0
+[Enum(UnityEngine.Rendering.StencilOp)] _Stencil2BackFailOp ("Back Fail Op", Float) = 0
+[Enum(UnityEngine.Rendering.StencilOp)] _Stencil2BackZFailOp ("Back ZFail Op", Float) = 0
+[Enum(UnityEngine.Rendering.CompareFunction)] _Stencil2BackCompareFunction ("Back Compare Function", Float) = 8
+[HideInInspector] m_end_Stencil2PassBackOptions ("Back", Float) = 0
+
+[HideInInspector] m_start_Stencil2PassFrontOptions ("Front--{condition_showS:(_Stencil2Type==1)}", Float) = 0
+[Helpbox(1)] _FFBFStencilHelp1 ("Front Face and Back Face Stencils only work when locked in due to Unity's Stencil managment", Int) = 0
+[Enum(UnityEngine.Rendering.StencilOp)] _Stencil2FrontPassOp ("Front Pass Op", Float) = 0
+[Enum(UnityEngine.Rendering.StencilOp)] _Stencil2FrontFailOp ("Front Fail Op", Float) = 0
+[Enum(UnityEngine.Rendering.StencilOp)] _Stencil2FrontZFailOp ("Front ZFail Op", Float) = 0
+[Enum(UnityEngine.Rendering.CompareFunction)] _Stencil2FrontCompareFunction ("Front Compare Function", Float) = 8
+[HideInInspector] m_end_Stencil2PassFrontOptions ("Front", Float) = 0
+
+[HideInInspector] m_end_Stencil2PassOptions ("Stencil", Float) = 0
+
+#T#PoiStencilTwoImplementation
+Stencil
+{
+	Ref [_Stencil2Ref]
+	ReadMask [_Stencil2ReadMask]
+	WriteMask [_Stencil2WriteMask]
+	//ifex _Stencil2Type==1
+	Comp [_Stencil2CompareFunction]
+	Pass [_Stencil2PassOp]
+	Fail [_Stencil2FailOp]
+	ZFail [_Stencil2ZFailOp]
+	//endex
+
+	//ifex _Stencil2Type==0
+	CompBack [_Stencil2BackCompareFunction]
+	PassBack [_Stencil2BackPassOp]
+	FailBack [_Stencil2BackFailOp]
+	ZFailBack [_Stencil2BackZFailOp]
+
+	CompFront [_Stencil2FrontCompareFunction]
+	PassFront [_Stencil2FrontPassOp]
+	FailFront [_Stencil2FrontFailOp]
+	ZFailFront [_Stencil2FrontZFailOp]
+	//endex
+
+}
+
+#T#PoiTwoPassGlobalMask
+#ifndef SecondPassRunning
+	// First Pass
+	if (_TwoPassFirstPassGlobalMaskIndex)
+	{
+		applyToGlobalMask(poiMods, _TwoPassFirstPassGlobalMaskIndex - 1, _TwoPassFirtstPassApplyGlobalMaskBlendType, 1);
+	}
+	if (_TwoPassSecondPassGlobalMaskIndex)
+	{
+		applyToGlobalMask(poiMods, _TwoPassSecondPassGlobalMaskIndex - 1, _TwoPassSecondPassApplyGlobalMaskBlendType, 0);
+	}
+#else
+	if (_TwoPassFirstPassGlobalMaskIndex)
+	{
+		applyToGlobalMask(poiMods, _TwoPassFirstPassGlobalMaskIndex - 1, _TwoPassFirtstPassApplyGlobalMaskBlendType, 0);
+	}
+	if (_TwoPassSecondPassGlobalMaskIndex)
+	{
+		applyToGlobalMask(poiMods, _TwoPassSecondPassGlobalMaskIndex - 1, _TwoPassSecondPassApplyGlobalMaskBlendType, 1);
+	}
+#endif

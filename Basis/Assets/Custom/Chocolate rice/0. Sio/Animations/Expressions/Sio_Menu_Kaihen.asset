@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -340790334, guid: 67cc4cb7839cd3741b63733d5adf0442, type: 3}
+  m_Name: Sio_Menu_Kaihen
+  m_EditorClassIdentifier: 
+  controls:
+  - name: Function
+    icon: {fileID: 2800000, guid: 9dacc4a3f1852d2489ffa1d1198990fe, type: 3}
+    type: 103
+    parameter:
+      name: 
+    value: 1
+    style: 0
+    subMenu: {fileID: 11400000, guid: 2f34e943ebad58f458c56d06e7b3b4d9, type: 2}
+    subParameters: []
+    labels: []
+  - name: Touch_Gimmick
+    icon: {fileID: 2800000, guid: 3e38cf3ae5824eb4c8b8042c5c689a08, type: 3}
+    type: 103
+    parameter:
+      name: 
+    value: 1
+    style: 0
+    subMenu: {fileID: 11400000, guid: bd7141348de5a11439fd4657a6332a59, type: 2}
+    subParameters: []
+    labels: []

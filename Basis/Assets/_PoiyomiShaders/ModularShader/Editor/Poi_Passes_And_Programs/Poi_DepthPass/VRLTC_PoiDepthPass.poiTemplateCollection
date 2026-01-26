@@ -1,0 +1,82 @@
+#T#DepthOnlyPassTags
+Name "DepthOnly"
+Tags { "LightMode" = "DepthOnly" }
+
+#T#DepthNormalsPassTags
+Name "DepthNormals"
+Tags { "LightMode" = "DepthNormals" }
+
+#T#DepthStencil
+#K#DEPTH_PASS_STENCIL
+
+#T#DepthBlendSettings
+ZWrite [_ZWrite]
+Cull [_Cull]
+AlphaToMask Off
+ZTest [_ZTest]
+Offset [_OffsetFactor], [_OffsetUnits]
+
+BlendOp [_BlendOp], [_BlendOpAlpha]
+Blend [_SrcBlend] [_DstBlend], [_SrcBlendAlpha] [_DstBlendAlpha]
+
+#T#DepthKeywords
+#pragma skip_variants FOG_LINEAR FOG_EXP FOG_EXP2
+#if POI_PIPE == POI_URP
+    // https://issuetracker.unity3d.com/issues/number-pragma-skip-variants-fog-linear-does-not-remove-fog-linear-keyword-declared-keyword
+    // Skip variants not working for fog in URP
+    #define FOG_LINEAR 0
+    #define FOG_EXP 0
+    #define FOG_EXP2 0
+#endif
+#pragma multi_compile_instancing
+#K#DEPTH_PASS_KEYWORDS
+
+#K#DEPTH_PASS_PRAGMA_PROGRAMS
+
+#T#DepthOnlyKeywords
+#define POI_PASS_DEPTH_ONLY
+
+#T#DepthNormalsKeywords
+#define POI_PASS_DEPTH_NORMALS
+
+#T#DepthPropertyVariablesURP
+CBUFFER_START(UnityPerMaterial)
+#K#DEPTH_PROPERTY_VARIABLES_EXPOSED
+CBUFFER_END
+#K#DEPTH_PROPERTY_VARIABLES
+
+#T#DepthPropertyVariables
+#K#DEPTH_PROPERTY_VARIABLES_EXPOSED
+#K#DEPTH_PROPERTY_VARIABLES
+
+#T#DepthOnlyPassPrograms
+#K#VERTEX_DEPTH_DATA_STRUCTURES
+#K#VERTEX_DEPTH_FUNCTIONS_EARLY
+#K#VERTEX_DEPTH_FUNCTIONS
+#K#VERTEX_DEPTH_FUNCTIONS_LATE
+#K#VERTEX_DEPTH_ONLY_PROGRAM
+
+#K#HULLDOMAIN_DEPTH_ONLY_PROGRAM
+#K#GEOMETRY_DEPTH_ONLY_PROGRAM
+
+#K#FRAGMENT_DEPTH_DATA_STRUCTURES
+#K#FRAGMENT_DEPTH_FUNCTIONS_EARLY
+#K#FRAGMENT_DEPTH_FUNCTIONS
+#K#FRAGMENT_DEPTH_FUNCTIONS_LATE
+#K#FRAGMENT_DEPTH_ONLY_PROGRAM
+
+#T#DepthNormalsPassPrograms
+#K#VERTEX_DEPTH_DATA_STRUCTURES
+#K#VERTEX_DEPTH_FUNCTIONS_EARLY
+#K#VERTEX_DEPTH_FUNCTIONS
+#K#VERTEX_DEPTH_FUNCTIONS_LATE
+#K#VERTEX_DEPTH_NORMALS_PROGRAM
+
+#K#HULLDOMAIN_DEPTH_NORMALS_PROGRAM
+#K#GEOMETRY_DEPTH_NORMALS_PROGRAM
+
+#K#FRAGMENT_DEPTH_DATA_STRUCTURES
+#K#FRAGMENT_DEPTH_FUNCTIONS_EARLY
+#K#FRAGMENT_DEPTH_FUNCTIONS
+#K#FRAGMENT_DEPTH_FUNCTIONS_LATE
+#K#FRAGMENT_DEPTH_NORMALS_PROGRAM

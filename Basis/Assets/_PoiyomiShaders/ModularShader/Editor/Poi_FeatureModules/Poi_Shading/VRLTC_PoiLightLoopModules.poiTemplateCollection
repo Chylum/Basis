@@ -1,0 +1,55 @@
+#T#PoiBaseLightLoopModules
+//ifex _ShadingEnabled==0
+#ifdef VIGNETTE_MASKED
+void PoiLightingDependantModules(inout PoiLight poiLight, inout PoiFragData poiFragData, in MochieBRDFData mochieBRDFData,
+	in PoiMesh poiMesh, in PoiCam poiCam, in PoiMods poiMods)
+{
+	#K#BASE_LIGHT_LOOP_INIT
+	#K#BASE_LIGHT_LOOP_EARLY
+	#K#BASE_LIGHT_LOOP
+	#K#BASE_LIGHT_LOOP_LATE
+}
+#endif
+//endex
+
+#T#PoiAddLightLoopModules
+//ifex _ShadingEnabled==0
+#ifdef VIGNETTE_MASKED
+void PoiLightingDependantModules(inout PoiLight poiLight, inout PoiFragData poiFragData, in MochieBRDFData mochieBRDFData,
+	in PoiMesh poiMesh, in PoiCam poiCam, in PoiMods poiMods)
+{
+	#K#ADD_LIGHT_LOOP_INIT
+	#K#ADD_LIGHT_LOOP_EARLY
+	#K#ADD_LIGHT_LOOP
+	#K#ADD_LIGHT_LOOP_LATE
+}
+#endif
+//endex
+
+#T#PoiOutlineLightLoopModules
+//ifex _ShadingEnabled==0
+#ifdef VIGNETTE_MASKED
+void PoiLightingDependantModules(inout PoiLight poiLight, inout PoiFragData poiFragData, in MochieBRDFData mochieBRDFData,
+	in PoiMesh poiMesh, in PoiCam poiCam, in PoiMods poiMods)
+{
+	#K#OUTLINE_LIGHT_LOOP_INIT
+	#K#OUTLINE_LIGHT_LOOP_EARLY
+	#K#OUTLINE_LIGHT_LOOP
+	#K#OUTLINE_LIGHT_LOOP_LATE
+}
+#endif
+//endex
+
+#T#PoiLilFurLightLoopModules
+//ifex _ShadingEnabled==0
+#ifdef VIGNETTE_MASKED
+void PoiLightingDependantModules(inout PoiLight poiLight, inout PoiFragData poiFragData, in MochieBRDFData mochieBRDFData,
+	in PoiMesh poiMesh, in PoiCam poiCam, in PoiMods poiMods)
+{
+	#K#LILFUR_LIGHT_LOOP_INIT
+	#K#LILFUR_LIGHT_LOOP_EARLY
+	#K#LILFUR_LIGHT_LOOP
+	#K#LILFUR_LIGHT_LOOP_LATE
+}
+#endif
+//endex

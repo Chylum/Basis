@@ -1,0 +1,15 @@
+#T#PoiGIProps
+[HideInInspector] m_start_bakedLighting ("Baked Lighting", Float) = 0
+//_SpecularLMOcclusion ("Specular Occlusion", Range(0, 1)) = 0
+//_SpecLMOcclusionAdjust ("Spec Occlusion Sensitiviy", Range(0, 1)) = 0.2
+_GIEmissionMultiplier ("GI Emission Multiplier", Float) = 1
+[HideInInspector][HDR]_EmissionColor ("Emission Color", Color) = (0, 0, 0, 1) // Fallback for Unity GI - overridden by emission module when enabled
+[HideInInspector] DSGI ("DSGI", Float) = 0 //add this property for double sided illumination settings to be shown
+[HideInInspector] LightmapFlags ("Lightmap Flags", Float) = 0 //add this property for lightmap flags settings to be shown
+[HideInInspector] m_end_bakedLighting ("Baked Lighting", Float) = 0
+
+#T#PoiGIVariablesExposed
+float _GIEmissionMultiplier;
+
+#T#PoiWorldDefine
+#define POI_WORLD

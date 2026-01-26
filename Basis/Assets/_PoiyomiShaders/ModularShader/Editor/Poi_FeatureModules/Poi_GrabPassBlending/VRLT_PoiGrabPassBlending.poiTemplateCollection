@@ -1,0 +1,242 @@
+#T#PoiGrabPassBlendingProperties
+//ifex _EnableGrabpass==0
+[HideInInspector] m_start_Refraction ("Refraction--{reference_property:_RefractionEnabled}", Float) = 0
+[ThryHideInInspector][ToggleUI] _RefractionEnabled ("Enable Refraction", Float) = 1
+_RefractionIndex ("Refraction", Range(0, 3)) = 1.333333
+_RefractionChromaticAberration ("Chromatic Aberration", Range(0, 1)) = 0
+_RefractionFresnelPower ("Fresnel Power", Range(0, 10)) = 0
+[HideInInspector] m_end_Refraction ("Refraction", Float) = 0
+
+[HideInInspector] m_start_Blur ("Blur--{reference_property:_EnableBlur}", Float) = 0
+[HideInInspector][ThryToggle(CHROMATIC_ABERRATION_LOW)]_EnableBlur ("Enable Blur", Float) = 0
+[Helpbox(2)] _RefractionCABlurHelp ("Chromatic Aberration and Blur cannot be used at the same time--{condition_showS:_RefractionChromaticAberration!=0 && _EnableBlur==1 && _RefractionEnabled==1}", Float) = 0
+_GrabBlurDistance ("Blur Distance", Range(0, 1)) = 0
+[IntRange]_GrabBlurQuality ("Blur Quality", Range(1, 20)) = 10
+[IntRange]_GrabBlurDirections ("Blur Directions", Range(1, 10)) = 10
+_GrabBlurFalloff ("Distance Scaling--{hover:Controls how much the blur changes over distance}", Range(0, 1)) = 0
+_GrabBlurUseSmoothness ("Use Smoothness", Range(0, 1)) = 0
+_GrabBlurPower ("Center Importance", Range(0, 1)) = 0
+[HideInInspector] m_end_Blur ("Blur", Float) = 0
+
+[HideInInspector] m_start_GrabpassColor ("Color", Float) = 0
+	_GrabpassColor ("Color", Color) = (1, 1, 1, 1)
+	_GrabPassBrightness ("Multiplicative Brightness", Float) = 1
+	_GrabPassAddBrightness ("Additive Brightness", Float) = 0
+
+	[HideInInspector] s_start_GrabPassHueShift ("Hue Shift--{reference_property:_GrabPassHueShiftToggle,persistent_expand:true,default_expand:true}", Float) = 1
+		[HideInInspector][ThryToggleUI(true)] _GrabPassHueShiftToggle ("<size=13><b>  Hue Shift</b></size>", Float) = 0
+		[ThryWideEnum(OKLab, 0, HSV, 1)] _GrabPassHueShiftColorSpace ("Color Space", Int) = 0
+		[ThryWideEnum(Hue Select, 0, Hue Shift, 1)] _GrabPassHueSelectOrShift ("Select or Shift", Int) = 1
+		_GrabPassHueShift ("Hue Shift", Range(0, 1)) = 0
+		_GrabPassHueShiftSpeed ("Hue Shift Speed", Float) = 0
+	[HideInInspector] s_end_MainHueShift ("Hue Shift", Float) = 0
+[HideInInspector] m_end_GrabpassColor ("Color", Float) = 0
+
+[HideInInspector] m_start_GrabPassAdvanced ("Advanced", Float) = 0
+[ToggleUI]_GrabPassUseAlpha ("Use Material Alpha", Float) = 1
+[sRGBWarning]_GrabPassBlendMap ("Blend Map--{reference_properties:[_GrabPassBlendMapPan, _GrabPassBlendMapUV, _GrabPassBlendMapChannel]}", 2D) = "white" { }
+[ThryHideInInspector][Vector2]_GrabPassBlendMapPan ("Panning", Vector) = (0, 0, 0, 0)
+[ThryHideInInspector][Enum(UV0, 0, UV1, 1, UV2, 2, UV3, 3, distorteduv0, 4)] _GrabPassBlendMapUV ("UV", Int) = 0
+[ThryHideInInspector][Enum(R, 0, G, 1, B, 2, A, 3)]_GrabPassBlendMapChannel ("Channel", Float) = 0
+_GrabPassBlendFactor ("Blend Amount", Range(0, 1)) = 1
+[ThryWideEnum(Off, 0, 1R, 1, 1G, 2, 1B, 3, 1A, 4, 2R, 5, 2G, 6, 2B, 7, 2A, 8, 3R, 9, 3G, 10, 3B, 11, 3A, 12, 4R, 13, 4G, 14, 4B, 15, 4A, 16)] _GrabPassBlendGlobalMask ("Global Mask--{reference_property:_GrabPassBlendGlobalMaskBlendType}", Int) = 0
+[ThryHideInInspector][ThryWideEnum(Add, 7, Subtract, 1, Multiply, 2, Divide, 3, Min, 4, Max, 5, Average, 6, Replace, 0)] _GrabPassBlendGlobalMaskBlendType ("Blending", Int) = 2
+[Enum(UnityEngine.Rendering.BlendMode)] _GrabSrcBlend ("Source Blend", Int) = 5
+[Enum(UnityEngine.Rendering.BlendMode)] _GrabDstBlend ("Destination Blend", Int) = 10
+[HideInInspector] m_end_GrabPassAdvanced ("Advanced", Float) = 0
+//endex
+
+#T#PoiGrabPassBlendingKeywords
+//ifex _EnableGrabpass==0
+#define POI_GRABPASS
+#pragma shader_feature CHROMATIC_ABERRATION_LOW
+//endex
+
+#T#PoiGrabPassBlendingVariables
+#if POI_PIPE == POI_BIRP
+	#if defined(UNITY_STEREO_INSTANCING_ENABLED) || defined(UNITY_STEREO_MULTIVIEW_ENABLED)
+		Texture2DArray _PoiGrab2;
+	#else
+		Texture2D _PoiGrab2;
+	#endif
+
+	float4 _PoiGrab2_TexelSize;
+
+	#define _PoiOpaqueTex           _PoiGrab2
+	#define _PoiOpaqueTex_TexelSize _PoiGrab2_TexelSize
+#elif POI_PIPE == POI_URP
+	TEXTURE2D_X(_CameraOpaqueTexture);
+	#define _PoiOpaqueTex           _CameraOpaqueTexture
+	#define _PoiOpaqueTex_TexelSize _CameraOpaqueTexture_TexelSize
+#endif
+
+//ifex _EnableGrabpass==0
+#if defined(PROP_GRABPASSBLENDMAP) || !defined(OPTIMIZER_ENABLED)
+	Texture2D _GrabPassBlendMap;
+#endif
+float4 _GrabPassBlendMap_ST;
+//endex
+
+#T#PoiGrabPassBlendingVariablesExposed
+//ifex _EnableGrabpass==0
+float _RefractionIndex;
+float _RefractionChromaticAberration;
+float _RefractionEnabled;
+float _GrabSrcBlend;
+float _GrabDstBlend;
+float _GrabPassUseAlpha;
+float _GrabPassBlendFactor;
+float _GrabPassBlendGlobalMask;
+float _GrabPassBlendGlobalMaskBlendType;
+float _GrabBlurDistance;
+float _GrabBlurQuality;
+float _GrabBlurDirections;
+float _GrabBlurUseSmoothness;
+float _GrabBlurPower;
+float _GrabBlurFalloff;
+float2 _GrabPassBlendMapPan;
+float _GrabPassBlendMapUV;
+float _GrabPassBlendMapChannel;
+float _EnableGrabpass;
+float _RefractionFresnelPower;
+
+float4 _GrabpassColor;
+float _GrabPassBrightness;
+float _GrabPassAddBrightness;
+
+float _GrabPassHueShiftToggle;
+float _GrabPassHueShiftColorSpace;
+float _GrabPassHueSelectOrShift;
+float _GrabPassHueShift;
+float _GrabPassHueShiftSpeed;
+//endex
+
+#T#PoiGrabPassBlendingFunctions
+//ifex _EnableGrabpass==0
+float4 grabpassBlur(float2 uv, float camDistance, float smoothness)
+{
+	// Smoothness modulates blur - glossy surfaces get less blur, rough surfaces get full blur
+	float roughnessInfluence = lerp(1, 1 - smoothness, _GrabBlurUseSmoothness);
+	
+	// Falloff controls how much distance affects the blur (0 = constant size, 1 = full realistic falloff)
+	float effectiveDistance = lerp(1, camDistance, _GrabBlurFalloff);
+	float scale = WorldToScreenScale(_GrabBlurDistance * roughnessInfluence * 0.1, effectiveDistance);
+	float2 aspectCorrect = GetScreenAspectCorrection();
+	
+	int samples = floor(_GrabBlurQuality) * floor(_GrabBlurDirections);
+
+	float4 color = 0;
+	float totalWeight = 0;
+
+	// Golden angle in radians (~137.5 degrees)
+	const float goldenAngle = 2.39996323;
+
+	for (int i = 0; i < samples; i++)
+	{
+		float r = sqrt((i + 0.5) / samples);
+		float theta = i * goldenAngle;
+
+		// Apply center importance to radius distribution
+		float adjustedR = pow(r, _GrabBlurPower + 1);
+
+		float2 offset = float2(cos(theta), sin(theta)) * adjustedR * scale * aspectCorrect;
+
+		float weight = 1.0 - r * _GrabBlurPower;
+		color += POI_SAMPLE_SCREEN(_PoiOpaqueTex, sampler_linear_clamp, uv + offset) * weight;
+		totalWeight += weight;
+	}
+
+	color /= totalWeight;
+	return color;
+}
+
+inline float4 Refraction(float indexOfRefraction, float chromaticAberration, float camDistance, in PoiMesh poiMesh, in PoiCam poiCam, in PoiMods poiMods, inout PoiLight poiLight, in PoiFragData poiFragData)
+{
+	poiLight.finalLighting = max(poiLight.finalLighting, EPSILON);
+	float4 refractionColor;
+	float3 worldViewDir = normalize(PoiWorldSpaceViewDir(poiMesh.worldPos));
+	float3 refractionOffset = (((indexOfRefraction - 1.0) * mul(UNITY_MATRIX_V, float4(poiMesh.normals[1], 0.0)).xyz) * (1.0 - dot(poiMesh.normals[1], worldViewDir)));
+	float2 cameraRefraction = float2(refractionOffset.x, - (refractionOffset.y * _ProjectionParams.x)) * GetFOVScale() / max(camDistance, 1.0);
+	cameraRefraction *= pow(saturate(1.0 - poiLight.nDotV), _RefractionFresnelPower);
+
+	float2 bgRes = poiGetWidthAndHeight(_PoiOpaqueTex);
+	float aspect = bgRes.y / bgRes.x;
+	cameraRefraction.x *= aspect;
+
+	UNITY_BRANCH
+	if (_RefractionChromaticAberration > 0)
+	{
+		float4 redAlpha = POI_SAMPLE_SCREEN(_PoiOpaqueTex, sampler_linear_clamp, (poiCam.screenUV + cameraRefraction));
+		float green = POI_SAMPLE_SCREEN(_PoiOpaqueTex, sampler_linear_clamp, (poiCam.screenUV + (cameraRefraction * (1.0 - chromaticAberration)))).g;
+		float blue = POI_SAMPLE_SCREEN(_PoiOpaqueTex, sampler_linear_clamp, (poiCam.screenUV + (cameraRefraction * (1.0 + chromaticAberration)))).b;
+		refractionColor = float4(redAlpha.r, green, blue, redAlpha.a);
+	}
+	else
+	{
+		float2 refractedGrab = poiCam.screenUV + cameraRefraction;
+		
+		#ifdef CHROMATIC_ABERRATION_LOW
+			refractionColor = grabpassBlur(refractedGrab, camDistance, poiFragData.smoothness);
+		#else
+			refractionColor = POI_SAMPLE_SCREEN(_PoiOpaqueTex, sampler_linear_clamp, refractedGrab);
+		#endif
+	}
+	return refractionColor;
+}
+
+void applyGrabEffects(inout PoiFragData poiFragData, in PoiCam poiCam, in PoiMesh poiMesh, inout PoiLight poiLight, in PoiMods poiMods)
+{
+	float camDistance = poiCam.distanceToVert;
+	float3 grabpassColor = 1;
+	UNITY_BRANCH
+	if (_RefractionEnabled == 1)
+	{
+		grabpassColor = Refraction(_RefractionIndex, _RefractionChromaticAberration, camDistance, poiMesh, poiCam, poiMods, poiLight, poiFragData).rgb;
+	}
+	else
+	{
+		#ifdef CHROMATIC_ABERRATION_LOW
+			grabpassColor = grabpassBlur(poiCam.screenUV, camDistance, poiFragData.smoothness);
+		#else
+			grabpassColor = POI_SAMPLE_SCREEN(_PoiOpaqueTex, sampler_linear_clamp, poiCam.screenUV).rgb;
+		#endif
+	}
+	
+	float blendMap = 1;
+	#if defined(PROP_GRABPASSBLENDMAP) || !defined(OPTIMIZER_ENABLED)
+		blendMap = POI2D_SAMPLER_PAN(_GrabPassBlendMap, _MainTex, poiUV(poiMesh.uv[_GrabPassBlendMapUV], _GrabPassBlendMap_ST), _GrabPassBlendMapPan)[_GrabPassBlendMapChannel];
+	#endif
+	float blendFactor = _GrabPassBlendFactor * blendMap;
+	if (_GrabPassBlendGlobalMask > 0)
+	{
+		blendFactor = customBlend(blendFactor, poiMods.globalMask[_GrabPassBlendGlobalMask - 1], _GrabPassBlendGlobalMaskBlendType);
+	}
+
+	if (_GrabPassUseAlpha)
+	{
+		blendFactor *= (1 - poiFragData.alpha);
+	}
+
+	grabpassColor = (_GrabpassColor.rgb * grabpassColor * _GrabPassBrightness) + (_GrabPassAddBrightness * _GrabpassColor.rgb);
+	
+	UNITY_BRANCH
+	if (_GrabPassHueShiftToggle)
+	{
+		grabpassColor = hueShift(grabpassColor, frac(_GrabPassHueShift + _GrabPassHueShiftSpeed * _Time.x), _GrabPassHueShiftColorSpace, _GrabPassHueSelectOrShift);
+	}
+	#ifdef POI_PASS_ADD
+		poiFragData.baseColor = poiBlend(_GrabSrcBlend, float4(poiFragData.baseColor, poiFragData.alpha), _GrabDstBlend, float4(0, 0, 0, 1), blendFactor).rgb;
+	#endif
+	#ifdef POI_PASS_BASE
+		poiFragData.baseColor = poiBlend(_GrabSrcBlend, float4(poiFragData.baseColor, poiFragData.alpha), _GrabDstBlend, float4(grabpassColor / poiLight.finalLighting, 1), blendFactor).rgb;
+	#endif
+}
+//endex
+
+#T#PoiGrabPassBlendingFunctionCalls
+//ifex _EnableGrabpass==0
+if (_EnableGrabpass)
+{
+	applyGrabEffects(poiFragData, poiCam, poiMesh, poiLight, poiMods);
+}
+//endex

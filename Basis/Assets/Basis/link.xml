@@ -43,6 +43,7 @@
     <assembly fullname="OpusSharp.Core" preserve="all" />
     <assembly fullname="RNNoiseIntergration" preserve="all" />
     <assembly fullname="RenderAs2DModule" preserve="all" />
+    <assembly fullname="Runtime" preserve="all" />
     <assembly fullname="SimpleBase" preserve="all" />
     <assembly fullname="SteamAudioUnity" preserve="all" />
     <assembly fullname="SteamVR" preserve="all" />

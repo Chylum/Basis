@@ -1,0 +1,95 @@
+#T#RenderOptionsProperties
+[DoNotAnimate][Enum(UnityEngine.Rendering.CullMode)] _Cull ("Cull", Float) = 2
+[DoNotAnimate][Enum(UnityEngine.Rendering.CompareFunction)] _ZTest ("ZTest", Float) = 4
+[DoNotAnimate][Enum(Off, 0, On, 1)] _ZWrite ("ZWrite", Int) = 1
+[DoNotAnimate][ThryMask(Thry.ColorMaskFlags)] _ColorMask ("Color Mask", Int) = 15
+[DoNotAnimate] _OffsetFactor ("Offset Factor", Float) = 0.0
+[DoNotAnimate] _OffsetUnits ("Offset Units", Float) = 0.0
+[DoNotAnimate][ToggleUI] _RenderingReduceClipDistance ("Reduce Clip Distance", Float) = 0
+[DoNotAnimate][ToggleUI] _ZClip ("Z Clip", Float) = 1
+[DoNotAnimate][ToggleUI] _IgnoreFog ("Ignore Fog", Float) = 0
+//[ToggleUI]_Conservative ("Conservative", Float) = 0
+[DoNotAnimate][ToggleUI]_FlipBackfaceNormals ("Flip Backface Normals", Int) = 1
+[DoNotAnimate][HideInInspector] Instancing ("Instancing", Float) = 0 //add this property for instancing variants settings to be shown
+#K#RENDERING_OPTIONS_EXTRA_PROPERTIES
+
+//ifex _RenderingAOBlockerEnabled==0
+[HideInInspector] m_start_WorldAOBlocker (" World AO Blocker--{reference_property:_RenderingAOBlockerEnabled,button_help:{text:Tutorial,action:{type:URL,data:https://www.poiyomi.com/rendering/world-ao-blocker},hover:Documentation}}", Float) = 0
+[Helpbox(1)] _RenderingAOBlockerNote ("Meshes in this UV space render only to depth and act as a blocking volume for effects like ambient occlusion. This section effects the uv tile directly to the left of the default uv. (U -1→0, V 0→1)", Int) = 0
+[ThryHideInInspector][ToggleUI] _RenderingAOBlockerEnabled ("Enabled", Float) = 0
+[ThryWideEnum(UV0, 0, UV1, 1, UV2, 2, UV3, 3)]_RenderingAOBlockerUVChannel ("UV Channel", Int) = 0
+[ToggleUI] _RenderingAOBlockerFlipNormal ("Flip Normal", Float) = 0
+[HideInInspector] m_end_WorldAOBlocker ("World AO Blocker", Float) = 0
+//endex
+
+// Blending Options
+[HideInInspector] m_start_blending ("Blending--{button_help:{text:Tutorial,action:{type:URL,data:https://www.poiyomi.com/rendering/blending},hover:Documentation}}", Float) = 0
+[DoNotAnimate][Enum(Thry.BlendOp)] _BlendOp ("RGB Blend Op", Int) = 0
+[DoNotAnimate][Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend ("RGB Source Blend", Int) = 1
+[DoNotAnimate][Enum(UnityEngine.Rendering.BlendMode)] _DstBlend ("RGB Destination Blend", Int) = 0
+[DoNotAnimate][Space][ThryHeaderLabel(Additive Blending, 13)]
+[DoNotAnimate][Enum(Thry.BlendOp)] _AddBlendOp ("RGB Blend Op", Int) = 4
+[DoNotAnimate][Enum(UnityEngine.Rendering.BlendMode)] _AddSrcBlend ("RGB Source Blend", Int) = 1
+[DoNotAnimate][Enum(UnityEngine.Rendering.BlendMode)] _AddDstBlend ("RGB Destination Blend", Int) = 1
+
+[DoNotAnimate][HideInInspector] m_start_alphaBlending ("Advanced Alpha Blending", Float) = 0
+[DoNotAnimate][Enum(Thry.BlendOp)] _BlendOpAlpha ("Alpha Blend Op", Int) = 0
+[DoNotAnimate][Enum(UnityEngine.Rendering.BlendMode)] _SrcBlendAlpha ("Alpha Source Blend", Int) = 1
+[DoNotAnimate][Enum(UnityEngine.Rendering.BlendMode)] _DstBlendAlpha ("Alpha Destination Blend", Int) = 10
+[DoNotAnimate][Space][ThryHeaderLabel(Additive Blending, 13)]
+[DoNotAnimate][Enum(Thry.BlendOp)] _AddBlendOpAlpha ("Alpha Blend Op", Int) = 4
+[DoNotAnimate][Enum(UnityEngine.Rendering.BlendMode)] _AddSrcBlendAlpha ("Alpha Source Blend", Int) = 0
+[DoNotAnimate][Enum(UnityEngine.Rendering.BlendMode)] _AddDstBlendAlpha ("Alpha Destination Blend", Int) = 1
+[DoNotAnimate][HideInInspector] m_end_alphaBlending ("Advanced Alpha Blending", Float) = 0
+
+[HideInInspector] m_end_blending ("Blending", Float) = 0
+
+#T#RenderOptionsVariables
+float _IgnoreFog;
+float _RenderingReduceClipDistance;
+int _FlipBackfaceNormals;
+float _AddBlendOp;
+float _Cull;
+
+//ifex _RenderingAOBlockerEnabled==0
+float _RenderingAOBlockerEnabled;
+float _RenderingAOBlockerUVChannel;
+float _RenderingAOBlockerFlipNormal;
+//endex
+
+#T#RenderOptionsFunctions
+void applyReducedRenderClipDistance(inout VertexOut o)
+{
+	if (o.pos.w < _ProjectionParams.y * 1.01 && o.pos.w > 0)
+	{
+		#if defined(UNITY_REVERSED_Z) // DirectX
+		o.pos.z = o.pos.z * 0.0001 + o.pos.w * 0.999;
+		#else // OpenGL
+		o.pos.z = o.pos.z * 0.0001 - o.pos.w * 0.999;
+		#endif
+	}
+}
+
+#T#RenderOptionsVertex
+//ifex _RenderingAOBlockerEnabled==0
+#ifndef POI_PASS_SHADOW
+if(_RenderingAOBlockerEnabled)
+{
+	float2 blockerUV = 0; 
+	blockerUV += (v.uv0.xy * (_RenderingAOBlockerUVChannel == 0));
+	blockerUV += (v.uv1.xy * (_RenderingAOBlockerUVChannel == 1));
+	blockerUV += (v.uv2.xy * (_RenderingAOBlockerUVChannel == 2));
+	blockerUV += (v.uv3.xy * (_RenderingAOBlockerUVChannel == 3));
+	if(blockerUV.x < 0 && blockerUV.x > -1 && blockerUV.y < 1 && blockerUV.y > 0)
+	{
+		#ifdef POI_PASS_LILFUR
+			return (PoiVertToGeoLilFur)POI_NAN;
+		#else
+			return (VertexOut)POI_NAN;
+		#endif
+	}
+	
+	v.normal *= _RenderingAOBlockerFlipNormal * -2.0 + 1.0;
+}
+#endif
+//endex

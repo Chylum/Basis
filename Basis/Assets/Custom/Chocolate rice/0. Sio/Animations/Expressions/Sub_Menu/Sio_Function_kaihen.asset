@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -340790334, guid: 67cc4cb7839cd3741b63733d5adf0442, type: 3}
+  m_Name: Sio_Function_kaihen
+  m_EditorClassIdentifier: 
+  controls:
+  - name: Breast
+    icon: {fileID: 2800000, guid: 371457f697f042f469461ff7861e9432, type: 3}
+    type: 203
+    parameter:
+      name: 
+    value: 1
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters:
+    - name: Breast
+    labels: []
+  - name: Jelly_Eye
+    icon: {fileID: 2800000, guid: d0dd141ba0382df42923eef2f75217ee, type: 3}
+    type: 102
+    parameter:
+      name: Jelly_Eye_Forced
+    value: 1
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: Jelly_Ear
+    icon: {fileID: 2800000, guid: 743969ee1335d50478dda4eb9e695e9f, type: 3}
+    type: 102
+    parameter:
+      name: Jelly_Ear_Forced
+    value: 1
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: Kemomimi
+    icon: {fileID: 2800000, guid: 2d39f56db28e3694f8ec09a318f73860, type: 3}
+    type: 102
+    parameter:
+      name: Kemomimi
+    value: 1
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: Tail
+    icon: {fileID: 2800000, guid: 718e774d02d83564aa376f6006ebc229, type: 3}
+    type: 102
+    parameter:
+      name: Tail
+    value: 1
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: Heel_Feet
+    icon: {fileID: 2800000, guid: 940e77faf1c55194ca92a89eac98802f, type: 3}
+    type: 102
+    parameter:
+      name: Heel_Feet
+    value: 1
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: Rim_Shade
+    icon: {fileID: 2800000, guid: 68400cf11cf1cc1428fdc71ee22fc796, type: 3}
+    type: 102
+    parameter:
+      name: Rim_Shade
+    value: 1
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: Hair_Ribbon
+    icon: {fileID: 2800000, guid: b388cbd9bc5c1064898fe60c795d17bc, type: 3}
+    type: 102
+    parameter:
+      name: Hair_Ribbon
+    value: 1
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []

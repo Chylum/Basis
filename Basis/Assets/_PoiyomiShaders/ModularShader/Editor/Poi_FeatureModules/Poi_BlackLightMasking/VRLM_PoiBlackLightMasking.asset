@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1039f25740a92fc4292bb1d94d07ad19, type: 3}
+  m_Name: VRLM_PoiBlackLightMasking
+  m_EditorClassIdentifier: 
+  Id: PoiBlackLightMasking
+  Name: 
+  Version: 1.0
+  Author: Poiyomi
+  Description: 
+  AllowDuplicates: 0
+  ForceDuplicateLogic: 0
+  EnableProperties: []
+  Properties: []
+  ModuleDependencies: []
+  IncompatibleWith: []
+  Templates:
+  - Template: {fileID: 3036204003895637931, guid: d62caea497d8b4744ada102ce55812e6, type: 3}
+    Keywords:
+    - GLOBAL_PROPERTIES
+    NeedsVariant: 0
+    Queue: 100
+  - Template: {fileID: 6317577487401931402, guid: d62caea497d8b4744ada102ce55812e6, type: 3}
+    Keywords:
+    - BASE_PASS_KEYWORDS
+    - FUR_BASE_PASS_KEYWORDS
+    - ADD_PASS_KEYWORDS
+    NeedsVariant: 0
+    Queue: 100
+  - Template: {fileID: 8677259137714699794, guid: d62caea497d8b4744ada102ce55812e6, type: 3}
+    Keywords:
+    - BASE_PROPERTY_VARIABLES_EXPOSED
+    - ADD_PROPERTY_VARIABLES_EXPOSED
+    - SHADOW_PROPERTY_VARIABLES_EXPOSED
+    - META_PROPERTY_VARIABLES_EXPOSED
+    - OUTLINE_PROPERTY_VARIABLES_EXPOSED
+    - DEPTH_PROPERTY_VARIABLES_EXPOSED
+    NeedsVariant: 0
+    Queue: 100
+  - Template: {fileID: -4327617738496747933, guid: d62caea497d8b4744ada102ce55812e6, type: 3}
+    Keywords:
+    - FRAGMENT_BASE_FUNCTIONS
+    - FRAGMENT_ADD_FUNCTIONS
+    - FRAGMENT_SHADOW_FUNCTIONS
+    - FRAGMENT_META_FUNCTIONS
+    - FRAGMENT_OUTLINE_FUNCTIONS
+    - FRAGMENT_DEPTH_FUNCTIONS
+    NeedsVariant: 0
+    Queue: 100
+  - Template: {fileID: -7845599545550261965, guid: d62caea497d8b4744ada102ce55812e6, type: 3}
+    Keywords:
+    - FRAGMENT_BASE_INIT_LATE
+    - FRAGMENT_ADD_INIT_LATE
+    - FRAGMENT_SHADOW_INIT_LATE
+    - FRAGMENT_META_INIT_LATE
+    - FRAGMENT_OUTLINE_INIT_LATE
+    - FRAGMENT_DEPTH_INIT_LATE
+    NeedsVariant: 0
+    Queue: 100
+  Functions: []
+  AdditionalSerializedData: 

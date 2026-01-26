@@ -1,0 +1,21 @@
+struct VertexOut
+{
+	float4 pos : SV_POSITION;
+	float4 uv[2] : TEXCOORD0;
+	float3 normal : TEXCOORD2;
+	float4 tangent : TEXCOORD3;
+	float4 worldPos : TEXCOORD4;
+	float4 localPos : TEXCOORD5;
+	float4 vertexColor : TEXCOORD6;
+	float4 lightmapUV : TEXCOORD7;
+	float worldDir : TEXCOORD8;
+	float2 fogData: TEXCOORD10;
+	POI_SHADOW_COORDS(9)
+	#ifdef POI_PASS_MOTION_VECTORS
+		float4 positionCSNoJitter         : POSITION_CS_NO_JITTER;
+		float4 previousPositionCSNoJitter : PREV_POSITION_CS_NO_JITTER;
+	#endif
+	#K#vertexOutData
+	UNITY_VERTEX_INPUT_INSTANCE_ID
+	UNITY_VERTEX_OUTPUT_STEREO
+};

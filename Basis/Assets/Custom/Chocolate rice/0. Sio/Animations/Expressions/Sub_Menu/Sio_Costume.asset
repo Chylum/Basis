@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -340790334, guid: 67cc4cb7839cd3741b63733d5adf0442, type: 3}
+  m_Name: Sio_Costume
+  m_EditorClassIdentifier: 
+  controls:
+  - name: Armwarmer
+    icon: {fileID: 2800000, guid: c1ab0e82ec3a23c4d81e87fb90f2b345, type: 3}
+    type: 102
+    parameter:
+      name: Costume_Armwarmer
+    value: 1
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: Belt
+    icon: {fileID: 2800000, guid: 0a53aa4e88c9c5649958d288cb7c1b23, type: 3}
+    type: 102
+    parameter:
+      name: Costume_Belt
+    value: 1
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: Halter_top
+    icon: {fileID: 2800000, guid: 9a620fb635ffa83418a26b12265a4e93, type: 3}
+    type: 102
+    parameter:
+      name: Costume_Halter_top
+    value: 1
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: Jacket
+    icon: {fileID: 2800000, guid: 0c6ce95a1c9eda24988aa4743a601a80, type: 3}
+    type: 102
+    parameter:
+      name: Costume_Jacket
+    value: 1
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: Pants
+    icon: {fileID: 2800000, guid: 4ee79f5d0ffecf9488e14b1df4a2d32b, type: 3}
+    type: 102
+    parameter:
+      name: Costume_Pants
+    value: 1
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: Shoes
+    icon: {fileID: 2800000, guid: 3d5b100cffab3cd468bf2a16bef7e1be, type: 3}
+    type: 102
+    parameter:
+      name: Costume_Shoes
+    value: 1
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: Stockings
+    icon: {fileID: 2800000, guid: 121cea7d166bcf74283c31028c3f31c2, type: 3}
+    type: 102
+    parameter:
+      name: Costume_Stockings
+    value: 1
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []
+  - name: Stockings_Belt
+    icon: {fileID: 2800000, guid: d61d44c6fb6dacd468c987e294151fa6, type: 3}
+    type: 102
+    parameter:
+      name: Costume_Stockings_Belt
+    value: 1
+    style: 0
+    subMenu: {fileID: 0}
+    subParameters: []
+    labels: []

@@ -1,0 +1,16 @@
+#T#PoiGeometryProgram
+[maxvertexcount(4)]
+void geom(triangle VertexOut p[3], inout LineStream<VertexOut> triStream)
+{
+	for (int i = 0; i < 3; i ++)
+	{
+		UNITY_SETUP_INSTANCE_ID(p[i]);
+		UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(p[i]);
+		p[i].pos = PoiWorldToClipPos(p[i].worldPos.xyz);
+	}
+
+	triStream.Append(p[0]);
+	triStream.Append(p[1]);
+	triStream.Append(p[2]);
+	triStream.Append(p[0]);
+}

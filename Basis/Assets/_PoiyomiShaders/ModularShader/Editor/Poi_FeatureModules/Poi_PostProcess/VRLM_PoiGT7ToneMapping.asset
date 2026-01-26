@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1039f25740a92fc4292bb1d94d07ad19, type: 3}
+  m_Name: VRLM_PoiGT7ToneMapping
+  m_EditorClassIdentifier: 
+  Id: PoiGT7ToneMapping
+  Name: GT7 Tone Mapping
+  Version: 1.0
+  Author: Polyphony Digital Inc. (Ported by Poiyomi)
+  Description: Gran Turismo 7 tone mapping operator in ICtCp color space. Based on
+    the reference implementation from SIGGRAPH 2025.
+  AllowDuplicates: 0
+  ForceDuplicateLogic: 0
+  EnableProperties: []
+  Properties: []
+  ModuleDependencies: []
+  IncompatibleWith: []
+  Templates:
+  - Template: {fileID: -4433003133141013569, guid: 72670c8643b228342893b69c28cbb78d, type: 3}
+    Keywords:
+    - POSTPROCESSING_PROPERTIES
+    NeedsVariant: 0
+    Queue: 101
+  - Template: {fileID: 4012319664669181045, guid: 72670c8643b228342893b69c28cbb78d, type: 3}
+    Keywords:
+    - BASE_PASS_KEYWORDS
+    - FUR_BASE_PASS_KEYWORDS
+    - ADD_PASS_KEYWORDS
+    - META_PASS_KEYWORDS
+    - LILFUR_PASS_KEYWORDS
+    - OUTLINE_PASS_KEYWORDS
+    NeedsVariant: 0
+    Queue: 101
+  - Template: {fileID: 5320155817530733184, guid: 72670c8643b228342893b69c28cbb78d, type: 3}
+    Keywords:
+    - BASE_PROPERTY_VARIABLES
+    - ADD_PROPERTY_VARIABLES
+    - META_PROPERTY_VARIABLES
+    - LILFUR_PROPERTY_VARIABLES
+    - OUTLINE_PROPERTY_VARIABLES
+    NeedsVariant: 0
+    Queue: 101
+  - Template: {fileID: -89852238350106729, guid: 72670c8643b228342893b69c28cbb78d, type: 3}
+    Keywords:
+    - FRAGMENT_BASE_FUNCTIONS
+    - FRAGMENT_ADD_FUNCTIONS
+    - FRAGMENT_META_FUNCTIONS
+    - FRAGMENT_LILFUR_FUNCTIONS
+    - FRAGMENT_OUTLINE_FUNCTIONS
+    NeedsVariant: 0
+    Queue: 101
+  - Template: {fileID: 1163058197640731373, guid: 72670c8643b228342893b69c28cbb78d, type: 3}
+    Keywords:
+    - FRAGMENT_BASE_RETURN
+    - FRAGMENT_OUTLINE_RETURN
+    NeedsVariant: 0
+    Queue: 101
+  Functions: []
+  AdditionalSerializedData: 

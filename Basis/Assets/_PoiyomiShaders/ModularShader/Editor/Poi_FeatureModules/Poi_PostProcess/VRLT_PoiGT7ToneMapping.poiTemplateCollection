@@ -1,0 +1,250 @@
+#T#PoiGT7ToneMappingProperties
+//ifex _GT7ToneMapping==0
+[HideInInspector] m_start_gt7tonemapping (" GT7 Tone Mapping--{reference_property:_GT7ToneMapping,button_help:{text:Tutorial,action:{type:URL,data:https://www.poiyomi.com/modifiers/post-processing/gt7},hover:GT7 Tone Mapping Documentation}}", Float) = 0
+[HideInInspector][ThryToggle(GT7_TONEMAPPING)]_GT7ToneMapping ("Enable", Float) = 0
+
+_GT7TM_ColorAccuracy ("Color Accuracy", Range(0, 1)) = 0.6
+_GT7TM_ChromaFadeStart ("Chroma Fade Start", Range(0.5, 1.2)) = 0.98
+_GT7TM_ChromaFadeEnd ("Chroma Fade End", Range(0.5, 1.5)) = 1.16
+
+[HideInInspector] m_end_gt7tonemapping ("", Float) = 0
+//endex
+
+#T#PoiGT7ToneMappingKeywords
+//ifex _GT7ToneMapping==0
+#pragma shader_feature_local GT7_TONEMAPPING
+//endex
+
+#T#PoiGT7ToneMappingVariables
+//ifex _GT7ToneMapping==0
+#ifdef GT7_TONEMAPPING
+	float _GT7TM_ColorAccuracy;
+	float _GT7TM_ChromaFadeStart;
+	float _GT7TM_ChromaFadeEnd;
+
+	static const float GT7_REFERENCE_LUMINANCE = 100.0;
+	static const float GT7_SDR_PAPER_WHITE = 250.0;
+#endif
+//endex
+
+#T#PoiGT7ToneMappingFunctions
+//ifex _GT7ToneMapping==0
+#ifdef GT7_TONEMAPPING
+	// ============================================================================
+	// GT7 Tone Mapping Implementation
+	// Based on: https://blog.selfshadow.com/publications/s2025-shading-course/pdi/supplemental/gt7_tone_mapping.cpp
+	// MIT License - Copyright (c) 2025 Polyphony Digital Inc.
+	// ============================================================================
+
+	float gt7_FrameBufferToPhysical(float fbValue)
+	{
+		return fbValue * GT7_REFERENCE_LUMINANCE;
+	}
+
+	float gt7_PhysicalToFrameBuffer(float physical)
+	{
+		return physical / GT7_REFERENCE_LUMINANCE;
+	}
+
+	float gt7_SmoothStep(float x, float edge0, float edge1)
+	{
+		float t = (x - edge0) / (edge1 - edge0);
+		t = saturate(t);
+		return t * t * (3.0 - 2.0 * t);
+	}
+
+	float gt7_ChromaCurve(float x, float a, float b)
+	{
+		return 1.0 - gt7_SmoothStep(x, a, b);
+	}
+
+	struct GT7ToneMappingCurve
+	{
+		float peakIntensity;
+		float alpha;
+		float midPoint;
+		float linearSection;
+		float toeStrength;
+		float kA, kB, kC;
+	};
+
+	GT7ToneMappingCurve gt7_InitCurve(float monitorIntensity, float alpha, float grayPoint, float linearSection, float toeStrength)
+	{
+		GT7ToneMappingCurve curve;
+		curve.peakIntensity = monitorIntensity;
+		curve.alpha = alpha;
+		curve.midPoint = grayPoint;
+		curve.linearSection = linearSection;
+		curve.toeStrength = toeStrength;
+
+		float k = (linearSection - 1.0) / (alpha - 1.0);
+		curve.kA = monitorIntensity * linearSection + monitorIntensity * k;
+		curve.kB = -monitorIntensity * k * exp(linearSection / k);
+		curve.kC = -1.0 / (k * monitorIntensity);
+		
+		return curve;
+	}
+
+	float gt7_EvaluateCurve(GT7ToneMappingCurve curve, float x)
+	{
+		if (x < 0.0) return 0.0;
+
+		float weightLinear = gt7_SmoothStep(x, 0.0, curve.midPoint);
+		float weightToe = 1.0 - weightLinear;
+		float shoulder = curve.kA + curve.kB * exp(x * curve.kC);
+
+		if (x < curve.linearSection * curve.peakIntensity)
+		{
+			float toeMapped = curve.midPoint * pow(max(0.0, x / curve.midPoint), curve.toeStrength);
+			return weightToe * toeMapped + weightLinear * x;
+		}
+		else
+		{
+			return shoulder;
+		}
+	}
+
+	// ST-2084 (PQ) EOTF and Inverse EOTF
+	float gt7_EOTF_ST2084(float n, float exponentScaleFactor)
+	{
+		n = saturate(n);
+		
+		const float m1 = 0.1593017578125;
+		const float m2 = 78.84375 * exponentScaleFactor;
+		const float c1 = 0.8359375;
+		const float c2 = 18.8515625;
+		const float c3 = 18.6875;
+		const float pqC = 10000.0;
+
+		float np = pow(n, 1.0 / m2);
+		float l = max(0.0, np - c1);
+		l = l / (c2 - c3 * np);
+		l = pow(l, 1.0 / m1);
+
+		return gt7_PhysicalToFrameBuffer(l * pqC);
+	}
+
+	float gt7_InverseEOTF_ST2084(float v, float exponentScaleFactor)
+	{
+		const float m1 = 0.1593017578125;
+		const float m2 = 78.84375 * exponentScaleFactor;
+		const float c1 = 0.8359375;
+		const float c2 = 18.8515625;
+		const float c3 = 18.6875;
+		const float pqC = 10000.0;
+
+		float physical = gt7_FrameBufferToPhysical(v);
+		float y = physical / pqC;
+		float ym = pow(max(0.0, y), m1);
+		return exp2(m2 * (log2(c1 + c2 * ym) - log2(1.0 + c3 * ym)));
+	}
+
+	// RGB to ICtCp conversion (ITU-R BT.2100)
+	float3 gt7_RGBToICtCp(float3 rgb)
+	{
+		// RGB to LMS (Rec.2020 primaries)
+		const float3x3 rgb2lms = float3x3(
+			1688.0, 2146.0, 262.0,
+			683.0, 2951.0, 462.0,
+			99.0, 309.0, 3688.0
+		) / 4096.0;
+
+		float3 lms = mul(rgb2lms, rgb);
+		lms = max(lms, 0.0);
+
+		// Apply PQ inverse EOTF
+		lms = float3(
+			gt7_InverseEOTF_ST2084(lms.x, 1.0),
+			gt7_InverseEOTF_ST2084(lms.y, 1.0),
+			gt7_InverseEOTF_ST2084(lms.z, 1.0)
+		);
+
+		// LMS to ICtCp
+		const float3x3 lms2ictcp = float3x3(
+			2048.0, 2048.0, 0.0,
+			6610.0, -13613.0, 7003.0,
+			17933.0, -17390.0, -543.0
+		) / 4096.0;
+
+		return mul(lms2ictcp, lms);
+	}
+
+	float3 gt7_ICtCpToRGB(float3 ictcp)
+	{
+		// ICtCp to LMS
+		const float3x3 ictcp2lms = float3x3(
+			1.0, 0.00860514569398152,  0.11103560447547328,
+			1.0, -0.00860514569398152, -0.11103560447547328,
+			1.0, 0.56004885956263900, -0.32063747023212210
+		);
+
+		float3 lms = mul(ictcp2lms, ictcp);
+
+		// Apply PQ EOTF
+		lms = float3(
+			gt7_EOTF_ST2084(lms.x, 1.0),
+			gt7_EOTF_ST2084(lms.y, 1.0),
+			gt7_EOTF_ST2084(lms.z, 1.0)
+		);
+
+		// LMS to RGB
+		const float3x3 lms2rgb = float3x3(
+			 3.43661, -2.50645,  0.06984,
+			-0.79133,  1.98360, -0.19227,
+			-0.02592, -0.09894,  1.12486
+		);
+
+		return mul(lms2rgb, lms);
+	}
+
+
+	void applyGT7ToneMapping(inout PoiFragData poiFragData, in PoiMesh poiMesh)
+	{
+		float3 col = poiFragData.finalColor;
+
+		float framebufferLuminanceTarget = gt7_PhysicalToFrameBuffer(GT7_SDR_PAPER_WHITE);
+		col *= framebufferLuminanceTarget;
+		float sdrCorrectionFactor = 1.0 / framebufferLuminanceTarget;
+
+		GT7ToneMappingCurve curve = gt7_InitCurve(framebufferLuminanceTarget, 0.25, 0.538, 0.444, 1.280);
+
+		float3 ictcp = gt7_RGBToICtCp(col);
+
+		float3 skewedRgb = float3(
+			gt7_EvaluateCurve(curve, col.r),
+			gt7_EvaluateCurve(curve, col.g),
+			gt7_EvaluateCurve(curve, col.b)
+		);
+
+		float3 skewedIctcp = gt7_RGBToICtCp(skewedRgb);
+
+		float3 targetLumRGB = float3(framebufferLuminanceTarget, framebufferLuminanceTarget, framebufferLuminanceTarget);
+		float3 targetLumICtCp = gt7_RGBToICtCp(targetLumRGB);
+		float framebufferLuminanceTargetIctcp = targetLumICtCp.x;
+
+		float chromaScale = gt7_ChromaCurve(ictcp.x / framebufferLuminanceTargetIctcp, _GT7TM_ChromaFadeStart, _GT7TM_ChromaFadeEnd);
+
+		float3 scaledIctcp = float3(
+			skewedIctcp.x,
+			ictcp.y * chromaScale,
+			ictcp.z * chromaScale
+		);
+
+		float3 scaledRgb = gt7_ICtCpToRGB(scaledIctcp);
+		scaledRgb = max(scaledRgb, 0.0);
+
+		float3 blended = lerp(skewedRgb, scaledRgb, _GT7TM_ColorAccuracy);
+		blended = sdrCorrectionFactor * min(blended, framebufferLuminanceTarget);
+
+		poiFragData.finalColor = blended;
+	}
+#endif
+//endex
+
+#T#PoiGT7ToneMappingFunctionCalls
+//ifex _GT7ToneMapping==0
+#ifdef GT7_TONEMAPPING
+	applyGT7ToneMapping(poiFragData, poiMesh);
+#endif
+//endex
+
