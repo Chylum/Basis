@@ -53,6 +53,24 @@ namespace Poi.Tools.ShaderTranslator.VersionUpgrade
 					SetTargetPropertyValue(ctx, "_FlipbookPosition", position);
 					SetTargetPropertyValue(ctx, "_FlipbookScale", scale);
 				}),
+
+				// Rim Lighting: _RimSharpness -> _RimBlur (inverted: blur = width - sharpness)
+				new PropertyTranslation("_RimSharpness", (prop, ctx) =>
+				{
+					float sharpness = GetSourcePropertyValue<float>(ctx, prop);
+					float width = GetSourcePropertyValue<float>(ctx, "_RimWidth");
+					float blur = Mathf.Clamp01(width - sharpness);
+					SetTargetPropertyValue(ctx, "_RimBlur", blur);
+				}),
+
+				// Rim Lighting 2: _Rim2Sharpness -> _Rim2Blur
+				new PropertyTranslation("_Rim2Sharpness", (prop, ctx) =>
+				{
+					float sharpness = GetSourcePropertyValue<float>(ctx, prop);
+					float width = GetSourcePropertyValue<float>(ctx, "_Rim2Width");
+					float blur = Mathf.Clamp01(width - sharpness);
+					SetTargetPropertyValue(ctx, "_Rim2Blur", blur);
+				}),
 			};
 		}
 

@@ -2,7 +2,7 @@
 //ifex _EnableTouchGlow==0
 [HideInInspector] m_start_depthFX (" Depth FX--{reference_property:_EnableTouchGlow, button_help:{text:Tutorial,action:{type:URL,data:https://www.poiyomi.com/special-fx/depth-fx},hover:Documentation}}", Float) = 0
 [HideInInspector][ThryToggle(GRAIN)]_EnableTouchGlow ("Enable Depth FX", Float) = 0
-[Helpbox(1)]_DepthFXWarning ("Depth FX doesn't write to depth, which can break certain transparent effects like custom fog and raymarching", Int) = 0
+[Helpbox(1, 2)]_DepthFXWarning ("Depth FX doesn't write to depth, which can break certain transparent effects like custom fog and raymarching", Int) = 0
 [sRGBWarning]_DepthMask ("Mask--{reference_properties:[_DepthMaskPan, _DepthMaskUV, _DepthMaskChannel, _DepthMaskGlobalMask]}", 2D) = "white" { }
 [ThryHideInInspector][Vector2]_DepthMaskPan ("Panning", Vector) = (0, 0, 0, 0)
 [ThryHideInInspector][ThryWideEnum(UV0, 0, UV1, 1, UV2, 2, UV3, 3, Panosphere, 4, World Pos, 5, Local Pos, 8, Polar UV, 6, Distorted UV, 7, Matcap, 9)] _DepthMaskUV ("UV", Int) = 0

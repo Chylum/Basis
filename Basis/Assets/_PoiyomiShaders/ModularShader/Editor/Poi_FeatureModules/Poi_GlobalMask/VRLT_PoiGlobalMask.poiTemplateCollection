@@ -128,7 +128,7 @@
 //ifex _GlobalMaskModifiersCameraEnable==0
 [HideInInspector] m_start_GlobalMaskModifiersCamera ("Camera Masking--{reference_property:_GlobalMaskModifiersCameraEnable}", Float) = 0
 [HideInInspector][DoNotAnimate][ThryToggleUI(true)] _GlobalMaskModifiersCameraEnable ("Global Mask Camera Enable", Float) = 0
-[Helpbox(1)] _GlobalMaskModifiersCameraInfo ("Camera Masking only works in VRChat.", Int) = 0
+[Helpbox(1, 2)] _GlobalMaskModifiersCameraInfo ("Camera Masking only works in VRChat.", Int) = 0
 [Enum(Both, 0, Only Outside Camera, 1, Only In Camera, 2)] _GlobalMaskCamera_0 ("1R", Int) = 0
 [Enum(Both, 0, Only Outside Camera, 1, Only In Camera, 2)] _GlobalMaskCamera_1 ("1G", Int) = 0
 [Enum(Both, 0, Only Outside Camera, 1, Only In Camera, 2)] _GlobalMaskCamera_2 ("1B", Int) = 0

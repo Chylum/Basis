@@ -11,7 +11,7 @@ _ALUVScale ("Scale", Vector) = (1, 1, 1, 1)
 _ALUVRotation ("Rotation", Range(0, 360)) = 0
 _ALUVRotationSpeed ("Rotation Speed", Float) = 0
 _ALDecalLineWidth ("Line Width", Range(0, 1)) = 1.0
-_ALDecaldCircleDimensions ("Cirlce Dimensions--{ condition_showS:_ALDecalUVMode==1}", Vector) = (0, 1, 0, 1)
+_ALDecaldCircleDimensions ("Circle Dimensions--{ condition_showS:_ALDecalUVMode==1}", Vector) = (0, 1, 0, 1)
 
 [HideInInspector] s_start_ALDecalVolumeOptions ("Volume--{persistent_expand:true,default_expand:true}", Float) = 1
 _ALDecalVolumeStep ("Volume Step Num (0 = Off)", Float) = 0.0

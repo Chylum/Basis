@@ -1215,11 +1215,12 @@ float _LightingAdditiveDetailStrength;
 			#if POI_PIPE == POI_BIRP
 				UnityLight light;
 				light.dir = poiLight.direction;
-				light.color = max(0, _LightColor0.rgb) * saturate(shadowAttenuation * attenuation * poiLight.detailShadow);
+				light.color = max(0, poiLight.directColor) * saturate(shadowAttenuation * attenuation * poiLight.detailShadow);
 				light.ndotl = poiLight.nDotLSaturated;
 				UnityIndirect indirectLight = (UnityIndirect)0;
 				#ifdef POI_PASS_BASE
 					indirectLight = CreateIndirectLight(poiMesh, poiCam, poiLight);
+					indirectLight.diffuse = lerp(indirectLight.diffuse, dot(indirectLight.diffuse, float3(0.299, 0.587, 0.114)), poiLight.lightingMonochromatic);
 				#endif
 				#K#BASE_REALISTIC_MOD
 				poiLight.rampedLightMap = poiLight.nDotLSaturated;
@@ -1234,7 +1235,7 @@ float _LightingAdditiveDetailStrength;
 						float3 L1g = 0;
 						float3 L1b = 0;
 						#ifdef LIGHTMAP_ON
-							LightVolumeAdditiveSH(poiMesh.worldPos, L0, L1r, L1g, L1b);
+							LightVolumeAdditiveSH(poiMesh.worldPos, L0, L1r, L1g, L1b, poiMesh.normals[1] * _LightingLightVolumesNormalBias);
 							poiLight.finalLighting += clamp(LightVolumeEvaluate(poiMesh.normals[1], L0, L1r, L1g, L1b), poiLight.lightingMinLightBrightness, _LightingCap);
 						#endif
 					}
@@ -1263,7 +1264,7 @@ float _LightingAdditiveDetailStrength;
 						poiGI = SAMPLE_GI(poiMesh.lightmapUV.xy, poiMesh.lightmapUV.zw, 0, lightNormalWS.xyz);
 					#elif !defined(LIGHTMAP_ON) && (defined(PROBE_VOLUMES_L1) || defined(PROBE_VOLUMES_L2))
 						poiGI = SAMPLE_GI(0,
-							GetAbsolutePositionWS(poiMesh.worldPos),
+							GetAbsolutePositionWS(poiMesh.worldPos + poiMesh.normals[1] * _LightingLightVolumesNormalBias),
 							poiMesh.normals[1],
 							poiCam.viewDir,
 							poiCam.clipPos.xy,
@@ -1276,10 +1277,10 @@ float _LightingAdditiveDetailStrength;
 					MixRealtimeAndBakedGI(poiLight.unityLight, poiMesh.normals[1], poiGI);
 					AmbientOcclusionFactor aoFactor = CreateAmbientOcclusionFactor(poiCam.screenUV, poiLight.occlusion);
 					poiGI = GlobalIllumination(poiLight.brdfData, poiLight.brdfDataClearCoat, 1,
-						poiGI, aoFactor.indirectAmbientOcclusion, poiMesh.worldPos,
+						poiGI, aoFactor.indirectAmbientOcclusion, poiMesh.worldPos + poiMesh.normals[1] * _LightingLightVolumesNormalBias,
 						poiMesh.normals[1], poiCam.viewDir, poiCam.screenUV);
 
-					poiLight.finalLighting += poiGI;
+					poiLight.finalLighting += lerp(poiGI, dot(poiGI, float3(0.299, 0.587, 0.114)), poiLight.lightingMonochromatic);
 				}
 				//endex
 			#endif

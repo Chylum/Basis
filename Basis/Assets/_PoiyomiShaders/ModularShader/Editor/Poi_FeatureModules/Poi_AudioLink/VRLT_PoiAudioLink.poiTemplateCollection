@@ -3,7 +3,7 @@
 [HideInInspector] m_AudioLinkCategory (" Audio Link--{reference_property:_EnableAudioLink, button_help:{text:Tutorial,action:{type:URL,data:https://www.poiyomi.com/audio-link/},hover:Documentation}}", Float) = 0
 [HideInInspector] m_start_audioLink ("Audio Link", Float) = 0
 [HideInInspector][ThryToggle(POI_AUDIOLINK)] _EnableAudioLink ("Enabled", Float) = 0
-[Helpbox(1)] _AudioLinkHelp ("This section houses the global controls for audio link. Controls for individual features are in their respective sections. (Emission, Dissolve, etc...)", Int) = 0
+[Helpbox(1, 2)] _AudioLinkHelp ("This section houses the global controls for audio link. Controls for individual features are in their respective sections. (Emission, Dissolve, etc...)", Int) = 0
 [ToggleUI] _AudioLinkAnimToggle ("Anim Toggle", Float) = 1
 /*
 _AudioLinkDelay ("Delay", Range(0, 1)) = 0

@@ -2,7 +2,7 @@
 //ifex _EnableDepthBulge==0
 [HideInInspector] m_start_DepthBulge (" Depth Bulge--{reference_property:_EnableDepthBulge,button_help:{text:Tutorial,action:{type:URL,data:https://www.poiyomi.com/special-fx/depth-bulge},hover:Documentation}}", Float) = 0
 [HideInInspector][ThryToggle(POI_DEPTHBULGE)] _EnableDepthBulge ("Bulge", Float) = 0
-[Helpbox(1)]_DepthBulgeWarning ("Depth Bulge doesn't write to depth, which can break certain transparent effects like custom fog and raymarching", Int) = 0
+[Helpbox(1, 2)]_DepthBulgeWarning ("Depth Bulge doesn't write to depth, which can break certain transparent effects like custom fog and raymarching", Int) = 0
 _DepthBulgeMask ("Bulge Mask--{reference_properties:[_DepthBulgeMaskUV, _DepthBulgeMaskChannel]}", 2D) = "white" { }
 [ThryHideInInspector][Enum(UV0, 0, UV1, 1, UV2, 2, UV3, 3)] _DepthBulgeMaskUV ("UV", Int) = 0
 [ThryHideInInspector][Enum(R, 0, G, 1, B, 2, A, 3)] _DepthBulgeMaskChannel ("Channel", Float) = 0

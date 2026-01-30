@@ -15,7 +15,7 @@
 
 //ifex _RenderingAOBlockerEnabled==0
 [HideInInspector] m_start_WorldAOBlocker (" World AO Blocker--{reference_property:_RenderingAOBlockerEnabled,button_help:{text:Tutorial,action:{type:URL,data:https://www.poiyomi.com/rendering/world-ao-blocker},hover:Documentation}}", Float) = 0
-[Helpbox(1)] _RenderingAOBlockerNote ("Meshes in this UV space render only to depth and act as a blocking volume for effects like ambient occlusion. This section effects the uv tile directly to the left of the default uv. (U -1→0, V 0→1)", Int) = 0
+[Helpbox(1, 2)] _RenderingAOBlockerNote ("Meshes in this UV space render only to depth and act as a blocking volume for effects like ambient occlusion. This section effects the uv tile directly to the left of the default uv. (U -1→0, V 0→1)", Int) = 0
 [ThryHideInInspector][ToggleUI] _RenderingAOBlockerEnabled ("Enabled", Float) = 0
 [ThryWideEnum(UV0, 0, UV1, 1, UV2, 2, UV3, 3)]_RenderingAOBlockerUVChannel ("UV Channel", Int) = 0
 [ToggleUI] _RenderingAOBlockerFlipNormal ("Flip Normal", Float) = 0

@@ -11,6 +11,9 @@ struct VertexOut
 	float worldDir : TEXCOORD8;
 	float2 fogData: TEXCOORD10;
 	POI_SHADOW_COORDS(9)
+	#ifdef POI_SQUISH
+		float squishAmount : TEXCOORD11;
+	#endif
 	#ifdef POI_PASS_MOTION_VECTORS
 		float4 positionCSNoJitter         : POSITION_CS_NO_JITTER;
 		float4 previousPositionCSNoJitter : PREV_POSITION_CS_NO_JITTER;

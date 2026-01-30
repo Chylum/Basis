@@ -44,7 +44,9 @@ Material:
     - _RimBlur: 0.17
     - _RimBorder: 0.755
     - _RimIndirBlur: 0.1
+    - _lilToonVersion: 45
     m_Colors:
     - _MainTexHSVG: {r: 0, g: 1, b: 1, a: 1.23}
     - _RimColor: {r: 1, g: 1, b: 1, a: 0.174}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1

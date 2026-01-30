@@ -6,7 +6,7 @@
 
 #T#PoiTessellationProperties
 [HideInInspector] m_tessellationCategory ("Tessellation", Float) = 0
-[Helpbox(2)]_TessellationAMDMoment ("Tessellation can cause issues on some AMD GPUs - be careful when using high factors.", Int) = 0
+[Helpbox(2, 2)]_TessellationAMDMoment ("Tessellation can cause issues on some AMD GPUs - be careful when using high factors.", Int) = 0
 [ThryWideEnum(Uniform, 0, Edge Length, 1, Distance, 2)] _TessellationType ("Tessellation Type", Int) = 1
 _TessellationUniform ("Uniform Factor--{condition_showS:(_TessellationType==0||_TessellationType==2)}", Range(1, 5)) = 2.5
 [VectorLabel(Min, Max)] _TessellationDistance ("Distance--{condition_showS:(_TessellationType==2)}", Vector) = (2, 8, 0, 0)

@@ -327,7 +327,11 @@ Shader "Hidden/Locked/.poiyomi/Poiyomi Pro URP/d8318b5db7318454bbf90416aba81d31"
 		#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 		#if defined(SHADER_API_MOBILE)
 		#undef TEXTURE3D
+		#if defined(SHADER_API_VULKAN)
+		#define TEXTURE3D(textureName) textureName.Sample(sampler3D, uvw) // adjust uvw accordingly
+		#else
 		#define TEXTURE3D(textureName) TEXTURE3D_FLOAT(textureName)
+		#endif
 		#endif
 		#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 		#endif

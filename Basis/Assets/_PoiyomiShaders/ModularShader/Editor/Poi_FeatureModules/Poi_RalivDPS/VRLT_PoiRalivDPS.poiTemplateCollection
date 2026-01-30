@@ -2,7 +2,7 @@
 //ifex _PenetratorEnabled!=1 && _OrifaceEnabled!=1
 [HideInInspector] m_start_raliv ("Raliv Dynamic Penetration System--{button_help:{text:Gumroad,action:{type:URL,data:https://gumroad.com/l/lwthuB},hover:Buy}}", Float) = 0
 // Penetrator
-[Helpbox(1)] _RalivHelp ("To use this you'll need to purchase the shader from the gumroad link in the header", Int) = 0
+[Helpbox(1, 2)] _RalivHelp ("To use this you'll need to purchase the shader from the gumroad link in the header", Int) = 0
 //ifex _PenetratorEnabled!=1
 [HideInInspector] m_start_ralivPenetrator (" Penetrator--{reference_property:_PenetratorEnabled}", Float) = 0
 [ThryHideInInspector][ToggleUI] _PenetratorEnabled ("Enabled", Float) = 0
@@ -35,9 +35,9 @@ _BlendshapeBadScaleFix("Blend Shape Bad Scale Fix", Range(1, 100)) = 1
 [HideInInspector] m_end_ralivOriface ("Oriface", Float) = 0
 //endex
 [HideInInspector] m_start_ralivAdvanced ("Advanced", Float) = 0
-[Helpbox(1)] _RalivAdvancedHelp ("An advanced user feature that allows a separate channel for penetrators and orifices (think toy radio controlled cars) 0s only interact with 0s and 1s only interact with 1s", Int) = 0
+[Helpbox(1, 2)] _RalivAdvancedHelp ("An advanced user feature that allows a separate channel for penetrators and orifices (think toy radio controlled cars) 0s only interact with 0s and 1s only interact with 1s", Int) = 0
 _OrificeChannel("OrificeChannel Please Use 0", Float) = 0
-[Helpbox(0)] _RalivDPSDisableShadowCasterHelp ("Enabling ShadowCaster means that you may see real time shadows through the mesh and is not recommended for Penetrators and any Orifices that greatly expand", Int) = 0
+[Helpbox(0, 2)] _RalivDPSDisableShadowCasterHelp ("Enabling ShadowCaster means that you may see real time shadows through the mesh and is not recommended for Penetrators and any Orifices that greatly expand", Int) = 0
 [ToggleUI] _RalivDPSDisableShadowCaster ("Disable ShadowCaster for DPS", Int) = 1
 [HideInInspector] m_end_ralivAdvanced ("Advanced", Float) = 0
 [HideInInspector] m_end_raliv ("Raliv", Float) = 0

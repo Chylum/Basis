@@ -3,152 +3,184 @@
 [HideInInspector] m_start_dissolve (" Dissolve--{reference_property:_EnableDissolve,button_help:{text:Tutorial,action:{type:URL,data:https://www.poiyomi.com/special-fx/dissolve},hover:Documentation}}", Float) = 0
 [HideInInspector][ThryToggle(DISTORT)]_EnableDissolve ("Enable Dissolve", Float) = 0
 [Enum(Basic, 1, Point to Point, 2, Spherical, 3, Center Out, 4)] _DissolveType ("Dissolve Type", Int) = 1
+_DissolveAlpha ("Dissolve Alpha", Range(0, 1)) = 0
+_DissolveSoftness ("Softness", Range(0, 1)) = 0
+[ToggleUI]_DissolveDebugGradient ("Debug Gradient", Float) = 0
 
-[HideInInspector] s_start_EdgeMenu ("Edge--{persistent_expand:true,default_expand:true}", Float) = 1
-_DissolveEdgeWidth ("Edge Width--{condition_show:_DissolveType!=2}", Range(0, .5)) = 0.025
-_DissolveEdgeHardness ("Edge Hardness", Range(0, 1)) = 0.5
-_DissolveEdgeColor ("Edge Color--{reference_property:_DissolveEdgeColorThemeIndex}", Color) = (1, 1, 1, 1)
-[ThryHideInInspector][ThryWideEnum(Off, 0, Theme Color 0, 1, Theme Color 1, 2, Theme Color 2, 3, Theme Color 3, 4, ColorChord 0, 5, ColorChord 1, 6, ColorChord 2, 7, ColorChord 3, 8, AL Theme 0, 9, AL Theme 1, 10, AL Theme 2, 11, AL Theme 3, 12)] _DissolveEdgeColorThemeIndex ("", Int) = 0
-[sRGBWarning][Gradient]_DissolveEdgeGradient ("Edge Gradient", 2D) = "white" { }
-_DissolveEdgeEmission ("Edge Emission", Range(0, 20)) = 0
-[HideInInspector] s_end_EdgeMenu ("", Float) = 0
-
-[HideInInspector] s_start_DissolvedMenu ("Dissolved--{persistent_expand:true,default_expand:true}", Float) = 1
-_DissolveTextureColor ("Dissolved Color--{reference_property:_DissolveTextureColorThemeIndex}", Color) = (1, 1, 1, 1)
-[ThryHideInInspector][ThryWideEnum(Off, 0, Theme Color 0, 1, Theme Color 1, 2, Theme Color 2, 3, Theme Color 3, 4, ColorChord 0, 5, ColorChord 1, 6, ColorChord 2, 7, ColorChord 3, 8, AL Theme 0, 9, AL Theme 1, 10, AL Theme 2, 11, AL Theme 3, 12)] _DissolveTextureColorThemeIndex ("", Int) = 0
-[sRGBWarning(true)]_DissolveToTexture ("Dissolved Texture--{reference_properties:[_DissolveToTexturePan, _DissolveToTextureUV]}", 2D) = "white" { }
-[ThryHideInInspector][Vector2]_DissolveToTexturePan ("Panning", Vector) = (0, 0, 0, 0)
-[ThryHideInInspector][ThryWideEnum(UV0, 0, UV1, 1, UV2, 2, UV3, 3, Panosphere, 4, World Pos, 5, Local Pos, 8, Polar UV, 6, Distorted UV, 7, Matcap, 9)] _DissolveToTextureUV ("UV", Int) = 0
-_DissolveToEmissionStrength ("Dissolved Emission Strength", Range(0, 20)) = 0
-[HideInInspector] s_end_DissolvedMenu ("", Float) = 0
-
-[HideInInspector] s_start_TransitionMenu ("Transition--{persistent_expand:true,default_expand:true}", Float) = 1
-[sRGBWarning]_DissolveNoiseTexture ("Dissolve Gradient--{condition_show:_DissolveType==1,reference_properties:[_DissolveNoiseTexturePan, _DissolveNoiseTextureUV, _DissolveInvertNoise]}", 2D) = "white" { }
+[HideInInspector] s_start_BasicDissolve ("Gradient--{condition_showS:(_DissolveType==1),default_expand:true}", Float) = 0
+[sRGBWarning]_DissolveNoiseTexture ("Dissolve Gradient--{reference_properties:[_DissolveNoiseTexturePan, _DissolveNoiseTextureUV, _DissolveInvertNoise]}", 2D) = "white" { }
 [ThryHideInInspector][Vector2]_DissolveNoiseTexturePan ("Panning", Vector) = (0, 0, 0, 0)
 [ThryHideInInspector][ThryWideEnum(UV0, 0, UV1, 1, UV2, 2, UV3, 3, Panosphere, 4, World Pos, 5, Local Pos, 8, Polar UV, 6, Distorted UV, 7, Matcap, 9)] _DissolveNoiseTextureUV ("UV", Int) = 0
 [ThryHideInInspector][ToggleUI]_DissolveInvertNoise ("Invert", Float) = 0
-[sRGBWarning]_DissolveDetailNoise ("Dissolve Noise--{reference_properties:[_DissolveDetailNoisePan, _DissolveDetailNoiseUV, _DissolveInvertDetailNoise]}", 2D) = "black" { }
+[HideInInspector] s_end_BasicDissolve ("", Float) = 0
+
+[HideInInspector] s_start_pointToPoint ("Point to Point--{condition_showS:(_DissolveType==2),default_expand:true}", Float) = 0
+[Enum(Local, 0, World, 1, Vertex Colors, 2, UV, 3)] _DissolveP2PWorldLocal ("Space", Int) = 0
+[ThryWideEnum(UV0, 0, UV1, 1, UV2, 2, UV3, 3)]_DissolveP2PUV ("UV--{condition_showS:(_DissolveP2PWorldLocal==3)}", Int) = 0
+[Vector3]_DissolveStartPoint ("Start Point", Vector) = (0, -1, 0, 0)
+[Vector3]_DissolveEndPoint ("End Point", Vector) = (0, 1, 0, 0)
+[HideInInspector] s_end_pointToPoint ("", Float) = 0
+
+[HideInInspector] s_start_SphericalDissolve ("Spherical--{condition_showS:(_DissolveType==3),default_expand:true}", Float) = 0
+[Vector3]_SphericalDissolveCenter ("Center Point", Vector) = (0, 0, 0)
+_SphericalDissolveRadius ("Radius", Float) = 1.5
+[ToggleUI]_SphericalDissolveInvert ("Invert", Float) = 0
+[HideInInspector] s_end_SphericalDissolve ("", Float) = 0
+
+[HideInInspector] s_start_CenterOutDissolve ("Center Out--{condition_showS:(_DissolveType==4),default_expand:true}", Float) = 0
+[Enum(View Direction, 1, Custom Direction, 2, Light Direction, 3)]_CenterOutDissolveMode ("Mode", Int) = 1
+[Vector3]_CenterOutDissolveDirection ("Direction--{condition_showS:(_CenterOutDissolveMode==2)}", Vector) = (0, 0, 1, 0)
+[ToggleUI]_CenterOutDissolveInvert ("Invert", Float) = 0
+_CenterOutDissolveNormals ("Pixel Normals", Range(0, 1)) = 0
+[ToggleUI]_CenterOutDissolveLinear ("Linear", Float) = 1
+[HideInInspector] s_end_CenterOutDissolve ("", Float) = 0
+
+[HideInInspector] s_start_DissolvedMenu ("Dissolved--{persistent_expand:true,default_expand:true}", Float) = 1
+[ToggleUI]_DissolveAlphaOnly ("Alpha Only", Float) = 0
+[Ramp4]_DissolveAlphaOnlyRamp ("Alpha Ramp--{condition_showS:(_DissolveAlphaOnly==1)}", Vector) = (1, 0, 0, 1)
+_DissolveTextureColor ("Color--{reference_property:_DissolveTextureColorThemeIndex,condition_showS:(_DissolveAlphaOnly==0)}", Color) = (1, 1, 1, 1)
+[ThryHideInInspector][ThryWideEnum(Off, 0, Theme Color 0, 1, Theme Color 1, 2, Theme Color 2, 3, Theme Color 3, 4, ColorChord 0, 5, ColorChord 1, 6, ColorChord 2, 7, ColorChord 3, 8, AL Theme 0, 9, AL Theme 1, 10, AL Theme 2, 11, AL Theme 3, 12)] _DissolveTextureColorThemeIndex ("", Int) = 0
+[sRGBWarning(true)]_DissolveToTexture ("Texture--{reference_properties:[_DissolveToTexturePan, _DissolveToTextureUV],condition_showS:(_DissolveAlphaOnly==0)}", 2D) = "white" { }
+[ThryHideInInspector][Vector2]_DissolveToTexturePan ("Panning", Vector) = (0, 0, 0, 0)
+[ThryHideInInspector][ThryWideEnum(UV0, 0, UV1, 1, UV2, 2, UV3, 3, Panosphere, 4, World Pos, 5, Local Pos, 8, Polar UV, 6, Distorted UV, 7, Matcap, 9)] _DissolveToTextureUV ("UV", Int) = 0
+_DissolveToEmissionStrength ("Emission--{condition_showS:(_DissolveAlphaOnly==0)}", Range(0, 20)) = 0
+[Space(8)]
+[ToggleUI]_DissolveHueShiftEnabled ("Hue Shift--{condition_showS:(_DissolveAlphaOnly==0)}", Float) = 0
+[ThryWideEnum(OKLab, 0, HSV, 1)] _DissolveHueShiftColorSpace ("Color Space--{condition_showS:(_DissolveHueShiftEnabled==1&&_DissolveAlphaOnly==0)}", Int) = 0
+[ThryWideEnum(Hue Select, 0, Hue Shift, 1)] _DissolveHueSelectOrShift ("Mode--{condition_showS:(_DissolveHueShiftEnabled==1&&_DissolveAlphaOnly==0)}", Int) = 1
+_DissolveHueShift ("Shift--{condition_showS:(_DissolveHueShiftEnabled==1&&_DissolveAlphaOnly==0)}", Range(0, 1)) = 0
+_DissolveHueShiftSpeed ("Speed--{condition_showS:(_DissolveHueShiftEnabled==1&&_DissolveAlphaOnly==0)}", Float) = 0
+[HideInInspector] s_end_DissolvedMenu ("", Float) = 0
+
+[HideInInspector] s_start_DetailNoise ("Gradient Noise--{reference_property:_DissolveDetailNoiseEnabled,persistent_expand:true,default_expand:false}", Float) = 0
+[ThryHideInInspector][ToggleUI]_DissolveDetailNoiseEnabled ("Enabled", Float) = 0
+[Enum(Texture, 0, 3D Dot Noise, 1)]_DissolveDetailNoiseMode ("Mode", Int) = 0
+[sRGBWarning]_DissolveDetailNoise ("Texture--{reference_properties:[_DissolveDetailNoisePan, _DissolveDetailNoiseUV, _DissolveInvertDetailNoise],condition_showS:(_DissolveDetailNoiseMode==0)}", 2D) = "black" { }
 [ThryHideInInspector][Vector2]_DissolveDetailNoisePan ("Panning", Vector) = (0, 0, 0, 0)
 [ThryHideInInspector][ThryWideEnum(UV0, 0, UV1, 1, UV2, 2, UV3, 3, Panosphere, 4, World Pos, 5, Local Pos, 8, Polar UV, 6, Distorted UV, 7, Matcap, 9)] _DissolveDetailNoiseUV ("UV", Int) = 0
 [ThryHideInInspector][ToggleUI]_DissolveInvertDetailNoise ("Invert", Float) = 0
-_DissolveDetailEdgeSmoothing ("Detail Noise Smoothing", Range(0, 1)) = 0
-_DissolveDetailStrength ("Dissolve Detail Strength", Range(0, 1)) = 0.1
-_DissolveAlpha ("Dissolve Alpha", Range(0, 1)) = 0
-_ContinuousDissolve ("Continuous Dissolve Speed", Float) = 0
-[HideInInspector] s_end_TransitionMenu ("", Float) = 0
+[VectorLabel(X, Y, Z, link)]_DissolveDotNoiseScale ("Scale--{condition_showS:(_DissolveDetailNoiseMode==1)}", Vector) = (1, 1, 1, 0)
+[Vector3]_DissolveDotNoiseOffset ("Offset--{condition_showS:(_DissolveDetailNoiseMode==1)}", Vector) = (0, 0, 0, 0)
+[Vector3]_DissolveDotNoiseSpeed ("Speed--{condition_showS:(_DissolveDetailNoiseMode==1)}", Vector) = (0, 0, 0, 0)
+[ToggleUI]_DissolveInvertDotNoise ("Invert--{condition_showS:(_DissolveDetailNoiseMode==1)}", Float) = 0
+_DissolveDetailStrength ("Strength", Range(0, 1)) = 0.1
+_DissolveDetailEdgeMask ("Edge Only--{hover:Only apply noise to areas already past the dissolve threshold}", Range(0, 1)) = 0
+[HideInInspector] s_end_DetailNoise ("", Float) = 0
 
-[HideInInspector] s_start_MaskingMenu ("Masking--{persistent_expand:true,default_expand:true}", Float) = 0
-[sRGBWarning]_DissolveMask ("Dissolve Mask--{reference_properties:[_DissolveMaskPan, _DissolveMaskUV]}", 2D) = "white" { }
+[HideInInspector] s_start_EdgeLine ("Edge Line--{reference_property:_DissolveEdgeEnabled,persistent_expand:true,default_expand:false}", Float) = 0
+[ThryHideInInspector][ToggleUI]_DissolveEdgeEnabled ("Enabled", Float) = 0
+_DissolveEdgeColor ("Color 1--{reference_property:_DissolveEdgeColorThemeIndex}", Color) = (1, 1, 1, 1)
+[ThryHideInInspector][ThryWideEnum(Off, 0, Theme Color 0, 1, Theme Color 1, 2, Theme Color 2, 3, Theme Color 3, 4, ColorChord 0, 5, ColorChord 1, 6, ColorChord 2, 7, ColorChord 3, 8, AL Theme 0, 9, AL Theme 1, 10, AL Theme 2, 11, AL Theme 3, 12)] _DissolveEdgeColorThemeIndex ("", Int) = 0
+[ToggleUI]_DissolveEdgeGradient ("Gradient", Float) = 0
+_DissolveEdgeColor2 ("Color 2--{reference_property:_DissolveEdgeColor2ThemeIndex,condition_showS:(_DissolveEdgeGradient==1)}", Color) = (1, 0.5, 0, 1)
+[ThryHideInInspector][ThryWideEnum(Off, 0, Theme Color 0, 1, Theme Color 1, 2, Theme Color 2, 3, Theme Color 3, 4, ColorChord 0, 5, ColorChord 1, 6, ColorChord 2, 7, ColorChord 3, 8, AL Theme 0, 9, AL Theme 1, 10, AL Theme 2, 11, AL Theme 3, 12)] _DissolveEdgeColor2ThemeIndex ("", Int) = 0
+_DissolveEdgeColor3 ("Color 3--{reference_property:_DissolveEdgeColor3ThemeIndex,condition_showS:(_DissolveEdgeGradient==1)}", Color) = (1, 1, 0, 1)
+[ThryHideInInspector][ThryWideEnum(Off, 0, Theme Color 0, 1, Theme Color 1, 2, Theme Color 2, 3, Theme Color 3, 4, ColorChord 0, 5, ColorChord 1, 6, ColorChord 2, 7, ColorChord 3, 8, AL Theme 0, 9, AL Theme 1, 10, AL Theme 2, 11, AL Theme 3, 12)] _DissolveEdgeColor3ThemeIndex ("", Int) = 0
+_DissolveEdgeBorder1 ("Border 1--{condition_showS:(_DissolveEdgeGradient==1)}", Range(0, 1)) = 0.5
+_DissolveEdgeBorder2 ("Border 2--{condition_showS:(_DissolveEdgeGradient==1)}", Range(0, 1)) = 1.0
+_DissolveEdgeBlur1 ("Blur 1--{condition_showS:(_DissolveEdgeGradient==1)}", Range(0, 1)) = 0.1
+_DissolveEdgeBlur2 ("Blur 2--{condition_showS:(_DissolveEdgeGradient==1)}", Range(0, 1)) = 0.1
+_DissolveEdgeWidth ("Width", Range(0, .5)) = 0.1
+_DissolveEdgeEmission ("Emission", Range(0, 20)) = 1
+[ToggleUI]_DissolveEdgeFlip ("Flip Side", Float) = 0
+[HideInInspector] s_end_EdgeLine ("", Float) = 0
+
+
+[HideInInspector] s_start_WaveMode ("Wave Mode--{reference_property:_DissolveWaveMode,persistent_expand:true,default_expand:false}", Float) = 0
+[ThryHideInInspector][ToggleUI]_DissolveWaveMode ("Enabled", Float) = 0
+_DissolveWaveWidth ("Wave Width", Range(0, 1)) = 0.1
+[Enum(Edge, 0, Center, 1, Loop, 2)]_DissolveWaveBounds ("Wave Bounds", Int) = 0
+[HideInInspector] s_end_WaveMode ("", Float) = 0
+
+[HideInInspector] s_start_ContinuousAnimation ("Continuous Dissolve--{reference_property:_ContinuousDissolveEnabled,persistent_expand:true,default_expand:false}", Float) = 0
+[ThryHideInInspector][ToggleUI]_ContinuousDissolveEnabled ("Enabled", Float) = 0
+[Enum(Sine, 0, Triangle, 1, Sawtooth, 2, Square, 3)] _ContinuousDissolveWave ("Wave Shape", Int) = 0
+_ContinuousDissolveSpeed ("Speed", Float) = 1
+[MultiSlider]_ContinuousDissolveRange ("Range", Vector) = (0, 1, 0, 1)
+_ContinuousDissolvePhase ("Phase", Range(0, 1)) = 0
+[Enum(Replace, 0, Add, 1, Multiply, 2)] _ContinuousDissolveBlend ("Blend", Int) = 0
+[HideInInspector] s_end_ContinuousAnimation ("", Float) = 0
+
+[HideInInspector] s_start_VertexHeight ("Vertex Height--{reference_property:_DissolveVertexHeightEnabled,persistent_expand:true,default_expand:false}", Float) = 0
+[ThryHideInInspector][ToggleUI]_DissolveVertexHeightEnabled ("Enabled", Float) = 0
+_DissolveVertexHeight ("Height", Float) = 1
+_DissolveVertexHeightOffset ("Offset", Range(-1, 1)) = 0
+[Enum(Smoothstep, 0, Linear, 1, Ease Out, 2, Ease In, 3)]_DissolveVertexHeightEasing ("Easing", Int) = 1
+_DissolveVertexHeightDetailStrength ("Detail Strength--{condition_showS:(_DissolveDetailNoiseEnabled==1)}", Range(0, 1)) = 0
+[Vector3]_DissolveVertexHeightDirection ("Direction", Vector) = (0, 1, 0, 0)
+[Enum(Local, 0, World, 1)]_DissolveVertexHeightDirectionSpace ("Direction Space", Int) = 0
+_DissolveVertexHeightDirectionBlend ("Direction Blend", Range(0, 1)) = 0
+_DissolveVertexHeightDotMask ("Dot Mask--{hover:Reduces height based on how different the direction is from the normal}", Range(0, 1)) = 0
+[ToggleUI]_DissolveVertexHeightContinue ("Continue Past Peak--{hover:Dissolved areas keep moving instead of stopping at peak height}", Float) = 0
+[HideInInspector] s_end_VertexHeight ("", Float) = 0
+
+[HideInInspector] s_start_MaskingMenu ("Masking--{persistent_expand:true,default_expand:false}", Float) = 0
+[sRGBWarning]_DissolveMask ("Mask--{reference_properties:[_DissolveMaskPan, _DissolveMaskUV, _DissolveMaskInvert]}", 2D) = "white" { }
 [ThryHideInInspector][Vector2]_DissolveMaskPan ("Panning", Vector) = (0, 0, 0, 0)
 [ThryHideInInspector][ThryWideEnum(UV0, 0, UV1, 1, UV2, 2, UV3, 3, Panosphere, 4, World Pos, 5, Local Pos, 8, Polar UV, 6, Distorted UV, 7, Matcap, 9)] _DissolveMaskUV ("UV", Int) = 0
+[ThryHideInInspector][ToggleUI]_DissolveMaskInvert ("Invert", Float) = 0
+[Enum(Off, 0, Red, 1, Green, 2, Blue, 3, Alpha, 4)]_DissolveUseVertexColors ("Vertex Color", Int) = 0
 [ThryWideEnum(Off, 0, 1R, 1, 1G, 2, 1B, 3, 1A, 4, 2R, 5, 2G, 6, 2B, 7, 2A, 8, 3R, 9, 3G, 10, 3B, 11, 3A, 12, 4R, 13, 4G, 14, 4B, 15, 4A, 16)] _DissolveMaskGlobalMask ("Global Mask--{reference_property:_DissolveMaskGlobalMaskBlendType}", Int) = 0
 [ThryHideInInspector][ThryWideEnum(Add, 7, Subtract, 1, Multiply, 2, Divide, 3, Min, 4, Max, 5, Average, 6, Replace, 0)]_DissolveMaskGlobalMaskBlendType ("Blending", Int) = 2
-[ThryWideEnum(Off, 0, 1R, 1, 1G, 2, 1B, 3, 1A, 4, 2R, 5, 2G, 6, 2B, 7, 2A, 8, 3R, 9, 3G, 10, 3B, 11, 3A, 12, 4R, 13, 4G, 14, 4B, 15, 4A, 16)] _DissolveApplyGlobalMaskIndex ("Dissolved to Global Mask--{reference_property:_DissolveApplyGlobalMaskBlendType}", Int) = 0
+[ThryWideEnum(Off, 0, 1R, 1, 1G, 2, 1B, 3, 1A, 4, 2R, 5, 2G, 6, 2B, 7, 2A, 8, 3R, 9, 3G, 10, 3B, 11, 3A, 12, 4R, 13, 4G, 14, 4B, 15, 4A, 16)] _DissolveApplyGlobalMaskIndex ("Output Dissolved--{reference_property:_DissolveApplyGlobalMaskBlendType}", Int) = 0
 [ThryHideInInspector][ThryWideEnum(Add, 7, Subtract, 1, Multiply, 2, Divide, 3, Min, 4, Max, 5, Average, 6, Replace, 0)] _DissolveApplyGlobalMaskBlendType ("Blending", Int) = 0
-[ThryWideEnum(Off, 0, 1R, 1, 1G, 2, 1B, 3, 1A, 4, 2R, 5, 2G, 6, 2B, 7, 2A, 8, 3R, 9, 3G, 10, 3B, 11, 3A, 12, 4R, 13, 4G, 14, 4B, 15, 4A, 16)] _DissolveInverseApplyGlobalMaskIndex ("Undissolved to Global Mask--{reference_property:_DissolveInverseApplyGlobalMaskBlendType}", Int) = 0
+[ThryWideEnum(Off, 0, 1R, 1, 1G, 2, 1B, 3, 1A, 4, 2R, 5, 2G, 6, 2B, 7, 2A, 8, 3R, 9, 3G, 10, 3B, 11, 3A, 12, 4R, 13, 4G, 14, 4B, 15, 4A, 16)] _DissolveInverseApplyGlobalMaskIndex ("Output Undissolved--{reference_property:_DissolveInverseApplyGlobalMaskBlendType}", Int) = 0
 [ThryHideInInspector][ThryWideEnum(Add, 7, Subtract, 1, Multiply, 2, Divide, 3, Min, 4, Max, 5, Average, 6, Replace, 0)] _DissolveInverseApplyGlobalMaskBlendType ("Blending", Int) = 0
-[Enum(Off, 0, Red, 1, Green, 2, Blue, 3, Alpha, 4)]_DissolveUseVertexColors ("VertexColor Mask", Int) = 0
-[ThryHideInInspector][ToggleUI]_DissolveMaskInvert ("Invert", Float) = 0
 [HideInInspector] s_end_MaskingMenu ("", Float) = 0
 
-[HideInInspector] s_start_DissolveAudioLink ("Audio Link ♫--{reference_property:_EnableDissolveAudioLink,persistent_expand:true,default_expand:false, condition_showS:(_EnableAudioLink==1)}", Float) = 0
-[ThryHideInInspector][ToggleUI] _EnableDissolveAudioLink ("Dissolve AudioLink Enabled", Float) = 0
-[Enum(Bass, 0, Low Mid, 1, High Mid, 2, Treble, 3, Volume, 4)] _AudioLinkDissolveAlphaBand ("Dissolve Alpha Band", Int) = 0
-[VectorLabel(Min, Max)]_AudioLinkDissolveAlpha ("Dissolve Alpha Mod", Vector) = (0, 0, 0, 0)
-[Space(7)]
-[Enum(Bass, 0, Low Mid, 1, High Mid, 2, Treble, 3, Volume, 4)] _AudioLinkDissolveDetailBand ("Dissolve Detail Band", Int) = 0
-[VectorLabel(Min, Max)]_AudioLinkDissolveDetail ("Dissolve Detail Mod", Vector) = (0, 0, 0, 0)
-[HideInInspector] s_end_DissolveAudioLink ("Audio Link", Float) = 0
+[HideInInspector] s_start_DissolveAudioLink ("Audio Link ♫--{reference_property:_EnableDissolveAudioLink,persistent_expand:true,default_expand:false,condition_showS:(_EnableAudioLink==1)}", Float) = 0
+[ThryHideInInspector][ToggleUI] _EnableDissolveAudioLink ("Enabled", Float) = 0
+[Enum(Bass, 0, Low Mid, 1, High Mid, 2, Treble, 3, Volume, 4)] _AudioLinkDissolveAlphaBand ("Alpha Band", Int) = 0
+[VectorLabel(Min, Max)]_AudioLinkDissolveAlpha ("Alpha Mod", Vector) = (0, 0, 0, 0)
+[ThrySeperator(2, 4, 4)]
+[Enum(Bass, 0, Low Mid, 1, High Mid, 2, Treble, 3, Volume, 4)] _AudioLinkDissolveDetailBand ("Detail Band", Int) = 0
+[VectorLabel(Min, Max)]_AudioLinkDissolveDetail ("Detail Mod", Vector) = (0, 0, 0, 0)
+[ThrySeperator(2, 4, 4)]
+[Enum(Bass, 0, Low Mid, 1, High Mid, 2, Treble, 3, Volume, 4)] _AudioLinkDissolveEdgeWidthBand ("Edge Width Band--{condition_showS:(_DissolveEdgeEnabled==1)}", Int) = 0
+[VectorLabel(Min, Max)]_AudioLinkDissolveEdgeWidth ("Edge Width Mod--{condition_showS:(_DissolveEdgeEnabled==1)}", Vector) = (0, 0, 0, 0)
+[ThrySeperator(2, 4, 4)]
+[Enum(Bass, 0, Low Mid, 1, High Mid, 2, Treble, 3, Volume, 4)] _AudioLinkDissolveEdgeEmissionBand ("Edge Emission Band--{condition_showS:(_DissolveEdgeEnabled==1)}", Int) = 0
+[VectorLabel(Min, Max)]_AudioLinkDissolveEdgeEmission ("Edge Emission Mod--{condition_showS:(_DissolveEdgeEnabled==1)}", Vector) = (0, 0, 0, 0)
+[ThrySeperator(2, 4, 4)]
+[ThryWideEnum(Motion increases as intensity of band increases, 0, Above but Smooth, 1, Motion moves back and forth as a function of intensity, 2, Above but Smoooth, 3, Fixed speed increase when the band is dark Stationary when light, 4, Above but Smooooth, 5, Fixed speed increase when the band is dark Fixed speed decrease when light, 6, Above but Smoooooth, 7)]_AudioLinkDissolveAlphaMotionType ("Alpha Chrono Motion Type", Int) = 0
+[Enum(Bass, 0, Low Mid, 1, High Mid, 2, Treble, 3)] _AudioLinkDissolveAlphaChronoBand ("Alpha Chrono Band", Int) = 0
+_AudioLinkDissolveAlphaChronoSpeed ("Alpha Chrono Speed", Float) = 0
+[ThrySeperator(2, 4, 4)]
+[ThryWideEnum(Motion increases as intensity of band increases, 0, Above but Smooth, 1, Motion moves back and forth as a function of intensity, 2, Above but Smoooth, 3, Fixed speed increase when the band is dark Stationary when light, 4, Above but Smooooth, 5, Fixed speed increase when the band is dark Fixed speed decrease when light, 6, Above but Smoooooth, 7)]_AudioLinkDissolveHueShiftMotionType ("Hue Shift Chrono Motion Type--{condition_showS:(_DissolveHueShiftEnabled==1)}", Int) = 0
+[Enum(Bass, 0, Low Mid, 1, High Mid, 2, Treble, 3)] _AudioLinkDissolveHueShiftChronoBand ("Hue Shift Chrono Band--{condition_showS:(_DissolveHueShiftEnabled==1)}", Int) = 0
+_AudioLinkDissolveHueShiftChronoSpeed ("Hue Shift Chrono Speed--{condition_showS:(_DissolveHueShiftEnabled==1)}", Float) = 0
+[HideInInspector] s_end_DissolveAudioLink ("", Float) = 0
 
-[Space(12)]
-
-// Spherical Dissolve
-[HideInInspector] m_start_SphericalDissolve ("Spherical Settings--{condition_showS:(_DissolveType==3)}", Float) = 0
-[Vector3] 	_SphericalDissolveCenter ("Center Point", Vector) = (0, 0, 0)
-_SphericalDissolveRadius ("Radius", Float) = 1.5
-[ToggleUI] 	_SphericalDissolveInvert ("Invert", Float) = 0
-[ToggleUI] 	_SphericalDissolveClamp ("Clamp Dissolve", Float) = 0
-[HideInInspector] m_end_SphericalDissolve ("Spherical", Float) = 0
-
-// Point to Point Dissolve
-[HideInInspector] m_start_pointToPoint ("Point to Point Settings--{condition_showS:(_DissolveType==2)}", Float) = 0
-[Enum(Local, 0, World, 1, Vertex Colors, 2)] _DissolveP2PWorldLocal ("World/Local", Int) = 0
-_DissolveP2PEdgeLength ("Edge Length", Float) = 0.1
-[Vector3]_DissolveStartPoint ("Start Point", Vector) = (0, -1, 0, 0)
-[Vector3]_DissolveEndPoint ("End Point", Vector) = (0, 1, 0, 0)
-[ToggleUI]_DissolveP2PClamp ("Clamp Dissolve", Float) = 0
-[HideInInspector] m_end_pointToPoint ("Point To Point", Float) = 0
-
-// CenterOut Dissolve
-[HideInInspector] m_start_CenterOutDissolve ("Center Out Settings--{condition_showS:(_DissolveType==4)}", Float) = 0
-[Enum(View Direction, 1, Custom Direction, 2, Light Direction, 3)] 	_CenterOutDissolveMode ("Center Out Mode", Int) = 1
-[Vector3] 	_CenterOutDissolveDirection ("Custom Direction--{condition_showS:(_CenterOutDissolveMode==2)}", Vector) = (0, 0, 1, 0)
-[ToggleUI] 	_CenterOutDissolveInvert ("Invert", Float) = 0
-_CenterOutDissolveNormals ("Use Pixel Normals", Range(0, 1)) = 0
-_CenterOutDissolvePower ("Power", Range(.1, 5)) = 1
-[HideInInspector] m_end_CenterOutDissolve ("CenterOut", Float) = 0
-
-[HideInInspector] m_start_dissolveHueShift (" Hue Shift--{reference_property:_DissolveHueShiftEnabled}", Float) = 0
-[ThryHideInInspector][ToggleUI]_DissolveHueShiftEnabled ("Dissolved Enabled", Float) = 0
-[ThryWideEnum(OKLab, 0, HSV, 1)] _DissolveHueShiftColorSpace ("Color Space", Int) = 0
-[ThryWideEnum(Hue Select, 0, Hue Shift, 1)] _DissolveHueSelectOrShift ("Select or Shift", Int) = 1
-_DissolveHueShiftSpeed ("Dissolved Speed", Float) = 0
-_DissolveHueShift ("Dissolved Shift", Range(0, 1)) = 0
-
-[ToggleUI]_DissolveEdgeHueShiftEnabled ("Edge Enabled", Float) = 0
-[ThryWideEnum(OKLab, 0, HSV, 1)] _DissolveEdgeHueShiftColorSpace ("Color Space", Int) = 0
-[ThryWideEnum(Hue Select, 0, Hue Shift, 1)] _DissolveEdgeHueSelectOrShift ("Select or Shift", Int) = 1
-_DissolveEdgeHueShiftSpeed ("Edge Speed", Float) = 0
-_DissolveEdgeHueShift ("Edge Shift", Range(0, 1)) = 0
-[HideInInspector] m_end_dissolveHueShift ("Hue Shift", Float) = 0
-
-[HideInInspector] m_start_UVTileDissolve (" UV Tile Dissolve--{reference_property:_UVTileDissolveEnabled}", Float) = 0
+[HideInInspector] s_start_UVTileDissolve ("UV Tile Dissolve--{reference_property:_UVTileDissolveEnabled,persistent_expand:true,default_expand:false}", Float) = 0
 [ThryHideInInspector][ToggleUI]_UVTileDissolveEnabled ("Enabled", Float) = 0
-[ThryWideEnum(UV0, 0, UV1, 1, UV2, 2, UV3, 3)]_UVTileDissolveUV ("UV Tile UV", Int) = 0
-[ToggleUI]_UVTileDissolveDiscardAtMax ("Discard Tiles at Max", Float) = 1
+[ThryWideEnum(UV0, 0, UV1, 1, UV2, 2, UV3, 3)]_UVTileDissolveUV ("UV", Int) = 0
+[ToggleUI]_UVTileDissolveDiscardAtMax ("Discard at Max", Float) = 1
+[HideInInspector] s_start_UVTileDissolveRow3 ("Row 3", Float) = 0
+_UVTileDissolveAlpha_Row3_0 ("Col 0", Range(-1, 1)) = 0
+_UVTileDissolveAlpha_Row3_1 ("Col 1", Range(-1, 1)) = 0
+_UVTileDissolveAlpha_Row3_2 ("Col 2", Range(-1, 1)) = 0
+_UVTileDissolveAlpha_Row3_3 ("Col 3", Range(-1, 1)) = 0
+[HideInInspector] s_end_UVTileDissolveRow3 ("", Float) = 0
+[HideInInspector] s_start_UVTileDissolveRow2 ("Row 2", Float) = 0
+_UVTileDissolveAlpha_Row2_0 ("Col 0", Range(-1, 1)) = 0
+_UVTileDissolveAlpha_Row2_1 ("Col 1", Range(-1, 1)) = 0
+_UVTileDissolveAlpha_Row2_2 ("Col 2", Range(-1, 1)) = 0
+_UVTileDissolveAlpha_Row2_3 ("Col 3", Range(-1, 1)) = 0
+[HideInInspector] s_end_UVTileDissolveRow2 ("", Float) = 0
+[HideInInspector] s_start_UVTileDissolveRow1 ("Row 1", Float) = 0
+_UVTileDissolveAlpha_Row1_0 ("Col 0", Range(-1, 1)) = 0
+_UVTileDissolveAlpha_Row1_1 ("Col 1", Range(-1, 1)) = 0
+_UVTileDissolveAlpha_Row1_2 ("Col 2", Range(-1, 1)) = 0
+_UVTileDissolveAlpha_Row1_3 ("Col 3", Range(-1, 1)) = 0
+[HideInInspector] s_end_UVTileDissolveRow1 ("", Float) = 0
+[HideInInspector] s_start_UVTileDissolveRow0 ("Row 0", Float) = 0
+_UVTileDissolveAlpha_Row0_0 ("Col 0", Range(-1, 1)) = 0
+_UVTileDissolveAlpha_Row0_1 ("Col 1", Range(-1, 1)) = 0
+_UVTileDissolveAlpha_Row0_2 ("Col 2", Range(-1, 1)) = 0
+_UVTileDissolveAlpha_Row0_3 ("Col 3", Range(-1, 1)) = 0
+[HideInInspector] s_end_UVTileDissolveRow0 ("", Float) = 0
+[HideInInspector] s_end_UVTileDissolve ("", Float) = 0
 
-[HideInInspector] s_start_UVTileDissolveRow3 ("Row 3 Alpha", Float) = 0
-_UVTileDissolveAlpha_Row3_0 ("Row 3 Column 0", Range(-1, 1)) = 0
-_UVTileDissolveAlpha_Row3_1 ("Row 3 Column 1", Range(-1, 1)) = 0
-_UVTileDissolveAlpha_Row3_2 ("Row 3 Column 2", Range(-1, 1)) = 0
-_UVTileDissolveAlpha_Row3_3 ("Row 3 Column 3", Range(-1, 1)) = 0
-[HideInInspector] s_end_UVTileDissolveRow3 ("Row 3", Float) = 0
-
-[HideInInspector] s_start_UVTileDissolveRow2 ("Row 2 Alpha", Float) = 0
-_UVTileDissolveAlpha_Row2_0 ("Row 2 Column 0", Range(-1, 1)) = 0
-_UVTileDissolveAlpha_Row2_1 ("Row 2 Column 1", Range(-1, 1)) = 0
-_UVTileDissolveAlpha_Row2_2 ("Row 2 Column 2", Range(-1, 1)) = 0
-_UVTileDissolveAlpha_Row2_3 ("Row 2 Column 3", Range(-1, 1)) = 0
-[HideInInspector] s_end_UVTileDissolveRow2 ("Row 2", Float) = 0
-
-[HideInInspector] s_start_UVTileDissolveRow1 ("Row 1 Alpha", Float) = 0
-_UVTileDissolveAlpha_Row1_0 ("Row 1 Column 0", Range(-1, 1)) = 0
-_UVTileDissolveAlpha_Row1_1 ("Row 1 Column 1", Range(-1, 1)) = 0
-_UVTileDissolveAlpha_Row1_2 ("Row 1 Column 2", Range(-1, 1)) = 0
-_UVTileDissolveAlpha_Row1_3 ("Row 1 Column 3", Range(-1, 1)) = 0
-[HideInInspector] s_end_UVTileDissolveRow1 ("Row 1", Float) = 0
-
-[HideInInspector] s_start_UVTileDissolveRow0 ("Row 0 Alpha", Float) = 0
-_UVTileDissolveAlpha_Row0_0 ("Row 0 Column 0", Range(-1, 1)) = 0
-_UVTileDissolveAlpha_Row0_1 ("Row 0 Column 1", Range(-1, 1)) = 0
-_UVTileDissolveAlpha_Row0_2 ("Row 0 Column 2", Range(-1, 1)) = 0
-_UVTileDissolveAlpha_Row0_3 ("Row 0 Column 3", Range(-1, 1)) = 0
-[HideInInspector] s_end_UVTileDissolveRow0 ("Row 0", Float) = 0
-[HideInInspector] m_end_UVTileDissolve ("UV Tile Dissolve", Float) = 0
-
-// Locked in anim sliders
-[HideInInspector] m_start_BonusSliders ("Locked In Anim Sliders", Float) = 0
-_DissolveAlpha0 ("Dissolve Alpha 0", Range(-1, 1)) = 0
-_DissolveAlpha1 ("Dissolve Alpha 1", Range(-1, 1)) = 0
-_DissolveAlpha2 ("Dissolve Alpha 2", Range(-1, 1)) = 0
-_DissolveAlpha3 ("Dissolve Alpha 3", Range(-1, 1)) = 0
-_DissolveAlpha4 ("Dissolve Alpha 4", Range(-1, 1)) = 0
-_DissolveAlpha5 ("Dissolve Alpha 5", Range(-1, 1)) = 0
-_DissolveAlpha6 ("Dissolve Alpha 6", Range(-1, 1)) = 0
-_DissolveAlpha7 ("Dissolve Alpha 7", Range(-1, 1)) = 0
-_DissolveAlpha8 ("Dissolve Alpha 8", Range(-1, 1)) = 0
-_DissolveAlpha9 ("Dissolve Alpha 9", Range(-1, 1)) = 0
-[HideInInspector] m_end_BonusSliders ("Locked In Sliders", Float) = 0
 [HideInInspector] m_end_dissolve ("Dissolve", Float) = 0
 //endex
 
@@ -161,127 +193,130 @@ _DissolveAlpha9 ("Dissolve Alpha 9", Range(-1, 1)) = 0
 //ifex _EnableDissolve==0
 #ifdef DISTORT
 	float _DissolveType;
-	float _DissolveEdgeWidth;
+	float _DissolveAlpha;
+	float _DissolveSoftness;
+	float _DissolveWaveMode;
+	float _DissolveWaveWidth;
+	float _DissolveWaveBounds;
+	float _DissolveDebugGradient;
+	float _DissolveEdgeEnabled;
 	float4 _DissolveEdgeColor;
-	float4 _DissolveEdgeGradient_ST;
-	float2 _DissolveEdgeGradientPan;
-	float _DissolveEdgeGradientUV;
-	float _DissolveEdgeEmission;
-	float4 _DissolveTextureColor;
 	float _DissolveEdgeColorThemeIndex;
+	float _DissolveEdgeGradient;
+	float4 _DissolveEdgeColor2;
+	float _DissolveEdgeColor2ThemeIndex;
+	float4 _DissolveEdgeColor3;
+	float _DissolveEdgeColor3ThemeIndex;
+	float _DissolveEdgeBorder1;
+	float _DissolveEdgeBorder2;
+	float _DissolveEdgeBlur1;
+	float _DissolveEdgeBlur2;
+	float _DissolveEdgeWidth;
+	float _DissolveEdgeEmission;
+	float _DissolveEdgeFlip;
+	float _ContinuousDissolveEnabled;
+	float _ContinuousDissolveWave;
+	float _ContinuousDissolveSpeed;
+	float2 _ContinuousDissolveRange;
+	float _ContinuousDissolvePhase;
+	float _ContinuousDissolveBlend;
+	float _DissolveVertexHeightEnabled;
+	float _DissolveVertexHeight;
+	float _DissolveVertexHeightOffset;
+	float _DissolveVertexHeightEasing;
+	float _DissolveVertexHeightDetailStrength;
+	float3 _DissolveVertexHeightDirection;
+	float _DissolveVertexHeightDirectionSpace;
+	float _DissolveVertexHeightDirectionBlend;
+	float _DissolveVertexHeightDotMask;
+	float _DissolveVertexHeightContinue;
+	float _DissolveAlphaOnly;
+	float4 _DissolveAlphaOnlyRamp;
+	float4 _DissolveTextureColor;
 	float _DissolveTextureColorThemeIndex;
 	float4 _DissolveToTexture_ST;
 	float2 _DissolveToTexturePan;
 	float _DissolveToTextureUV;
+	float _DissolveToEmissionStrength;
 	float4 _DissolveNoiseTexture_ST;
 	float2 _DissolveNoiseTexturePan;
 	float _DissolveNoiseTextureUV;
+	float _DissolveInvertNoise;
+	float _DissolveDetailNoiseEnabled;
+	float _DissolveDetailNoiseMode;
 	float4 _DissolveDetailNoise_ST;
 	float2 _DissolveDetailNoisePan;
 	float _DissolveDetailNoiseUV;
+	float _DissolveInvertDetailNoise;
+	float4 _DissolveDotNoiseScale;
+	float4 _DissolveDotNoiseOffset;
+	float4 _DissolveDotNoiseSpeed;
+	float _DissolveInvertDotNoise;
+	float _DissolveDetailStrength;
+	float _DissolveDetailEdgeMask;
 	float4 _DissolveMask_ST;
 	float2 _DissolveMaskPan;
 	float _DissolveMaskUV;
-
 	float _DissolveMaskGlobalMask;
 	float _DissolveMaskGlobalMaskBlendType;
+	float _DissolveMaskInvert;
+	float _DissolveUseVertexColors;
 	float _DissolveApplyGlobalMaskIndex;
 	float _DissolveApplyGlobalMaskBlendType;
-	float _DissolveInverseApplyGlobalMaskBlendType;
 	float _DissolveInverseApplyGlobalMaskIndex;
-	float _DissolveMaskInvert;
-	float _DissolveAlpha;
-	float _ContinuousDissolve;
-	float _DissolveDetailStrength;
-	float _DissolveDetailEdgeSmoothing;
-	float _DissolveEdgeHardness;
-	float _DissolveInvertNoise;
-	float _DissolveInvertDetailNoise;
-	float _DissolveToEmissionStrength;
-
-	// Point to Point
+	float _DissolveInverseApplyGlobalMaskBlendType;
 	float _DissolveP2PWorldLocal;
-	float _DissolveP2PEdgeLength;
-	float _DissolveP2PClamp;
+	float _DissolveP2PUV;
 	float4 _DissolveStartPoint;
 	float4 _DissolveEndPoint;
-
-	// Spherical
 	float3 _SphericalDissolveCenter;
 	float _SphericalDissolveRadius;
 	float _SphericalDissolveInvert;
-	float _SphericalDissolveClamp;
-
-	// CenterOut
 	float _CenterOutDissolveMode;
 	float3 _CenterOutDissolveDirection;
 	float _CenterOutDissolveInvert;
 	float _CenterOutDissolveNormals;
-	float _CenterOutDissolvePower;
-
-	// World Dissolve
-	float _DissolveWorldShape;
-	float4 _DissolveShapePosition;
-	float4 _DissolveShapeRotation;
-	float _DissolveShapeScale;
-	float _DissolveInvertShape;
-	float _DissolveShapeEdgeLength;
-
-	// UV Tile Dissolve
+	float _CenterOutDissolveLinear;
+	float _DissolveHueShiftEnabled;
+	float _DissolveHueShiftColorSpace;
+	float _DissolveHueSelectOrShift;
+	float _DissolveHueShiftSpeed;
+	float _DissolveHueShift;
 	float _UVTileDissolveEnabled;
 	float _UVTileDissolveDiscardAtMax;
 	float _UVTileDissolveUV;
-
-	float _UVTileDissolveAlpha_Row3_0;
-	float _UVTileDissolveAlpha_Row3_1;
-	float _UVTileDissolveAlpha_Row3_2;
-	float _UVTileDissolveAlpha_Row3_3;
-	float _UVTileDissolveAlpha_Row2_0;
-	float _UVTileDissolveAlpha_Row2_1;
-	float _UVTileDissolveAlpha_Row2_2;
-	float _UVTileDissolveAlpha_Row2_3;
-	float _UVTileDissolveAlpha_Row1_0;
-	float _UVTileDissolveAlpha_Row1_1;
-	float _UVTileDissolveAlpha_Row1_2;
-	float _UVTileDissolveAlpha_Row1_3;
 	float _UVTileDissolveAlpha_Row0_0;
 	float _UVTileDissolveAlpha_Row0_1;
 	float _UVTileDissolveAlpha_Row0_2;
 	float _UVTileDissolveAlpha_Row0_3;
-
-	float _DissolveAlpha0;
-	float _DissolveAlpha1;
-	float _DissolveAlpha2;
-	float _DissolveAlpha3;
-	float _DissolveAlpha4;
-	float _DissolveAlpha5;
-	float _DissolveAlpha6;
-	float _DissolveAlpha7;
-	float _DissolveAlpha8;
-	float _DissolveAlpha9;
-	// Masking
-	float _DissolveEmissionSide;
-	float _DissolveEmission1Side;
-	float _DissolveUseVertexColors;
-
-	float _DissolveHueShiftColorSpace;
-	float _DissolveHueSelectOrShift;
-	float _DissolveHueShiftEnabled;
-	float _DissolveHueShiftSpeed;
-	float _DissolveHueShift;
-	float _DissolveEdgeHueShiftColorSpace;
-	float _DissolveEdgeHueSelectOrShift;
-	float _DissolveEdgeHueShiftEnabled;
-	float _DissolveEdgeHueShiftSpeed;
-	float _DissolveEdgeHueShift;
+	float _UVTileDissolveAlpha_Row1_0;
+	float _UVTileDissolveAlpha_Row1_1;
+	float _UVTileDissolveAlpha_Row1_2;
+	float _UVTileDissolveAlpha_Row1_3;
+	float _UVTileDissolveAlpha_Row2_0;
+	float _UVTileDissolveAlpha_Row2_1;
+	float _UVTileDissolveAlpha_Row2_2;
+	float _UVTileDissolveAlpha_Row2_3;
+	float _UVTileDissolveAlpha_Row3_0;
+	float _UVTileDissolveAlpha_Row3_1;
+	float _UVTileDissolveAlpha_Row3_2;
+	float _UVTileDissolveAlpha_Row3_3;
 	float _EnableDissolveAudioLink;
-
-	// Audio Link
 	#ifdef POI_AUDIOLINK
-		half _AudioLinkDissolveAlphaBand;
+		float _AudioLinkDissolveAlphaBand;
 		float2 _AudioLinkDissolveAlpha;
-		half _AudioLinkDissolveDetailBand;
+		float _AudioLinkDissolveDetailBand;
 		float2 _AudioLinkDissolveDetail;
+		float _AudioLinkDissolveEdgeWidthBand;
+		float2 _AudioLinkDissolveEdgeWidth;
+		float _AudioLinkDissolveEdgeEmissionBand;
+		float2 _AudioLinkDissolveEdgeEmission;
+		float _AudioLinkDissolveAlphaMotionType;
+		float _AudioLinkDissolveAlphaChronoBand;
+		float _AudioLinkDissolveAlphaChronoSpeed;
+		float _AudioLinkDissolveHueShiftMotionType;
+		float _AudioLinkDissolveHueShiftChronoBand;
+		float _AudioLinkDissolveHueShiftChronoSpeed;
 	#endif
 #endif
 //endex
@@ -289,9 +324,6 @@ _DissolveAlpha9 ("Dissolve Alpha 9", Range(-1, 1)) = 0
 #T#PoiDissolveVariables
 //ifex _EnableDissolve==0
 #ifdef DISTORT
-	#if defined(PROP_DISSOLVEEDGEGRADIENT) || !defined(OPTIMIZER_ENABLED)
-		Texture2D _DissolveEdgeGradient;
-	#endif
 	#if defined(PROP_DISSOLVETOTEXTURE) || !defined(OPTIMIZER_ENABLED)
 		Texture2D _DissolveToTexture;
 	#endif
@@ -314,31 +346,22 @@ _DissolveAlpha9 ("Dissolve Alpha 9", Range(-1, 1)) = 0
 	UNITY_BRANCH
 	if (_UVTileDissolveEnabled && _UVTileDissolveDiscardAtMax)
 	{
-		// Branchless (inspired by s-ilent)
-		float2 dissolveUdim = 0;
-		// Select UV
-		dissolveUdim += (v.uv0.xy * (_UVTileDissolveUV == 0));
-		dissolveUdim += (v.uv1.xy * (_UVTileDissolveUV == 1));
-		dissolveUdim += (v.uv2.xy * (_UVTileDissolveUV == 2));
-		dissolveUdim += (v.uv3.xy * (_UVTileDissolveUV == 3));
-
-		float isDiscardedFromDissolve = 0;
-		float4 xMaskDissolve = float4((dissolveUdim.x >= 0 && dissolveUdim.x < 1),
-		(dissolveUdim.x >= 1 && dissolveUdim.x < 2),
-		(dissolveUdim.x >= 2 && dissolveUdim.x < 3),
-		(dissolveUdim.x >= 3 && dissolveUdim.x < 4));
-
-		isDiscardedFromDissolve += (dissolveUdim.y >= 0 && dissolveUdim.y < 1) * dot(float4(_UVTileDissolveAlpha_Row0_0, _UVTileDissolveAlpha_Row0_1, _UVTileDissolveAlpha_Row0_2, _UVTileDissolveAlpha_Row0_3), xMaskDissolve);
-		isDiscardedFromDissolve += (dissolveUdim.y >= 1 && dissolveUdim.y < 2) * dot(float4(_UVTileDissolveAlpha_Row1_0, _UVTileDissolveAlpha_Row1_1, _UVTileDissolveAlpha_Row1_2, _UVTileDissolveAlpha_Row1_3), xMaskDissolve);
-		isDiscardedFromDissolve += (dissolveUdim.y >= 2 && dissolveUdim.y < 3) * dot(float4(_UVTileDissolveAlpha_Row2_0, _UVTileDissolveAlpha_Row2_1, _UVTileDissolveAlpha_Row2_2, _UVTileDissolveAlpha_Row2_3), xMaskDissolve);
-		isDiscardedFromDissolve += (dissolveUdim.y >= 3 && dissolveUdim.y < 4) * dot(float4(_UVTileDissolveAlpha_Row3_0, _UVTileDissolveAlpha_Row3_1, _UVTileDissolveAlpha_Row3_2, _UVTileDissolveAlpha_Row3_3), xMaskDissolve);
-
-		isDiscardedFromDissolve *= any(float4(dissolveUdim.y >= 0, dissolveUdim.y < 4, dissolveUdim.x >= 0, dissolveUdim.x < 4)); // never discard outside 4x4 grid in pos coords
-
-		// Use a threshold so that there's some room for animations to be close to 1, but not exactly 1
-		const float threshold = 0.999;
-		if (isDiscardedFromDissolve > threshold) // Early Return skips rest of vertex shader
-
+		float2 udim = v.uv0.xy * (_UVTileDissolveUV == 0)
+					+ v.uv1.xy * (_UVTileDissolveUV == 1)
+					+ v.uv2.xy * (_UVTileDissolveUV == 2)
+					+ v.uv3.xy * (_UVTileDissolveUV == 3);
+		float4 xMask = float4(
+			udim.x >= 0 && udim.x < 1,
+			udim.x >= 1 && udim.x < 2,
+			udim.x >= 2 && udim.x < 3,
+			udim.x >= 3 && udim.x < 4
+		);
+		float tileAlpha = (udim.y >= 0 && udim.y < 1) * dot(float4(_UVTileDissolveAlpha_Row0_0, _UVTileDissolveAlpha_Row0_1, _UVTileDissolveAlpha_Row0_2, _UVTileDissolveAlpha_Row0_3), xMask)
+					    + (udim.y >= 1 && udim.y < 2) * dot(float4(_UVTileDissolveAlpha_Row1_0, _UVTileDissolveAlpha_Row1_1, _UVTileDissolveAlpha_Row1_2, _UVTileDissolveAlpha_Row1_3), xMask)
+					    + (udim.y >= 2 && udim.y < 3) * dot(float4(_UVTileDissolveAlpha_Row2_0, _UVTileDissolveAlpha_Row2_1, _UVTileDissolveAlpha_Row2_2, _UVTileDissolveAlpha_Row2_3), xMask)
+					    + (udim.y >= 3 && udim.y < 4) * dot(float4(_UVTileDissolveAlpha_Row3_0, _UVTileDissolveAlpha_Row3_1, _UVTileDissolveAlpha_Row3_2, _UVTileDissolveAlpha_Row3_3), xMask);
+		tileAlpha *= all(udim >= 0 && udim < 4);
+		if (tileAlpha > 0.999)
 		{
 			#ifdef POI_PASS_LILFUR
 				return (PoiVertToGeoLilFur)POI_NAN;
@@ -353,289 +376,393 @@ _DissolveAlpha9 ("Dissolve Alpha 9", Range(-1, 1)) = 0
 #T#PoiDissolveFunctions
 //ifex _EnableDissolve==0
 #ifdef DISTORT
+	static const float DISSOLVE_BLEND_MAX = 0.999999;
+
+	float dissolveDotNoise(float3 position)
+	{
+		static const float PHI = 1.618033988;
+		static const float3x3 GOLD = float3x3(
+			-0.571464913, +0.814921382, +0.096597072,
+			-0.278044873, -0.303026659, +0.911518454,
+			+0.772087367, +0.494042493, +0.399753815
+		);
+		float3 rotatedPosition = mul(GOLD, position);
+		float3 scaledRotatedPosition = PHI * mul(position, GOLD);
+		return (dot(cos(rotatedPosition), sin(scaledRotatedPosition)) + 3.0) / 6.0;
+	}
+
+	float getDissolveDetailNoise(float3 worldPos, float2 uv)
+	{
+		float detailNoise = 0;
+		if (_DissolveDetailNoiseMode == 0) // Texture mode
+		{
+			#if defined(PROP_DISSOLVEDETAILNOISE) || !defined(OPTIMIZER_ENABLED)
+				float2 detailUV = uv * _DissolveDetailNoise_ST.xy + _DissolveDetailNoise_ST.zw + _Time.x * _DissolveDetailNoisePan;
+				detailNoise = _DissolveDetailNoise.SampleLevel(sampler_linear_repeat, detailUV, 0).r;
+			#endif
+			detailNoise = _DissolveInvertDetailNoise ? 1 - detailNoise : detailNoise;
+		}
+		else // Dot Noise mode
+		{
+			float3 noisePos = worldPos * _DissolveDotNoiseScale.xyz + _DissolveDotNoiseOffset.xyz + _Time.y * _DissolveDotNoiseSpeed.xyz;
+			detailNoise = dissolveDotNoise(noisePos);
+			detailNoise = _DissolveInvertDotNoise ? 1 - detailNoise : detailNoise;
+		}
+		return detailNoise;
+	}
+
+	struct DissolveEdgeInput
+	{
+		float gradient;
+		float dissolveAmount;
+		float detailNoise;
+		float detailStrength;
+		float fwidthGradient;
+		float heightOffset;
+	};
+
+	struct DissolveEdgeOutput
+	{
+		float distFromEdge;
+		float dissolveAlpha;
+		float edgeAlpha;
+	};
+
+	DissolveEdgeOutput getDissolveEdge(DissolveEdgeInput input)
+	{
+		DissolveEdgeOutput output = (DissolveEdgeOutput)0;
+		
+		float softness = _DissolveSoftness * 0.5 + input.fwidthGradient;
+		float baseThreshold = input.dissolveAmount + input.heightOffset;
+		float baseDistFromEdge = input.gradient - baseThreshold;
+		float edgeMaskFactor = saturate(-baseDistFromEdge / (softness + 0.001));
+		float noiseMask = lerp(1, edgeMaskFactor, _DissolveDetailEdgeMask);
+		
+		float noiseOffset = (input.detailNoise - 0.5) * input.detailStrength * noiseMask;
+		float localThreshold = baseThreshold + noiseOffset;
+		
+		if (_DissolveWaveMode)
+		{
+			float halfWidth = _DissolveWaveWidth * 0.5;
+			float localHalfWidth = max(halfWidth + noiseOffset, 0.001);
+			float dist;
+			float waveAmount = input.dissolveAmount;
+			[flatten]
+			switch ((int)_DissolveWaveBounds)
+			{
+				case 0:
+					waveAmount = remap(waveAmount, 0, 1, -halfWidth, 1 + halfWidth);
+					dist = abs(input.gradient - waveAmount);
+					break;
+				case 1:
+					dist = abs(input.gradient - waveAmount);
+					break;
+				case 2:
+					float diff = input.gradient - waveAmount;
+					diff = diff - round(diff);
+					dist = abs(diff);
+					break;
+				default:
+					dist = abs(input.gradient - waveAmount);
+					break;
+			}
+			output.distFromEdge = dist - localHalfWidth;
+			output.dissolveAlpha = 1 - smoothstep(localHalfWidth - softness, localHalfWidth + softness, dist);
+		}
+		else
+		{
+			output.distFromEdge = input.gradient - localThreshold;
+			output.dissolveAlpha = 1 - smoothstep(localThreshold - softness, localThreshold + softness, input.gradient);
+		}
+		
+		float peakPosition = output.distFromEdge + softness;
+		float edgeRange = max(_DissolveEdgeWidth + softness, 0.001);
+		output.edgeAlpha = saturate(1 - abs(peakPosition) / edgeRange);
+		
+		return output;
+	}
+
+	float getUVTileDissolveAlpha(float2 uv)
+	{
+		float2 udim = floor(uv);
+		float4 xMask = float4(
+			udim.x >= 0 && udim.x < 1,
+			udim.x >= 1 && udim.x < 2,
+			udim.x >= 2 && udim.x < 3,
+			udim.x >= 3 && udim.x < 4
+		);
+		float alpha = 0;
+		alpha += (udim.y >= 0 && udim.y < 1) * dot(float4(_UVTileDissolveAlpha_Row0_0, _UVTileDissolveAlpha_Row0_1, _UVTileDissolveAlpha_Row0_2, _UVTileDissolveAlpha_Row0_3), xMask);
+		alpha += (udim.y >= 1 && udim.y < 2) * dot(float4(_UVTileDissolveAlpha_Row1_0, _UVTileDissolveAlpha_Row1_1, _UVTileDissolveAlpha_Row1_2, _UVTileDissolveAlpha_Row1_3), xMask);
+		alpha += (udim.y >= 2 && udim.y < 3) * dot(float4(_UVTileDissolveAlpha_Row2_0, _UVTileDissolveAlpha_Row2_1, _UVTileDissolveAlpha_Row2_2, _UVTileDissolveAlpha_Row2_3), xMask);
+		alpha += (udim.y >= 3 && udim.y < 4) * dot(float4(_UVTileDissolveAlpha_Row3_0, _UVTileDissolveAlpha_Row3_1, _UVTileDissolveAlpha_Row3_2, _UVTileDissolveAlpha_Row3_3), xMask);
+		return alpha;
+	}
+
+	float getContinuousDissolve()
+	{
+		float t = frac(_Time.y * _ContinuousDissolveSpeed + _ContinuousDissolvePhase);
+		float wave = 0;
+		[flatten]
+		switch((int)_ContinuousDissolveWave)
+		{
+			case 0: wave = sin(t * 6.28318) * 0.5 + 0.5; break;
+			case 1: wave = 1 - abs(t * 2 - 1); break;
+			case 2: wave = t; break;
+			case 3: wave = t < 0.5 ? 0 : 1; break;
+		}
+		return lerp(_ContinuousDissolveRange.x, _ContinuousDissolveRange.y, wave);
+	}
+
+	float getPointToPointGradient(float3 localPos, float3 worldPos, float3 vertexColor, float2 uv)
+	{
+		float3 start = _DissolveStartPoint.xyz;
+		float3 end = _DissolveEndPoint.xyz;
+		float lineLength = distance(start, end);
+		float3 direction = lineLength > EPSILON ? (end - start) / lineLength : float3(0, 1, 0);
+		float3 pos;
+		[flatten]
+		switch ((int)_DissolveP2PWorldLocal)
+		{
+			case 0: pos = localPos; break;
+			case 1: pos = worldPos; break;
+			case 2: pos = vertexColor; break;
+			case 3: pos = float3(uv, 0); break;
+			default: pos = localPos; break;
+		}
+		float projection = dot(pos - start, direction);
+		float gradient = projection / (lineLength + EPSILON);
+		return saturate(gradient);
+	}
+
+	float getSphericalGradient(float3 localPos)
+	{
+		float fragDistance = distance(_SphericalDissolveCenter, localPos);
+		float gradient = fragDistance / (_SphericalDissolveRadius + EPSILON);
+		gradient = _SphericalDissolveInvert ? 1 - gradient : gradient;
+		return saturate(gradient);
+	}
+
+	float getCenterOutGradient(in PoiMesh poiMesh, in PoiLight poiLight)
+	{
+		float gradient = 0.5;
+		[flatten]
+		switch(_CenterOutDissolveMode)
+		{
+			case 1: gradient = lerp(poiLight.vertexNDotV, poiLight.nDotV, _CenterOutDissolveNormals); break;
+			case 2: gradient = dot(normalize(_CenterOutDissolveDirection), lerp(poiMesh.normals[0], poiMesh.normals[1], _CenterOutDissolveNormals)) * 0.5 + 0.5; break;
+			case 3: gradient = lerp(poiLight.vertexNDotL, poiLight.nDotL, _CenterOutDissolveNormals) * 0.5 + 0.5; break;
+		}
+		gradient = saturate(gradient);
+		gradient = _CenterOutDissolveLinear ? 1 - acos(gradient) * 0.63662 : gradient;
+		gradient = _CenterOutDissolveInvert ? gradient : 1 - gradient;
+		return gradient;
+	}
+
+	float getDissolveGradient(float3 localPos, float3 worldPos, float3 vertexColor, float2 uv, float noiseTextureSample)
+	{
+		float gradient;
+		[flatten]
+		switch((int)_DissolveType)
+		{
+			default: gradient = _DissolveInvertNoise ? 1 - noiseTextureSample : noiseTextureSample; break;
+			case 2: gradient = getPointToPointGradient(localPos, worldPos, vertexColor, uv); break;
+			case 3: gradient = getSphericalGradient(localPos); break;
+			case 4: gradient = 0.5; break;
+		}
+		return saturate(gradient);
+	}
+
+	float getDissolveAmount(float2 uvTileUV, float dissolveMask)
+	{
+		float dissolveAmount = _DissolveAlpha;
+		if (_UVTileDissolveEnabled)
+			dissolveAmount += getUVTileDissolveAlpha(uvTileUV);
+		UNITY_BRANCH
+		if (_ContinuousDissolveEnabled)
+		{
+			float continuous = getContinuousDissolve();
+			[flatten]
+			switch((int)_ContinuousDissolveBlend)
+			{
+				case 0: dissolveAmount = continuous; break;
+				case 1: dissolveAmount = saturate(dissolveAmount + continuous); break;
+				case 2: dissolveAmount = dissolveAmount * continuous; break;
+			}
+		}
+		dissolveAmount = saturate(dissolveAmount);
+		dissolveAmount *= dissolveMask;
+		return dissolveAmount;
+	}
+
 	void applyDissolve(inout PoiFragData poiFragData, in PoiMesh poiMesh, inout PoiMods poiMods, in PoiCam poiCam, in PoiLight poiLight)
 	{
+		float dissolveMask = 1;
 		#if defined(PROP_DISSOLVEMASK) || !defined(OPTIMIZER_ENABLED)
-			float dissolveMask = POI2D_SAMPLER_PAN(_DissolveMask, _MainTex, poiUV(poiMesh.uv[_DissolveMaskUV], _DissolveMask_ST), _DissolveMaskPan).r;
-		#else
-			float dissolveMask = 1;
+			dissolveMask = POI2D_SAMPLER_PAN(_DissolveMask, _MainTex, poiUV(poiMesh.uv[_DissolveMaskUV], _DissolveMask_ST), _DissolveMaskPan).r;
 		#endif
+
 		UNITY_BRANCH
 		if (_DissolveUseVertexColors > 0)
-		{
-			// Vertex Color Imprecision hype
 			dissolveMask = ceil(poiMesh.vertexColor[max(_DissolveUseVertexColors - 1, 0)] * 100000) / 100000;
-		}
+
 		if (_DissolveMaskGlobalMask > 0)
-		{
 			dissolveMask = maskBlend(dissolveMask, poiMods.globalMask[_DissolveMaskGlobalMask - 1], _DissolveMaskGlobalMaskBlendType);
-		}
-		
-		float4 dissolveToTexture = 0;
+
+		if (_DissolveMaskInvert)
+			dissolveMask = 1 - dissolveMask;
+
 		#if defined(PROP_DISSOLVETOTEXTURE) || !defined(OPTIMIZER_ENABLED)
-			dissolveToTexture = POI2D_SAMPLER_PAN(_DissolveToTexture, _MainTex, poiUV(poiMesh.uv[_DissolveToTextureUV], _DissolveToTexture_ST), _DissolveToTexturePan) * float4(poiThemeColor(poiMods, _DissolveTextureColor.rgb, _DissolveTextureColorThemeIndex), _DissolveTextureColor.a);
+			float4 dissolveToTexture = POI2D_SAMPLER_PAN(_DissolveToTexture, _MainTex, poiUV(poiMesh.uv[_DissolveToTextureUV], _DissolveToTexture_ST), _DissolveToTexturePan) * float4(poiThemeColor(poiMods, _DissolveTextureColor.rgb, _DissolveTextureColorThemeIndex), _DissolveTextureColor.a);
 		#else
-			dissolveToTexture = float4(poiThemeColor(poiMods, _DissolveTextureColor.rgb, _DissolveTextureColorThemeIndex), _DissolveTextureColor.a);
+			float4 dissolveToTexture = float4(poiThemeColor(poiMods, _DissolveTextureColor.rgb, _DissolveTextureColorThemeIndex), _DissolveTextureColor.a);
 		#endif
-		
+		float dissolveNoise = 1;
 		#if defined(PROP_DISSOLVENOISETEXTURE) || !defined(OPTIMIZER_ENABLED)
-			float dissolveNoiseTexture = POI2D_SAMPLER_PAN(_DissolveNoiseTexture, _MainTex, poiUV(poiMesh.uv[_DissolveNoiseTextureUV], _DissolveNoiseTexture_ST), _DissolveNoiseTexturePan).r;
-		#else
-			float dissolveNoiseTexture = 1;
+			dissolveNoise = POI2D_SAMPLER_PAN(_DissolveNoiseTexture, _MainTex, poiUV(poiMesh.uv[_DissolveNoiseTextureUV], _DissolveNoiseTexture_ST), _DissolveNoiseTexturePan).r;
 		#endif
+		dissolveNoise = _DissolveInvertNoise ? 1 - dissolveNoise : dissolveNoise;
 		
-		float da = _DissolveAlpha
-		+ _DissolveAlpha0
-		+ _DissolveAlpha1
-		+ _DissolveAlpha2
-		+ _DissolveAlpha3
-		+ _DissolveAlpha4
-		+ _DissolveAlpha5
-		+ _DissolveAlpha6
-		+ _DissolveAlpha7
-		+ _DissolveAlpha8
-		+ _DissolveAlpha9;
-		float dds = _DissolveDetailStrength;
-
-		if (_UVTileDissolveEnabled)
+		float detailNoise = 0;
+		float detailStrength = 0;
+		if (_DissolveDetailNoiseEnabled)
 		{
-			float2 udim = floor(poiMesh.uv[(int)_UVTileDissolveUV]);
-
-			float4 xMask = float4((udim.x >= 0 && udim.x < 1),
-			(udim.x >= 1 && udim.x < 2),
-			(udim.x >= 2 && udim.x < 3),
-			(udim.x >= 3 && udim.x < 4));
-
-			da += (udim.y >= 0 && udim.y < 1) * dot(float4(_UVTileDissolveAlpha_Row0_0, _UVTileDissolveAlpha_Row0_1, _UVTileDissolveAlpha_Row0_2, _UVTileDissolveAlpha_Row0_3), xMask);
-			da += (udim.y >= 1 && udim.y < 2) * dot(float4(_UVTileDissolveAlpha_Row1_0, _UVTileDissolveAlpha_Row1_1, _UVTileDissolveAlpha_Row1_2, _UVTileDissolveAlpha_Row1_3), xMask);
-			da += (udim.y >= 2 && udim.y < 3) * dot(float4(_UVTileDissolveAlpha_Row2_0, _UVTileDissolveAlpha_Row2_1, _UVTileDissolveAlpha_Row2_2, _UVTileDissolveAlpha_Row2_3), xMask);
-			da += (udim.y >= 3 && udim.y < 4) * dot(float4(_UVTileDissolveAlpha_Row3_0, _UVTileDissolveAlpha_Row3_1, _UVTileDissolveAlpha_Row3_2, _UVTileDissolveAlpha_Row3_3), xMask);
+			detailNoise = getDissolveDetailNoise(poiMesh.worldPos, poiMesh.uv[_DissolveDetailNoiseUV]);
+			detailStrength = _DissolveDetailStrength;
 		}
 
-		
+		float dissolveAmount = _DissolveAlpha;
+		if (_UVTileDissolveEnabled)
+			dissolveAmount += getUVTileDissolveAlpha(poiMesh.uv[(int)_UVTileDissolveUV]);
+		float alEdgeWidthMod = 0;
+		float alEdgeEmissionMod = 0;
+		float alHueShiftMod = 0;
 		#ifdef POI_AUDIOLINK
 			UNITY_BRANCH
 			if (_EnableDissolveAudioLink && poiMods.audioLinkAvailable)
 			{
-				da += lerp(_AudioLinkDissolveAlpha.x, _AudioLinkDissolveAlpha.y, poiMods.audioLink[_AudioLinkDissolveAlphaBand]);
-				dds += lerp(_AudioLinkDissolveDetail.x, _AudioLinkDissolveDetail.y, poiMods.audioLink[_AudioLinkDissolveDetailBand]);
+				dissolveAmount += lerp(_AudioLinkDissolveAlpha.x, _AudioLinkDissolveAlpha.y, poiMods.audioLink[_AudioLinkDissolveAlphaBand]);
+				if (_AudioLinkDissolveAlphaChronoSpeed != 0)
+					dissolveAmount = frac(AudioLinkGetChronoTime(_AudioLinkDissolveAlphaMotionType, _AudioLinkDissolveAlphaChronoBand) * _AudioLinkDissolveAlphaChronoSpeed);
+				if (_DissolveDetailNoiseEnabled)
+					detailStrength += lerp(_AudioLinkDissolveDetail.x, _AudioLinkDissolveDetail.y, poiMods.audioLink[_AudioLinkDissolveDetailBand]);
+				if (_DissolveEdgeEnabled)
+				{
+					alEdgeWidthMod = lerp(_AudioLinkDissolveEdgeWidth.x, _AudioLinkDissolveEdgeWidth.y, poiMods.audioLink[_AudioLinkDissolveEdgeWidthBand]);
+					alEdgeEmissionMod = lerp(_AudioLinkDissolveEdgeEmission.x, _AudioLinkDissolveEdgeEmission.y, poiMods.audioLink[_AudioLinkDissolveEdgeEmissionBand]);
+				}
+				if (_DissolveHueShiftEnabled)
+					alHueShiftMod = AudioLinkGetChronoTime(_AudioLinkDissolveHueShiftMotionType, _AudioLinkDissolveHueShiftChronoBand) * _AudioLinkDissolveHueShiftChronoSpeed;
 			}
 		#endif
-		
+		UNITY_BRANCH
+		if (_ContinuousDissolveEnabled)
+		{
+			float continuous = getContinuousDissolve();
+			[flatten]
+			switch((int)_ContinuousDissolveBlend)
+			{
+				case 0: dissolveAmount = continuous; break;
+				case 1: dissolveAmount = saturate(dissolveAmount + continuous); break;
+				case 2: dissolveAmount = dissolveAmount * continuous; break;
+			}
+		}
+		dissolveAmount = saturate(dissolveAmount);
+		dissolveAmount *= dissolveMask;
+		detailStrength = saturate(detailStrength);
 
-		da = saturate(da);
-		dds = saturate(dds);
-		
-		if (_DissolveMaskInvert)
-		{
-			dissolveMask = 1 - dissolveMask;
-		}
-		#if defined(PROP_DISSOLVEDETAILNOISE) || !defined(OPTIMIZER_ENABLED)
-			float dissolveDetailNoise = POI2D_SAMPLER_PAN(_DissolveDetailNoise, _MainTex, poiUV(poiMesh.uv[_DissolveDetailNoiseUV], _DissolveDetailNoise_ST), _DissolveDetailNoisePan);
-		#else
-			float dissolveDetailNoise = 0;
-		#endif
-		if (_DissolveInvertNoise)
-		{
-			dissolveNoiseTexture = 1 - dissolveNoiseTexture;
-		}
-		if (_DissolveInvertDetailNoise)
-		{
-			dissolveDetailNoise = 1 - dissolveDetailNoise;
-		}
-		if (_ContinuousDissolve != 0)
-		{
-			da = sin(_Time.x * _ContinuousDissolve) * .5 + .5;
-		}
-		da *= dissolveMask;
-		float dissolveAlpha = da;
-		float edgeAlpha = 0;
-		
+		float gradient;
 		[flatten]
 		switch(_DissolveType)
 		{
-			default: // Basic (case 1)
-
-			{
-				da = remap(da, 0, 1, -_DissolveEdgeWidth, 1);
-				dissolveAlpha = da;
-				//Adjust detail strength to avoid artifacts
-				dds *= smoothstep(1, 0.99, da) * lerp(1, smoothstep(0, lerp(0.01, 0.1, dds), da), _DissolveDetailEdgeSmoothing);
-				float noise = saturate(dissolveNoiseTexture - dissolveDetailNoise * dds);
-				
-				noise = saturate(noise * 0.998 + 0.001);
-				dissolveAlpha = dissolveAlpha >= noise;
-				edgeAlpha = remapClamped(da + _DissolveEdgeWidth, da, noise) * (1 - dissolveAlpha);
-				break;
-			}
-			case 2: // Point to Point
-
-			{
-				float3 direction;
-				float3 currentPos;
-				float distanceTo = 0;
-				direction = normalize(_DissolveEndPoint - _DissolveStartPoint);
-				currentPos = lerp(_DissolveStartPoint, _DissolveEndPoint, dissolveAlpha);
-				
-				UNITY_BRANCH
-				if (_DissolveP2PWorldLocal != 1)
-				{
-					float3 pos = _DissolveP2PWorldLocal == 0 ? poiMesh.localPos.rgb : poiMesh.vertexColor.rgb;
-					distanceTo = dot(pos - currentPos, direction) - dissolveDetailNoise * dds;
-					edgeAlpha = smoothstep(_DissolveP2PEdgeLength + .00001, 0, distanceTo);
-					dissolveAlpha = step(distanceTo, 0);
-					edgeAlpha *= 1 - dissolveAlpha;
-				}
-				else
-				{
-					distanceTo = dot(poiMesh.worldPos - currentPos, direction) - dissolveDetailNoise * dds;
-					edgeAlpha = smoothstep(_DissolveP2PEdgeLength + .00001, 0, distanceTo);
-					dissolveAlpha = (distanceTo < 0) ? 1 : 0;
-					edgeAlpha *= 1 - dissolveAlpha;
-				}
-
-				if (_DissolveP2PClamp)
-				{
-					dissolveAlpha = saturate(dissolveAlpha * smoothstep(0, 0.01, da) + smoothstep(0.99, 1, da));
-					edgeAlpha *= smoothstep(0, 0.01, da);
-				}
-
-				break;
-			}
-			case 3: // Spherical
-
-			{
-				if (_SphericalDissolveInvert)
-				{
-					da = remap(da, 1, 0, -_DissolveEdgeWidth, 1);
-				}
-				else
-				{
-					da = remap(da, 0, 1, -_DissolveEdgeWidth, 1);
-				}
-				
-				dissolveAlpha = da;
-				dds *= smoothstep(0, 0.2 * dds + 0.01, dissolveAlpha) * lerp(1, smoothstep(1, 1 - 0.2 * dds - 0.01, dissolveAlpha), _DissolveDetailEdgeSmoothing);
-				float currentDistance = lerp(0, _SphericalDissolveRadius, dissolveAlpha);
-				float fragDistance = distance(_SphericalDissolveCenter, poiMesh.localPos.xyz);
-				float normalizedDistance;
-				normalizedDistance = (fragDistance - currentDistance) / (_SphericalDissolveRadius + 0.0001) - dissolveDetailNoise * dds;
-
-				if (_SphericalDissolveInvert)
-				{
-					dissolveAlpha = (normalizedDistance > 0) ? 1 : 0;
-					edgeAlpha = smoothstep(_DissolveEdgeWidth + .00001, 0, -normalizedDistance);
-				}
-				else
-				{
-					dissolveAlpha = (normalizedDistance < 0) ? 1 : 0;
-					edgeAlpha = smoothstep(_DissolveEdgeWidth + .00001, 0, normalizedDistance);
-				}
-
-				if (_SphericalDissolveClamp)
-				{
-					da = lerp(da, 1 - da, _SphericalDissolveInvert);
-					dissolveAlpha = saturate(dissolveAlpha * smoothstep(0, 0.01, da) + smoothstep(0.99, 1, da));
-					edgeAlpha *= smoothstep(0, 0.01, da);
-				}
-
-				break;
-			}
-			case 4: // CenterOut
-
-			{
-				float ramp = 0.5;
-				float noise;
-
-				[flatten]
-				switch(_CenterOutDissolveMode)
-				{
-					case 1: // View Direction
-
-					{
-						ramp = saturate(lerp(poiLight.vertexNDotV, poiLight.nDotV, _CenterOutDissolveNormals));
-						break;
-					}
-					case 2: // Custom Direction
-
-					{
-						ramp = dot(normalize(_CenterOutDissolveDirection), lerp(poiMesh.normals[0], poiMesh.normals[1], _CenterOutDissolveNormals));
-						ramp = saturate(ramp * .5 + 0.5);
-						break;
-					}
-					case 3: // Light Direction
-
-					{
-						ramp = lerp(poiLight.vertexNDotL, poiLight.nDotL, _CenterOutDissolveNormals);
-						ramp = saturate(ramp * .5 + 0.5);
-						break;
-					}
-				}
-
-				if (_CenterOutDissolvePower != 1)
-				{
-					ramp = pow(ramp, _CenterOutDissolvePower);
-				}
-
-				if (!_CenterOutDissolveInvert)
-				{
-					ramp = 1 - ramp;
-				}
-
-				da = remap(da, 0, 1, -_DissolveEdgeWidth, 1);
-				dissolveAlpha = da;
-				//Adjust detail strength to avoid artifacts
-				dds *= smoothstep(1, 0.99, da) * lerp(1, smoothstep(0, lerp(0.01, 0.1, dds), da), _DissolveDetailEdgeSmoothing);
-
-				noise = saturate(ramp - dissolveDetailNoise * dds);
-				noise = saturate(noise * 0.998 + 0.001);
-				dissolveAlpha = dissolveAlpha >= noise;
-				edgeAlpha = remapClamped(da + _DissolveEdgeWidth, da, noise) * (1 - dissolveAlpha);
-				break;
-			}
+			default: gradient = dissolveNoise; break;
+			case 2: gradient = getPointToPointGradient(poiMesh.localPos.rgb, poiMesh.worldPos, poiMesh.vertexColor.rgb, poiMesh.uv[(int)_DissolveP2PUV]); break;
+			case 3: gradient = getSphericalGradient(poiMesh.localPos.xyz); break;
+			case 4: gradient = getCenterOutGradient(poiMesh, poiLight); break;
 		}
+
+		if (_DissolveDebugGradient)
+		{
+			float3 debugColor = lerp(lerp(lerp(gradient, float3(1,0,0), gradient <= 0), float3(0,1,0), gradient >= 1), float3(1,1,0), abs(gradient - _DissolveAlpha) < 0.003);
+			poiFragData.baseColor = debugColor;
+			return;
+		}
+
+		gradient = saturate(gradient);
+		float fwidthGradient = fwidth(gradient);
 		
+		float softness = _DissolveSoftness * 0.5 + fwidthGradient;
+		float edgeWidth = _DissolveEdgeEnabled ? _DissolveEdgeWidth : 0;
+		float detailPadding = 0.5 * detailStrength * (1 - _DissolveDetailEdgeMask);
+		float totalPadding = max(2 * softness + edgeWidth + detailPadding, 0.01);
+		float remappedDissolveAmount = (_DissolveWaveMode && _DissolveWaveBounds == 2)
+			? dissolveAmount
+			: lerp(-totalPadding, 1 + totalPadding, dissolveAmount);
+		
+		DissolveEdgeInput edgeInput;
+		edgeInput.gradient = gradient;
+		edgeInput.dissolveAmount = remappedDissolveAmount;
+		edgeInput.detailNoise = detailNoise;
+		edgeInput.detailStrength = detailStrength;
+		edgeInput.fwidthGradient = fwidthGradient;
+		edgeInput.heightOffset = 0;
+		
+		DissolveEdgeOutput edgeOutput = getDissolveEdge(edgeInput);
+		float distFromEdge = edgeOutput.distFromEdge;
+		float dissolveAlpha = edgeOutput.dissolveAlpha;
+
 		#ifndef POI_PASS_SHADOW
 			UNITY_BRANCH
 			if (_DissolveHueShiftEnabled)
-			{
-				dissolveToTexture.rgb = hueShift(dissolveToTexture.rgb, _DissolveHueShift + _Time.x * _DissolveHueShiftSpeed, _DissolveHueShiftColorSpace, _DissolveHueSelectOrShift);
-			}
+				dissolveToTexture.rgb = hueShift(dissolveToTexture.rgb, _DissolveHueShift + _Time.x * _DissolveHueShiftSpeed + alHueShiftMod, _DissolveHueShiftColorSpace, _DissolveHueSelectOrShift);
 		#endif
 
-		poiFragData.alpha = lerp(poiFragData.alpha, dissolveToTexture.a, dissolveAlpha * .999999);
-		float4 edgeColor = 0.0;
-
+		if (_DissolveAlphaOnly)
+		{
+			float targetAlpha = evalRamp4(dissolveAlpha, _DissolveAlphaOnlyRamp);
+			poiFragData.alpha *= targetAlpha;
+		}
+		else
+		{
+			poiFragData.alpha = lerp(poiFragData.alpha, dissolveToTexture.a, dissolveAlpha * DISSOLVE_BLEND_MAX);
+		}
 		#if !defined(POI_PASS_OUTLINE) && !defined(POI_PASS_SHADOW)
-			poiFragData.baseColor = lerp(poiFragData.baseColor, dissolveToTexture.rgb, dissolveAlpha * .999999);
-			
-			if (_DissolveApplyGlobalMaskIndex > 0)
+			if (!_DissolveAlphaOnly)
 			{
-				applyToGlobalMask(poiMods, _DissolveApplyGlobalMaskIndex - 1, _DissolveApplyGlobalMaskBlendType, dissolveAlpha * .999999);
-			}
-			if (_DissolveInverseApplyGlobalMaskIndex > 0)
-			{
-				applyToGlobalMask(poiMods, _DissolveInverseApplyGlobalMaskIndex - 1, _DissolveInverseApplyGlobalMaskBlendType, 1 - (dissolveAlpha * .999999));
+				poiFragData.baseColor = lerp(poiFragData.baseColor, dissolveToTexture.rgb, dissolveAlpha * DISSOLVE_BLEND_MAX);
+				poiFragData.emission += dissolveToTexture.rgb * _DissolveToEmissionStrength * dissolveAlpha;
 			}
 			UNITY_BRANCH
-			if (_DissolveEdgeWidth || (_DissolveType == 2 && _DissolveP2PEdgeLength != 0))
+			if (_DissolveEdgeEnabled)
 			{
-				#if defined(PROP_DISSOLVEEDGEGRADIENT) || !defined(OPTIMIZER_ENABLED)
-					edgeColor = _DissolveEdgeGradient.Sample(sampler_MainTex, poiUV(float2(edgeAlpha, edgeAlpha), _DissolveEdgeGradient_ST)) * float4(poiThemeColor(poiMods, _DissolveEdgeColor.rgb, _DissolveEdgeColorThemeIndex), _DissolveEdgeColor.a);
-				#else
-					edgeColor = float4(poiThemeColor(poiMods, _DissolveEdgeColor.rgb, _DissolveEdgeColorThemeIndex), _DissolveEdgeColor.a);
-				#endif
-				#ifndef POI_PASS_SHADOW
-					UNITY_BRANCH
-					if (_DissolveEdgeHueShiftEnabled && _DissolveHueShiftEnabled)
-					{
-						edgeColor.rgb = hueShift(edgeColor.rgb, _DissolveEdgeHueShift + _Time.x * _DissolveEdgeHueShiftSpeed, _DissolveEdgeHueShiftColorSpace, _DissolveEdgeHueSelectOrShift);
-					}
-				#endif
-				poiFragData.baseColor = lerp(poiFragData.baseColor, edgeColor.rgb, smoothstep(0, 1 - _DissolveEdgeHardness * .99999999999, edgeAlpha));
+				float softness = _DissolveSoftness * 0.5 + fwidthGradient;
+				float fwidthEdge = max(fwidth(distFromEdge), fwidthGradient);
+				float edgeWidthAL = max(_DissolveEdgeWidth + alEdgeWidthMod, 0);
+				float undissolvedEdge = (1 - dissolveAlpha) * saturate((softness + edgeWidthAL - distFromEdge) / fwidthEdge);
+				float dissolvedEdge = dissolveAlpha * saturate((softness + edgeWidthAL + distFromEdge) / fwidthEdge);
+				float edgeAlpha = _DissolveEdgeFlip ? dissolvedEdge : undissolvedEdge;
+				float edgeTotal = 2 * softness + edgeWidthAL;
+				float edgeT = saturate((softness + edgeWidthAL + (_DissolveEdgeFlip ? distFromEdge : -distFromEdge)) / (edgeTotal + 0.001));
+				float3 edgeColor = poiThemeColor(poiMods, _DissolveEdgeColor.rgb, _DissolveEdgeColorThemeIndex);
+				if (_DissolveEdgeGradient)
+				{
+					float3 color2 = poiThemeColor(poiMods, _DissolveEdgeColor2.rgb, _DissolveEdgeColor2ThemeIndex);
+					float3 color3 = poiThemeColor(poiMods, _DissolveEdgeColor3.rgb, _DissolveEdgeColor3ThemeIndex);
+					
+					float band1 = poiEdgeNonLinear(edgeT, _DissolveEdgeBorder1, _DissolveEdgeBlur1);
+					float band2 = poiEdgeNonLinear(edgeT, _DissolveEdgeBorder2, _DissolveEdgeBlur2);
+					
+					band2 = min(band2, band1);
+					edgeColor = lerp(edgeColor, color2, band1);
+					edgeColor = lerp(edgeColor, color3, band2);
+				}
+				poiFragData.baseColor = lerp(poiFragData.baseColor, edgeColor, edgeAlpha);
+				poiFragData.emission += edgeColor * max(_DissolveEdgeEmission + alEdgeEmissionMod, 0) * edgeAlpha;
 			}
-
-			poiFragData.emission += lerp(0, dissolveToTexture * _DissolveToEmissionStrength, dissolveAlpha) + lerp(0, edgeColor.rgb * _DissolveEdgeEmission, smoothstep(0, 1 - _DissolveEdgeHardness * .99999999999, edgeAlpha));
+			if (_DissolveApplyGlobalMaskIndex > 0)
+				applyToGlobalMask(poiMods, _DissolveApplyGlobalMaskIndex - 1, _DissolveApplyGlobalMaskBlendType, dissolveAlpha * DISSOLVE_BLEND_MAX);
+			if (_DissolveInverseApplyGlobalMaskIndex > 0)
+				applyToGlobalMask(poiMods, _DissolveInverseApplyGlobalMaskIndex - 1, _DissolveInverseApplyGlobalMaskBlendType, 1 - dissolveAlpha * DISSOLVE_BLEND_MAX);
 		#endif
 	}
 #endif
@@ -648,3 +775,76 @@ _DissolveAlpha9 ("Dissolve Alpha 9", Range(-1, 1)) = 0
 #endif
 //endex
 
+#T#PoiDissolveVertexImplementation
+//ifex _EnableDissolve==0
+#ifdef DISTORT
+	UNITY_BRANCH
+	if (_DissolveVertexHeightEnabled)
+	{
+		float2 vertUV = v.uv0.xy * (_DissolveNoiseTextureUV == 0) + v.uv1.xy * (_DissolveNoiseTextureUV == 1) + v.uv2.xy * (_DissolveNoiseTextureUV == 2) + v.uv3.xy * (_DissolveNoiseTextureUV == 3);
+		float2 vertP2PUV = v.uv0.xy * (_DissolveP2PUV == 0) + v.uv1.xy * (_DissolveP2PUV == 1) + v.uv2.xy * (_DissolveP2PUV == 2) + v.uv3.xy * (_DissolveP2PUV == 3);
+		float2 vertUVTileUV = v.uv0.xy * (_UVTileDissolveUV == 0) + v.uv1.xy * (_UVTileDissolveUV == 1) + v.uv2.xy * (_UVTileDissolveUV == 2) + v.uv3.xy * (_UVTileDissolveUV == 3);
+		float2 vertDetailUV = v.uv0.xy * (_DissolveDetailNoiseUV == 0) + v.uv1.xy * (_DissolveDetailNoiseUV == 1) + v.uv2.xy * (_DissolveDetailNoiseUV == 2) + v.uv3.xy * (_DissolveDetailNoiseUV == 3);
+		
+		float3 vertLocalPos = v.vertex.xyz;
+		float3 vertWorldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
+		
+		float noiseTextureSample = 0.5;
+		#if defined(PROP_DISSOLVENOISETEXTURE) || !defined(OPTIMIZER_ENABLED)
+			noiseTextureSample = _DissolveNoiseTexture.SampleLevel(sampler_linear_repeat, TRANSFORM_TEX(vertUV, _DissolveNoiseTexture) + _DissolveNoiseTexturePan * _Time.x, 0).r;
+		#endif
+		
+		float vertGradient = getDissolveGradient(vertLocalPos, vertWorldPos, v.color.rgb, vertP2PUV, noiseTextureSample);
+		float vertAmount = getDissolveAmount(vertUVTileUV, 1.0);
+		float vertDetailNoise = 0.5;
+		float vertDetailStrength = 0;
+		if (_DissolveDetailNoiseEnabled)
+		{
+			vertDetailNoise = getDissolveDetailNoise(vertWorldPos, vertDetailUV);
+			vertDetailStrength = _DissolveVertexHeightDetailStrength;
+		}
+		
+		float vertSoftness = _DissolveSoftness * 0.5;
+		float vertEdgeWidth = _DissolveEdgeEnabled ? _DissolveEdgeWidth : 0;
+		float vertDetailPadding = 0.5 * vertDetailStrength * (1 - _DissolveDetailEdgeMask);
+		float vertTotalPadding = max(2 * vertSoftness + vertEdgeWidth + vertDetailPadding, 0.01);
+		vertAmount = (_DissolveWaveMode && _DissolveWaveBounds == 2)
+			? vertAmount
+			: lerp(-vertTotalPadding, 1 + vertTotalPadding, vertAmount);
+		
+		DissolveEdgeInput edgeInput;
+		edgeInput.gradient = vertGradient;
+		edgeInput.dissolveAmount = vertAmount;
+		edgeInput.detailNoise = vertDetailNoise;
+		edgeInput.detailStrength = vertDetailStrength;
+		edgeInput.fwidthGradient = 0;
+		edgeInput.heightOffset = _DissolveVertexHeightOffset;
+		
+		DissolveEdgeOutput edgeOutput = getDissolveEdge(edgeInput);
+		float heightAlpha = edgeOutput.dissolveAlpha;
+		float softness = max(_DissolveSoftness * 0.5, 0.001);
+		[flatten]
+		switch((int)_DissolveVertexHeightEasing)
+		{
+			case 0: break;
+			case 1: heightAlpha = saturate((softness - edgeOutput.distFromEdge) / (2 * softness)); break;
+			case 2: heightAlpha = 1 - (1 - heightAlpha) * (1 - heightAlpha); break;
+			case 3: heightAlpha = heightAlpha * heightAlpha; break;
+		}
+		
+		if (_DissolveVertexHeightContinue)
+		{
+			float pastPeak = max(0, -edgeOutput.distFromEdge - softness) / softness;
+			heightAlpha += pastPeak;
+		}
+		
+		float3 customDir = normalize(_DissolveVertexHeightDirection);
+		if (_DissolveVertexHeightDirectionSpace == 1)
+			customDir = normalize(mul((float3x3)unity_WorldToObject, customDir));
+		float3 displaceDir = normalize(lerp(v.normal, customDir, _DissolveVertexHeightDirectionBlend));
+		float dotMask = lerp(1, saturate(dot(v.normal, displaceDir) * 0.5 + 0.5), _DissolveVertexHeightDotMask);
+		
+		v.vertex.xyz += displaceDir * heightAlpha * _DissolveVertexHeight * dotMask;
+	}
+#endif
+//endex

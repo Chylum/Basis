@@ -18,11 +18,6 @@
     //#include "UnityPBSLighting.cginc"
 #elif POI_PIPE == POI_URP
     #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-    // Compile errors on android and IOS without this fix
-    #if defined(SHADER_API_MOBILE)
-        #undef TEXTURE3D
-        #define TEXTURE3D(textureName) TEXTURE3D_FLOAT(textureName)
-    #endif
     #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
 #endif
 

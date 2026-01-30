@@ -1,6 +1,6 @@
 #T#PoiPPAnimationProperties
 [HideInInspector] m_start_PPAnimations ("PP Animations--{button_help:{text:Tutorial,action:{type:URL,data:https://www.poiyomi.com/post-processing/pp-animations},hover:Documentation}}", Float) = 0
-[Helpbox(1)] _PPHelp ("This section is intended for real time adjustments through animations at runtime. Therefore, these should not be changed in Unity.", Int) = 0
+[Helpbox(1, 2)] _PPHelp ("This section is intended for real time adjustments through animations at runtime. Therefore, these should not be changed in Unity.", Int) = 0
 _PPLightingMultiplier ("Lighting Mulitplier", Float) = 1
 _PPLightingAddition ("Lighting Add", Float) = 0
 _PPEmissionMultiplier ("Emission Multiplier", Float) = 1

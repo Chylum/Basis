@@ -25,7 +25,7 @@ _FlipbookFPS ("FPS", Float) = 30.0
 _FlipbookFrameOffset ("Frame Offset", Float) = 0
 
 [HideInInspector] s_start_Positioning ("Positioning--{persistent_expand:true,default_expand:true}", Float) = 1
-[Helpbox(1)] _FlipbookPosHelp ("To apply Positioning using Raycast, edit this Material directly from your Mesh in the Scene. Click for video tutorial.--{onClick:{type:URL,data:https://www.poiyomi.com/color-and-normals/decals#positioning}}", Int) = 0
+[Helpbox(1, 2)] _FlipbookPosHelp ("To apply Positioning using Raycast, edit this Material directly from your Mesh in the Scene. Click for video tutorial.--{onClick:{type:URL,data:https://www.poiyomi.com/special-fx/flipbook#positioning}}", Int) = 0
 [ThryDecalPositioning(_FlipbookTexArray, _FlipbookTexArrayUV, _FlipbookPosition, _FlipbookRotation, _FlipbookScale, _FlipbookSideOffset)]
 [Vector2]_FlipbookPosition ("Position", Vector) = (.5, .5, 0, 0)
 _FlipbookRotation ("Rotation", Range(0, 360)) = 0

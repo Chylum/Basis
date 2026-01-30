@@ -23,7 +23,7 @@ _Decal3TPSMaskStrength ("Mask A Strength--{condition_showS:(_DecalTPSDepthMaskEn
 [HideInInspector] m_start_Decal0 (" Decal [IDX_Decal++]--{reference_property:_DecalEnabled}", Float) = 0
 [HideInInspector][ThryToggle(GEOM_TYPE_BRANCH)]_DecalEnabled ("Enable", Float) = 0
 [HideInInspector] s_start_decal_position ("Positioning--{persistent_expand:true,default_expand:true}", Float) = 1
-[Helpbox(1)] _Decal0PosHelp ("To apply Positioning using Raycast, edit this Material directly from your Mesh in the Scene. Click for video tutorial.--{onClick:{type:URL,data:https://www.poiyomi.com/color-and-normals/decals#positioning}}", Int) = 0
+[Helpbox(1, 2)] _Decal0PosHelp ("To apply Positioning using Raycast, edit this Material directly from your Mesh in the Scene. Click for video tutorial.--{onClick:{type:URL,data:https://www.poiyomi.com/color-and-normals/decals#positioning}}", Int) = 0
 [ThryDecalPositioning(_DecalTexture, _DecalTextureUV, _DecalPosition, _DecalRotation, _DecalScale, _DecalSideOffset)]
 [Vector2]_DecalPosition ("Position", Vector) = (.5, .5, 0, 0)
 _DecalRotation ("Rotation", Range(0, 360)) = 0
@@ -118,7 +118,7 @@ _DecalRotationCTALSpeed0 ("Chrono Rotation Speed", Float) = 0
 [HideInInspector] m_start_Decal1 (" Decal [IDX_Decal++]--{reference_property:_DecalEnabled1}", Float) = 0
 [HideInInspector][ThryToggle(GEOM_TYPE_BRANCH_DETAIL)]_DecalEnabled1 ("Enable", Float) = 0
 [HideInInspector] s_start_decal1_position ("Positioning--{persistent_expand:true,default_expand:true}", Float) = 1
-[Helpbox(1)] _Decal1PosHelp ("To apply Positioning using Raycast, edit this Material directly from your Mesh in the Scene. Click for video tutorial.--{onClick:{type:URL,data:https://www.poiyomi.com/color-and-normals/decals#positioning}}", Int) = 0
+[Helpbox(1, 2)] _Decal1PosHelp ("To apply Positioning using Raycast, edit this Material directly from your Mesh in the Scene. Click for video tutorial.--{onClick:{type:URL,data:https://www.poiyomi.com/color-and-normals/decals#positioning}}", Int) = 0
 [ThryDecalPositioning(_DecalTexture1, _DecalTexture1UV, _DecalPosition1, _DecalRotation1, _DecalScale1, _DecalSideOffset1)]
 [Vector2]_DecalPosition1 ("Position", Vector) = (.5, .5, 0, 0)
 _DecalRotation1 ("Rotation", Range(0, 360)) = 0
@@ -213,7 +213,7 @@ _DecalRotationCTALSpeed1 ("Chrono Rotation Speed", Float) = 0
 [HideInInspector] m_start_Decal2 (" Decal [IDX_Decal++]--{reference_property:_DecalEnabled2}", Float) = 0
 [HideInInspector][ThryToggle(GEOM_TYPE_FROND)]_DecalEnabled2 ("Enable", Float) = 0
 [HideInInspector] s_start_decal2_position ("Positioning--{persistent_expand:true,default_expand:true}", Float) = 1
-[Helpbox(1)] _Decal2PosHelp ("To apply Positioning using Raycast, edit this Material directly from your Mesh in the Scene.--{onClick:{type:URL,data:https://www.poiyomi.com/color-and-normals/decals#positioning}}", Int) = 0
+[Helpbox(1, 2)] _Decal2PosHelp ("To apply Positioning using Raycast, edit this Material directly from your Mesh in the Scene.--{onClick:{type:URL,data:https://www.poiyomi.com/color-and-normals/decals#positioning}}", Int) = 0
 [ThryDecalPositioning(_DecalTexture2, _DecalTexture2UV, _DecalPosition2, _DecalRotation2, _DecalScale2, _DecalSideOffset2)]
 [Vector2]_DecalPosition2 ("Position", Vector) = (.5, .5, 0, 0)
 _DecalRotation2 ("Rotation", Range(0, 360)) = 0
@@ -308,7 +308,7 @@ _DecalRotationCTALSpeed2 ("Chrono Rotation Speed", Float) = 0
 [HideInInspector] m_start_Decal3 (" Decal [IDX_Decal++]--{reference_property:_DecalEnabled3}", Float) = 0
 [HideInInspector][ThryToggle(DEPTH_OF_FIELD_COC_VIEW)]_DecalEnabled3 ("Enable", Float) = 0
 [HideInInspector] s_start_decal3_position ("Positioning--{persistent_expand:true,default_expand:true}", Float) = 1
-[Helpbox(1)] _Decal3PosHelp ("To apply Positioning using Raycast, edit this Material directly from your Mesh in the Scene. Click for video tutorial.--{onClick:{type:URL,data:https://www.poiyomi.com/color-and-normals/decals#positioning}}", Int) = 0
+[Helpbox(1, 2)] _Decal3PosHelp ("To apply Positioning using Raycast, edit this Material directly from your Mesh in the Scene. Click for video tutorial.--{onClick:{type:URL,data:https://www.poiyomi.com/color-and-normals/decals#positioning}}", Int) = 0
 [ThryDecalPositioning(_DecalTexture3, _DecalTexture3UV, _DecalPosition3, _DecalRotation3, _DecalScale3, _DecalSideOffset3)]
 [Vector2]_DecalPosition3 ("Position", Vector) = (.5, .5, 0, 0)
 _DecalRotation3 ("Rotation", Range(0, 360)) = 0

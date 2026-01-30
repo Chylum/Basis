@@ -35,6 +35,7 @@ _EmissionHueShiftSpeed__mIDx__ ("Hue Shift Speed", Float) = 0
 [HideInInspector] s_start_EmissionCenterOut__mID__ ("Center Out--{reference_property:_EmissionCenterOutEnabled__mIDx__,persistent_expand:true,default_expand:false}", Float) = 0
 [ThryHideInInspector][ToggleUI]_EmissionCenterOutEnabled__mIDx__ ("Center Out", Float) = 0
 _EmissionCenterOutSpeed__mIDx__ ("Flow Speed", Float) = 5
+[ToggleUI]_EmissionCenterOutLinear__mIDx__ ("Linear", Float) = 0
 [HideInInspector] s_end_EmissionCenterOut__mID__ ("", Float) = 0
 
 // Glow in the dark Emission
@@ -135,6 +136,7 @@ _AudioLinkEmission__mID__CenterOutDuration ("Duration", Range(-1, 1)) = 1
 	float _EmissionHueShiftSpeed__mIDx__;
 	float _EmissionCenterOutEnabled__mIDx__;
 	float _EmissionCenterOutSpeed__mIDx__;
+	float _EmissionCenterOutLinear__mIDx__;
 	float _EnableGITDEmission__mIDx__;
 	float _GITDEWorldOrMesh__mIDx__;
 	float _GITDEMinEmissionMultiplier__mIDx__;
@@ -288,7 +290,9 @@ void applyALCenterOutEmission(in PoiMods poiMods, in float nDotV, inout float em
 			}
 			else
 			{
-				emissionTex = UNITY_SAMPLE_TEX2D_SAMPLER(_EmissionMap__mIDx__, _MainTex, ((.5 + poiLight.nDotV * .5) * _EmissionMap__mIDx___ST.xy) + _Time.x * _EmissionCenterOutSpeed__mIDx__);
+				float centerOutValue = poiLight.nDotV;
+				centerOutValue = _EmissionCenterOutLinear__mIDx__ ? 1 - acos(centerOutValue) * 0.63662 : centerOutValue;
+				emissionTex = UNITY_SAMPLE_TEX2D_SAMPLER(_EmissionMap__mIDx__, _MainTex, ((.5 + centerOutValue * .5) * _EmissionMap__mIDx___ST.xy) + _Time.x * _EmissionCenterOutSpeed__mIDx__);
 			}
 			emissionColor0 = emissionTex.rgb * lerp(1, poiFragData.baseColor, mixBaseColor).rgb * poiThemeColor(poiMods, _EmissionColor__mIDx__.rgb, _EmissionColor__mIDx__ThemeIndex);
 			emissionAlpha = emissionTex.a;

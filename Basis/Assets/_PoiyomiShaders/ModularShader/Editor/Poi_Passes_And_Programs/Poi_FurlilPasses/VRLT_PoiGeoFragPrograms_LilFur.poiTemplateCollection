@@ -72,7 +72,7 @@ _FurOffsetUnits ("Offset Units", Float) = 0
 [Enum(UnityEngine.Rendering.CompareFunction)] _FurStencilComp ("Stencil Compare Function--{condition_showS:(_FurStencilType==0)}", Float) = 8
 
 [HideInInspector] s_start_LilFurStencilBack ("Back--{condition_showS:(_FurStencilType==1),margin_top:0,border_top:0,border_bottom:0,border_width_bottom:0}", Float) = 1
-[Helpbox(1)] _FurFFBFStencilHelp0 ("Front Face and Back Face Stencils only work when locked in due to Unity's Stencil managment", Int) = 0
+[Helpbox(1, 2)] _FurFFBFStencilHelp0 ("Front Face and Back Face Stencils only work when locked in due to Unity's Stencil managment", Int) = 0
 [Enum(UnityEngine.Rendering.StencilOp)] _FurStencilBackPass ("Back Pass Op", Float) = 0
 [Enum(UnityEngine.Rendering.StencilOp)] _FurStencilBackFail ("Back Fail Op", Float) = 0
 [Enum(UnityEngine.Rendering.StencilOp)] _FurStencilBackZFail ("Back ZFail Op", Float) = 0
@@ -80,7 +80,7 @@ _FurOffsetUnits ("Offset Units", Float) = 0
 [HideInInspector] s_end_LilFurStencilBack ("Back", Float) = 0
 
 [HideInInspector] s_start_LilFurStencilFront ("Front--{condition_showS:(_FurStencilType==1),margin_top:0,border_top:0,border_bottom:0}", Float) = 1
-[Helpbox(1)] _FurFFBFStencilHelp1 ("Front Face and Back Face Stencils only work when locked in due to Unity's Stencil managment", Int) = 0
+[Helpbox(1, 2)] _FurFFBFStencilHelp1 ("Front Face and Back Face Stencils only work when locked in due to Unity's Stencil managment", Int) = 0
 [Enum(UnityEngine.Rendering.StencilOp)] _FurStencilFrontPass ("Front Pass Op", Float) = 0
 [Enum(UnityEngine.Rendering.StencilOp)] _FurStencilFrontFail ("Front Fail Op", Float) = 0
 [Enum(UnityEngine.Rendering.StencilOp)] _FurStencilFrontZFail ("Front ZFail Op", Float) = 0

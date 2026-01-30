@@ -63,6 +63,7 @@ _LightingCastedShadows ("Receive Casted Shadows", Range(0, 1)) = 0
 [ToggleUI]_LightingVertexLightingEnabled ("Vertex lights (Non-Important)", Float) = 1
 [ToggleUI]_LightingMirrorVertexLightingEnabled ("Mirror Vertex lights (Non-Important)", Float) = 1
 [ToggleUI]_LightingEnableLightVolumes ("Light Volumes", Float) = 1
+_LightingLightVolumesNormalBias ("Normal Bias Sampling--{condition_showS:(_LightingEnableLightVolumes==1)}", Range(0, 1)) = 0
 [HideInInspector] s_end_LightDataBasePass ("Base Pass", Float) = 1
 // Lighting Additive
 [HideInInspector] s_start_LightDataAddPass ("Add Pass (Point & Spot lights)--{persistent_expand:true,default_expand:true}", Float) = 1
@@ -156,6 +157,7 @@ float _DisableDirectionalInAdd;
 float _LightingVertexLightingEnabled;
 float _LightingMirrorVertexLightingEnabled;
 float _LightingEnableLightVolumes;
+float _LightingLightVolumesNormalBias;
 // Lighting Data Debug
 float _LightDataDebugEnabled;
 float _LightingDebugVisualize;
@@ -200,7 +202,7 @@ else
 		//ifex _LightingEnableLightVolumes==0  && isNotAnimated(_LightingEnableLightVolumes)
 		if (_UdonLightVolumeEnabled && _LightingEnableLightVolumes)
 		{
-			LightVolumeSH(poiMesh.worldPos, L0, L1r, L1g, L1b);
+			LightVolumeSH(poiMesh.worldPos, L0, L1r, L1g, L1b, poiMesh.normals[1] * _LightingLightVolumesNormalBias);
 			PoiSHAr = float4(L1r, L0.r);
 			PoiSHAg = float4(L1g, L0.g);
 			PoiSHAb = float4(L1b, L0.b);
@@ -217,7 +219,7 @@ else
 		if (_LightingEnableLightVolumes)
 		{
 			APVResources apvRes = FillAPVResources();
-			float3 posWS = GetAbsolutePositionWS(poiMesh.worldPos);
+			float3 posWS = GetAbsolutePositionWS(poiMesh.worldPos + poiMesh.normals[1] * _LightingLightVolumesNormalBias);
 			posWS = AddNoiseToSamplingPosition(posWS, poiCam.clipPos.xy, poiCam.viewDir);
 			APVSample apvSample = SampleAPV(posWS, poiMesh.normals[1], GetMeshRenderingLayer(), poiCam.viewDir);
 			if (apvSample.status != APV_SAMPLE_STATUS_INVALID)

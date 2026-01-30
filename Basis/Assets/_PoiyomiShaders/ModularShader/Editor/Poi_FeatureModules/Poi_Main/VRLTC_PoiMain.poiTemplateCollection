@@ -27,7 +27,7 @@ _Color ("Color & Alpha--{reference_property:_ColorThemeIndex}", Color) = (1, 1, 
 _Cutoff ("Alpha Cutoff", Range(0, 1.001)) = 0.5
 
 //ifex _UseBump2ndMap==0
-[HideInInspector] m_start_Bump2ndMap (" Normal Map 2--{reference_property:_UseBump2ndMap}", Float) = 0
+[HideInInspector] m_start_Bump2ndMap (" Normal Map 2--{reference_property:_UseBump2ndMap,button_help:{text:Tutorial,action:{type:URL,data:https://www.poiyomi.com/color-and-normals/normal-map-2},hover:Documentation}}", Float) = 0
 [HideInInspector][ThryToggle(POI_BUMP2NDMAP)]_UseBump2ndMap ("Enable", Int) = 0
 [Normal]_Bump2ndMap ("Normal Map--{reference_property:_Bump2ndScale, reference_properties:[_Bump2ndMapPan, _Bump2ndMapUV, _Bump2ndMapStochastic]}", 2D) = "bump" { }
 [ThryHideInInspector]_Bump2ndScale ("Intensity", Range(-10, 10)) = 1
@@ -48,6 +48,8 @@ _Cutoff ("Alpha Cutoff", Range(0, 1.001)) = 0.5
 [ThryHideInInspector][Vector2]_MainColorAdjustTexturePan ("Panning", Vector) = (0, 0, 0, 0)
 [ThryHideInInspector][ThryWideEnum(UV0, 0, UV1, 1, UV2, 2, UV3, 3, Panosphere, 4, World Pos, 5, Local Pos, 8, Polar UV, 6, Distorted UV, 7, Matcap, 9)] _MainColorAdjustTextureUV ("UV", Int) = 0
 _Saturation ("Saturation", Range(-1, 10)) = 0
+_MainChromatize ("Chromatize", Range(-1, 10)) = 0
+_MainTintColor ("Tint", Color) = (1, 0, 0, 0)
 _MainBrightness ("Brightness", Range(-1, 2)) = 0
 _MainGamma ("Gamma", Range(0.01, 5)) = 1
 
@@ -143,6 +145,8 @@ float _Cutoff;
 	float _MainHueShift;
 	float _MainHueShiftSpeed;
 	float _Saturation;
+	float _MainChromatize;
+	float4 _MainTintColor;
 	float _MainBrightness;
 	float _MainGamma;
 
@@ -339,6 +343,79 @@ poiFragData.baseColor = mainTexture.rgb;
 	}
 	poiFragData.baseColor = lerp(poiFragData.baseColor, pow(abs(poiFragData.baseColor), _MainGamma), hueShiftAlpha.a);
 	poiFragData.baseColor = lerp(poiFragData.baseColor, dot(poiFragData.baseColor, float3(0.3, 0.59, 0.11)), - (_Saturation) * hueShiftAlpha.b);
+	if (_MainChromatize != 0)
+	{
+		#if !defined(UNITY_COLORSPACE_GAMMA)
+			float3 chromaLinear = poiFragData.baseColor;
+		#else
+			float3 chromaLinear = OpenLitSRGBToLinear(poiFragData.baseColor);
+		#endif
+		
+		// Compute dynamic max chroma from input color
+		float minRgb = min(chromaLinear.r, min(chromaLinear.g, chromaLinear.b));
+		float maxRgb = max(chromaLinear.r, max(chromaLinear.g, chromaLinear.b));
+		float rangeRgb = maxRgb - minRgb;
+		
+		// Create fully saturated reference at this hue (normalize to 0-1 range)
+		float3 saturatedRef = (rangeRgb > 0.0001) ? (chromaLinear - minRgb) / rangeRgb : float3(1, 0, 0);
+		float3 saturatedOklab = linear_srgb_to_oklab(saturatedRef);
+		float maxChroma = length(saturatedOklab.yz);
+		
+		// Convert input to OKLCH
+		float3 oklab = linear_srgb_to_oklab(chromaLinear);
+		float chroma = length(oklab.yz);
+		float hue = atan2(oklab.z, oklab.y);
+		
+		// Scale chroma and clamp to dynamic max
+		chroma = min(chroma * (1.0 + _MainChromatize), maxChroma);
+		
+		// Reconstruct OKLab from LCH
+		oklab.y = chroma * cos(hue);
+		oklab.z = chroma * sin(hue);
+		chromaLinear = oklab_to_linear_srgb(oklab);
+		
+		#if !defined(UNITY_COLORSPACE_GAMMA)
+			poiFragData.baseColor = saturate(chromaLinear);
+		#else
+			poiFragData.baseColor = saturate(OpenLitLinearToSRGB(chromaLinear));
+		#endif
+	}
+	if (_MainTintColor.a > 0)
+	{
+		#if !defined(UNITY_COLORSPACE_GAMMA)
+			float3 tintInputLinear = poiFragData.baseColor;
+			float3 tintColorLinear = _MainTintColor.rgb;
+		#else
+			float3 tintInputLinear = OpenLitSRGBToLinear(poiFragData.baseColor);
+			float3 tintColorLinear = OpenLitSRGBToLinear(_MainTintColor.rgb);
+		#endif
+		
+		// Get tint color's hue and saturation factor
+		float3 tintOklab = linear_srgb_to_oklab(tintColorLinear);
+		float tintHue = atan2(tintOklab.z, tintOklab.y);
+		float tintMin = min(tintColorLinear.r, min(tintColorLinear.g, tintColorLinear.b));
+		float tintMax = max(tintColorLinear.r, max(tintColorLinear.g, tintColorLinear.b));
+		float tintSatFactor = (tintMax > 0.0001) ? 1.0 - (tintMin / tintMax) : 0;
+		
+		// Get input's lightness and chroma
+		float3 inputOklab = linear_srgb_to_oklab(tintInputLinear);
+		float inputL = inputOklab.x;
+		float inputChroma = length(inputOklab.yz);
+		
+		// Combine: input's L, tint's H, input's C scaled by tint saturation
+		float newChroma = inputChroma * tintSatFactor;
+		float3 tintedOklab = float3(inputL, newChroma * cos(tintHue), newChroma * sin(tintHue));
+		float3 tintedLinear = saturate(oklab_to_linear_srgb(tintedOklab));
+		
+		// Lerp by alpha
+		tintInputLinear = lerp(tintInputLinear, tintedLinear, _MainTintColor.a);
+		
+		#if !defined(UNITY_COLORSPACE_GAMMA)
+			poiFragData.baseColor = tintInputLinear;
+		#else
+			poiFragData.baseColor = OpenLitLinearToSRGB(tintInputLinear);
+		#endif
+	}
 	poiFragData.baseColor = saturate(lerp(poiFragData.baseColor, poiFragData.baseColor * (_MainBrightness + 1), hueShiftAlpha.g));
 #endif
 //endex

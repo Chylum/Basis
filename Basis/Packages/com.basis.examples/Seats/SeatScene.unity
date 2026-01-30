@@ -178,8 +178,11 @@ MonoBehaviour:
   _foot: {x: -0.3, y: -0.25, z: 0}
   _knee: {x: -0.3, y: 0.33, z: 0}
   _spineAngleDegrees: 90
-  IsSeatTakenByAnyone: 0
   LocallyInSeat: 0
+  ResetPitchOnEntry: 0
+  ExitRequiresAllDevicesPressed: 0
+  ExitKey: 0
+  ExitRoles: 
 --- !u!65 &366497805
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -376,8 +379,11 @@ MonoBehaviour:
   _foot: {x: -0.3, y: -0.25, z: 0}
   _knee: {x: -0.3, y: 0.33, z: 0}
   _spineAngleDegrees: 90
-  IsSeatTakenByAnyone: 0
   LocallyInSeat: 0
+  ResetPitchOnEntry: 0
+  ExitRequiresAllDevicesPressed: 0
+  ExitKey: 0
+  ExitRoles: 
 --- !u!65 &721748681
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -804,8 +810,11 @@ MonoBehaviour:
   _foot: {x: 0, y: -0.2, z: -0.83}
   _knee: {x: 0, y: 0.33, z: -0.3}
   _spineAngleDegrees: 90
-  IsSeatTakenByAnyone: 0
   LocallyInSeat: 0
+  ResetPitchOnEntry: 0
+  ExitRequiresAllDevicesPressed: 0
+  ExitKey: 0
+  ExitRoles: 
 --- !u!114 &1047396125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -839,8 +848,11 @@ MonoBehaviour:
   _foot: {x: 0, y: -0.2, z: -0.83}
   _knee: {x: 0, y: 0.33, z: -0.3}
   _spineAngleDegrees: 120
-  IsSeatTakenByAnyone: 0
   LocallyInSeat: 0
+  ResetPitchOnEntry: 0
+  ExitRequiresAllDevicesPressed: 0
+  ExitKey: 0
+  ExitRoles: 
 --- !u!114 &1047396126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -874,8 +886,11 @@ MonoBehaviour:
   _foot: {x: 0, y: -0.25, z: -0.3}
   _knee: {x: 0, y: 0.33, z: -0.3}
   _spineAngleDegrees: 90
-  IsSeatTakenByAnyone: 0
   LocallyInSeat: 0
+  ResetPitchOnEntry: 0
+  ExitRequiresAllDevicesPressed: 0
+  ExitKey: 0
+  ExitRoles: 
 --- !u!114 &1047396127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -909,8 +924,11 @@ MonoBehaviour:
   _foot: {x: 0, y: -0.25, z: 0.3}
   _knee: {x: 0, y: 0.33, z: 0.3}
   _spineAngleDegrees: 90
-  IsSeatTakenByAnyone: 0
   LocallyInSeat: 0
+  ResetPitchOnEntry: 0
+  ExitRequiresAllDevicesPressed: 0
+  ExitKey: 0
+  ExitRoles: 
 --- !u!114 &1047396128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -944,8 +962,11 @@ MonoBehaviour:
   _foot: {x: 0, y: -0.25, z: 1.2}
   _knee: {x: 0, y: 2.07, z: 1.2}
   _spineAngleDegrees: 90
-  IsSeatTakenByAnyone: 0
   LocallyInSeat: 0
+  ResetPitchOnEntry: 0
+  ExitRequiresAllDevicesPressed: 0
+  ExitKey: 0
+  ExitRoles: 
 --- !u!114 &1047396129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1045,8 +1066,11 @@ MonoBehaviour:
   _foot: {x: 0, y: -0.25, z: 0.0755}
   _knee: {x: 0, y: -0.105, z: 0.0755}
   _spineAngleDegrees: 90
-  IsSeatTakenByAnyone: 0
   LocallyInSeat: 0
+  ResetPitchOnEntry: 0
+  ExitRequiresAllDevicesPressed: 0
+  ExitKey: 0
+  ExitRoles: 
 --- !u!114 &1403212574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1080,8 +1104,11 @@ MonoBehaviour:
   _foot: {x: -0.3, y: -0.25, z: 0}
   _knee: {x: -0.3, y: 0.33, z: 0}
   _spineAngleDegrees: 90
-  IsSeatTakenByAnyone: 0
   LocallyInSeat: 0
+  ResetPitchOnEntry: 0
+  ExitRequiresAllDevicesPressed: 0
+  ExitKey: 0
+  ExitRoles: 
 --- !u!1 &1511330576
 GameObject:
   m_ObjectHideFlags: 0
@@ -1168,8 +1195,11 @@ MonoBehaviour:
   _foot: {x: 0, y: -0.25, z: -0.3}
   _knee: {x: 0, y: 0.33, z: -0.3}
   _spineAngleDegrees: 90
-  IsSeatTakenByAnyone: 0
   LocallyInSeat: 0
+  ResetPitchOnEntry: 0
+  ExitRequiresAllDevicesPressed: 0
+  ExitKey: 0
+  ExitRoles: 
 --- !u!1 &1703945651 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5472706545657883201, guid: 8e9677a9f8cd4c947846603d5ca204e6, type: 3}
@@ -1208,8 +1238,11 @@ MonoBehaviour:
   _foot: {x: 0, y: -0.75, z: -0.14}
   _knee: {x: 0, y: -0.25, z: -0.14}
   _spineAngleDegrees: 175
-  IsSeatTakenByAnyone: 0
   LocallyInSeat: 0
+  ResetPitchOnEntry: 0
+  ExitRequiresAllDevicesPressed: 0
+  ExitKey: 0
+  ExitRoles: 
 --- !u!65 &1703945654
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1285,8 +1318,11 @@ MonoBehaviour:
   _foot: {x: 0, y: -0.25, z: -0.3}
   _knee: {x: 0, y: 0.33, z: -0.3}
   _spineAngleDegrees: 90
-  IsSeatTakenByAnyone: 0
   LocallyInSeat: 0
+  ResetPitchOnEntry: 0
+  ExitRequiresAllDevicesPressed: 0
+  ExitKey: 0
+  ExitRoles: 
 --- !u!114 &1846288222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1378,14 +1414,14 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1910090547}
   m_Enabled: 1
-  serializedVersion: 11
+  serializedVersion: 12
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
+  m_CookieSize2D: {x: 10, y: 10}
   m_Shadows:
     m_Type: 2
     m_Resolution: -1
@@ -1533,8 +1569,11 @@ MonoBehaviour:
   _foot: {x: -0.02, y: -0.34, z: -0.2}
   _knee: {x: 0.345, y: 0.1, z: -0.27}
   _spineAngleDegrees: 90
-  IsSeatTakenByAnyone: 0
   LocallyInSeat: 0
+  ResetPitchOnEntry: 0
+  ExitRequiresAllDevicesPressed: 0
+  ExitKey: 0
+  ExitRoles: 
 --- !u!65 &2030883942
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1589,8 +1628,11 @@ MonoBehaviour:
   _foot: {x: 0, y: -5, z: -0.01}
   _knee: {x: 0, y: 0.01, z: -0.01}
   _spineAngleDegrees: 90
-  IsSeatTakenByAnyone: 0
   LocallyInSeat: 0
+  ResetPitchOnEntry: 0
+  ExitRequiresAllDevicesPressed: 0
+  ExitKey: 0
+  ExitRoles: 
 --- !u!65 &2061200783
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1645,8 +1687,11 @@ MonoBehaviour:
   _foot: {x: -0.25, y: -0.3, z: 0}
   _knee: {x: 0.33, y: -0.3, z: 0}
   _spineAngleDegrees: 90
-  IsSeatTakenByAnyone: 0
   LocallyInSeat: 0
+  ResetPitchOnEntry: 0
+  ExitRequiresAllDevicesPressed: 0
+  ExitKey: 0
+  ExitRoles: 
 --- !u!1001 &1977322212309204955
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1808,6 +1853,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &6265163544628063587
 GameObject:
@@ -1894,8 +1940,11 @@ MonoBehaviour:
   _foot: {x: 0, y: -0.25, z: -0.3}
   _knee: {x: 0, y: 0.33, z: -0.3}
   _spineAngleDegrees: 90
-  IsSeatTakenByAnyone: 0
   LocallyInSeat: 0
+  ResetPitchOnEntry: 0
+  ExitRequiresAllDevicesPressed: 0
+  ExitKey: 0
+  ExitRoles: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

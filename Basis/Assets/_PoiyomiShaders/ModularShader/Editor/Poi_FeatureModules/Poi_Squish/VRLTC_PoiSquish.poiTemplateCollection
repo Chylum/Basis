@@ -1,0 +1,251 @@
+#T#PoiSquishProperties
+//ifex _EnableSquish==0
+[HideInInspector] m_start_Squish (" Squish--{reference_property:_EnableSquish}", Float) = 0
+[HideInInspector][ThryToggle(POI_SQUISH)] _EnableSquish ("Squish", Float) = 0
+[Helpbox(1, 2)] _SquishWarning ("Squish doesn't write to depth, which can break certain transparent effects like custom fog and raymarching", Int) = 0
+[Vector2] _SquishPlaneSize ("Collider Size", Vector) = (.5, .5, 0, 0)
+_SquishStrength ("Squish Strength", Range(0, 1)) = 1
+_SquishSpread ("Squish Spread", Range(-0.01, 0.01)) = 0.002
+_SquishMax ("Max Squish", Range(0.01, 1)) = 1
+_SquishFalloff ("Squish Falloff", Float) = 1.0
+_SquishClipOffset ("Z-Clipping Offset", Float) = 0
+[sRGBWarning(true)][Gradient] _SquishColor ("Color Gradient", 2D) = "black" { }
+
+[HideInInspector] s_start_SquishMasking ("Masking--{persistent_expand:true,default_expand:true}", Float) = 1
+_SquishMask ("Squish Mask--{reference_properties:[_SquishMaskUV, _SquishMaskChannel, _SquishnMaskInvert]}", 2D) = "white" { }
+[ThryHideInInspector][Enum(UV0, 0, UV1, 1, UV2, 2, UV3, 3)] _SquishMaskUV ("UV", Int) = 0
+[ThryHideInInspector][Enum(R, 0, G, 1, B, 2, A, 3)] _SquishMaskChannel ("Channel", Float) = 0
+[ThryHideInInspector][ToggleUI] _SquishnMaskInvert ("Invert", Float) = 0
+[ThryWideEnum(Off, 0, 1R, 1, 1G, 2, 1B, 3, 1A, 4, 2R, 5, 2G, 6, 2B, 7, 2A, 8, 3R, 9, 3G, 10, 3B, 11, 3A, 12, 4R, 13, 4G, 14, 4B, 15, 4A, 16)] _SquishApplyGlobalMaskIndex ("Write to Global Mask--{reference_property:_SquishApplyGlobalMaskBlendType}", Int) = 0
+[ThryHideInInspector][ThryWideEnum(Add, 7, Subtract, 1, Multiply, 2, Divide, 3, Min, 4, Max, 5, Average, 6, Replace, 0)] _SquishApplyGlobalMaskBlendType ("Blending", Int) = 0
+[HideInInspector] s_end_SquishMasking ("", Float) = 0
+
+[HideInInspector] s_start_SquishBlending ("Blending--{persistent_expand:true,default_expand:true}", Float) = 1
+_SquishReplace ("Replace", Range(0, 1)) = 1
+_SquishMultiply ("Multiply", Range(0, 1)) = 0
+_SquishAdd ("Add", Range(0, 1)) = 0
+_SquishMixed ("Mixed", Range(0, 1)) = 0
+_SquishScreen ("Screen", Range(0, 1)) = 0
+_SquishAddToLight ("Unlit Add", Range(0, 1)) = 0
+[HideInInspector] s_end_SquishBlending ("Blending", Float) = 0
+
+[HideInInspector] m_end_Squish ("Squish", Float) = 0
+//endex
+
+#T#PoiSquishKeywords
+//ifex _EnableSquish==0
+#pragma shader_feature_local POI_SQUISH
+//endex
+
+#T#PoiSquishVariablesExposed
+//ifex _EnableSquish==0
+#ifdef POI_SQUISH
+    float2 _SquishPlaneSize;
+    float _SquishStrength;
+    float _SquishSpread;
+    float _SquishMax;
+    float _SquishFalloff;
+    float _SquishClipOffset;
+    #if defined(PROP_SQUISHMASK) || !defined(OPTIMIZER_ENABLED)
+        float _SquishMaskUV;
+        float4 _SquishMask_ST;
+        float _SquishMaskChannel;
+        float _SquishnMaskInvert;
+    #endif
+    float _SquishApplyGlobalMaskIndex;
+    float _SquishApplyGlobalMaskBlendType;
+    float4 _SquishColor;
+    float _SquishReplace;
+    float _SquishMultiply;
+    float _SquishAdd;
+    float _SquishMixed;
+    float _SquishScreen;
+    float _SquishAddToLight;
+#endif
+//endex
+
+#T#PoiSquishVariables
+//ifex _EnableSquish==0
+#ifdef POI_SQUISH
+    #if defined(PROP_SQUISHMASK) || !defined(OPTIMIZER_ENABLED)
+        Texture2D _SquishMask;
+    #endif
+
+    struct bPlane
+    {
+        float3 center;
+        float3 normal;
+        float3 tangent;
+        float3 bitangent;
+        float2 halfExtents;
+    };
+#endif
+//endex
+
+#T#PoiSquishVertexFunctions
+//ifex _EnableSquish==0
+#ifdef POI_SQUISH
+void GetDPSLights(inout float3 positionOS, inout float3 normalOS)
+{
+    const float normalID = 0.05;
+    const float ringOrHoleID = 0.015;
+
+    positionOS = 1e20;
+    normalOS = float3(0, 0, 1);
+
+    #if POI_PIPE == POI_BIRP
+    for (int i = 0; i < 4; i++)
+    {
+        float range = (0.005 * sqrt(1000000 - unity_4LightAtten0[i])) / sqrt(unity_4LightAtten0[i]);
+        
+        if (length(unity_LightColor[i].rgb) < 0.01)
+        {
+            if (abs(fmod(range, 0.1) - normalID) < 0.005)
+            {
+                float4 normalWS = float4(unity_4LightPosX0[i], unity_4LightPosY0[i], unity_4LightPosZ0[i], 1);
+                normalOS = mul(unity_WorldToObject, normalWS).xyz;
+            }
+            if (abs(fmod(range, 0.1) - ringOrHoleID) < 0.0075)
+            {
+                float4 positionWS = float4(unity_4LightPosX0[i], unity_4LightPosY0[i], unity_4LightPosZ0[i], 1);
+                positionOS = mul(unity_WorldToObject, positionWS).xyz;
+            }
+        }
+    }
+    normalOS = normalize(positionOS - normalOS);
+    #endif
+}
+
+bPlane createBoundedPlane(float3 center, float3 normal, float3 up, float2 size)
+{
+    bPlane plane;
+    plane.center = center;
+    plane.normal = normal;
+    plane.tangent = normalize(cross(up, plane.normal));
+    plane.bitangent = cross(plane.normal, plane.tangent);
+    plane.halfExtents = size * 0.5;
+    
+    return plane;
+}
+
+float distBoundedPlane(bPlane plane, float3 positionOS)
+{
+    float3 toPoint = positionOS - plane.center;
+
+    float u = dot(toPoint, plane.tangent);
+    float v = dot(toPoint, plane.bitangent);
+    float distToPlane = dot(toPoint, plane.normal);
+
+    // outside bounds
+    if (abs(u) > plane.halfExtents.x || abs(v) > plane.halfExtents.y)
+    {
+        return pow(distToPlane, 6);
+    }
+
+    return distToPlane;
+}
+
+void applyPoiSquish(inout VertexOut o, inout float squishFixClip)
+{
+    float3 squishNormalOS;// = mul(unity_WorldToObject, float4(0, 0, 1, 0)).xyz;
+    float3 squishOriginOS;// = mul(unity_WorldToObject, float4(0, 0, 0, 1)).xyz;
+    GetDPSLights(squishOriginOS, squishNormalOS);
+    if (distance(o.localPos.xyz, squishOriginOS) > 1.0) return;
+
+    float3 upOS =  mul((float3x3)unity_WorldToObject, float3(0, 1, 0)).xyz;
+    bPlane squishPlane = createBoundedPlane(squishOriginOS, squishNormalOS, upOS, _SquishPlaneSize.xy);
+
+    float dist = distBoundedPlane(squishPlane, o.localPos.xyz);
+
+    if (dist < 0.0)
+    {
+        float3 posOS = o.localPos.xyz;
+        float3 normalOS = mul((float3x3)unity_WorldToObject, o.normal);
+        float3 tangentOS = mul((float3x3)unity_WorldToObject, o.tangent.xyz);
+        
+        #if defined(PROP_SQUISHMASK) || !defined(OPTIMIZER_ENABLED)
+            float squishMask = UNITY_SAMPLE_TEX2D_SAMPLER_LOD(_SquishMask, _linear_repeat, poiUV(vertexUV(o, _SquishMaskUV), _SquishMask_ST), 0)[_SquishMaskChannel];
+        #else
+            float squishMask = 1.0;
+        #endif
+
+        #if defined(PROP_SQUISHMASK) || !defined(OPTIMIZER_ENABLED)
+        if (_SquishnMaskInvert)
+        {
+            squishMask = 1.0 - squishMask;
+        }
+        #endif
+
+        float squishAmount = saturate(-dist / clamp(1.0 - _SquishStrength, 0.01, 0.99));
+        float squishCurve = clamp(squishAmount * squishMask, 0, _SquishMax);
+
+        // Lerp from original position toward the plane
+        float3 projected = posOS - squishPlane.normal * dist;
+        posOS = lerp(posOS, projected, squishCurve);
+
+        // Project normal onto plane
+        float3 projectedNormal = normalOS - squishPlane.normal * dot(normalOS, squishPlane.normal);
+        projectedNormal = normalize(projectedNormal);
+        normalOS = lerp(normalOS, projectedNormal, squishCurve);
+        
+        // Project tangent onto plane
+        float3 projectedTangent = tangentOS - squishPlane.normal * dot(tangentOS, squishPlane.normal);
+        projectedTangent = normalize(projectedTangent);
+        tangentOS = lerp(tangentOS, projectedTangent, squishCurve);
+        
+        posOS += normalOS * squishCurve * _SquishSpread;
+
+        float3 squishDir = normalize(o.localPos.xyz - posOS);
+        squishFixClip = mul(UNITY_MATRIX_V, float4(posOS - o.localPos.xyz, 0)).z;
+        
+        o.squishAmount = squishCurve * dot(squishDir, o.normal);
+        o.localPos.xyz = posOS;
+        o.worldPos = mul(unity_ObjectToWorld, o.localPos);
+        o.normal = mul((float3x3)unity_ObjectToWorld, normalOS);
+        o.tangent.xyz = mul((float3x3)unity_ObjectToWorld, tangentOS);
+    }
+}
+#endif
+//endex
+
+#T#PoiSquishVertexFunctionCalls
+//ifex _EnableSquish==0
+#if defined(POI_SQUISH) && (defined(POI_PASS_BASE) || defined(POI_PASS_ADD) || defined(POI_PASS_SHADOW) || defined(POI_PASS_OUTLINE))
+    float squishFixClip = 0.0;
+    applyPoiSquish(o, squishFixClip);
+#endif
+//endex
+
+#T#PoiSquishVertexClipFix
+//ifex _EnableSquish==0
+#if defined(POI_SQUISH) && (defined(POI_PASS_BASE) || defined(POI_PASS_ADD) || defined(POI_PASS_SHADOW) || defined(POI_PASS_OUTLINE))
+    #if defined(UNITY_REVERSED_Z)
+        //DX
+        o.pos.z += squishFixClip * _SquishClipOffset * 0.001;
+    #else
+        //OpenGL
+        o.pos.z += squishFixClip * _SquishClipOffset * -0.001;
+    #endif
+#endif
+//endex
+
+#T#PoiSquishFragmentFunction
+//ifex _EnableSquish==0
+#ifdef POI_SQUISH
+void applyPoiSquishColor(in VertexOut i, inout PoiFragData poiFragData, inout PoiMods poiMods)
+{
+    poiFragData.baseColor.rgb = lerp(poiFragData.baseColor.rgb, _SquishColor.rgb, i.squishAmount);
+    if (_SquishApplyGlobalMaskIndex > 0)
+    {
+        applyToGlobalMask(poiMods, _SquishApplyGlobalMaskIndex - 1, _SquishApplyGlobalMaskBlendType, i.squishAmount);
+    }
+}
+#endif
+//endex
+
+#T#PoiSquishFragmentFunctionCalls
+//ifex _EnableSquish==0
+#if defined(POI_SQUISH) && (defined(POI_PASS_BASE) || defined(POI_PASS_ADD) || defined(POI_PASS_OUTLINE))
+    applyPoiSquishColor(i, poiFragData, poiMods);
+#endif
+//endex

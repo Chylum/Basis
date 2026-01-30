@@ -3,8 +3,8 @@
 [HideInInspector] m_start_DEBUG ("DEBUG--{reference_property:_DEBUGEnabled}", Float) = 0
 [ThryHideInInspector][ToggleUI]_DEBUGEnabled ("DEBUG Enabled", Float) = 0
 [NonModifiableTextureData][ThryHideInInspector]_DEBUG_PersistDuringLock ("Persist Debug During Lock", Float) = 0
-[Helpbox(3)] _DEBUG_ErrorText ("This module will be removed when locked--{condition_showS:(_DEBUG_PersistDuringLock==0)}", Int) = 0
-[Helpbox(2)] _DEBUG_WarningText ("This module will NOT be removed when locked--{condition_showS:(_DEBUG_PersistDuringLock==1)}", Int) = 0
+[Helpbox(3, 2)] _DEBUG_ErrorText ("This module will be removed when locked--{condition_showS:(_DEBUG_PersistDuringLock==0)}", Int) = 0
+[Helpbox(2, 2)] _DEBUG_WarningText ("This module will NOT be removed when locked--{condition_showS:(_DEBUG_PersistDuringLock==1)}", Int) = 0
 [ThryWideEnum(RGB, 0, R, 1, G, 2, B, 3, A, 4)] _DEBUG_ChannelSelect ("Channel Select", Int) = 0
 [ToggleUI] _DEBUG_Remap ("Remap", Int) = 0
 [ThryWideEnum(Off, 0, baseColor, 1, finalColor, 2, alpha, 3, emission, 4)]

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -366,7 +366,7 @@ namespace Poi.Tools
                 {
                     string templateContent = File.ReadAllText(templatePath);
                     string newLine = $"shader_master_label (\"<color=#E75898ff>Poiyomi {destinationRule.versionOverride}</color>\", Float) = 0";
-                    string pattern = @"shader_master_label\s*\(\""<color=#E75898ff>Poiyomi\s*[\d\.]+<\/color>\"",\s*Float\)\s*=\s*0";
+                    string pattern = @"shader_master_label\s*\(\""<color=#E75898ff>Poiyomi\s*[^<]*<\/color>\"",\s*Float\)\s*=\s*0";
                     string newContent = Regex.Replace(templateContent, pattern, newLine);
 
                     // Write the change to disk

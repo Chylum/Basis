@@ -24,8 +24,8 @@ Blend [_SrcBlend] [_DstBlend], [_SrcBlendAlpha] [_DstBlendAlpha]
 
 #T#BasePassOnlyKeywords
 #if POI_PIPE == POI_URP
-    #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE
-    #pragma multi_compile _ _ADDITIONAL_LIGHTS
+    #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
+    #pragma multi_compile _ _ADDITIONAL_LIGHTS _ADDITIONAL_LIGHT_SHADOWS
     #pragma multi_compile _ _CLUSTER_LIGHT_LOOP
 
     #pragma multi_compile_fragment _ _SHADOWS_SOFT

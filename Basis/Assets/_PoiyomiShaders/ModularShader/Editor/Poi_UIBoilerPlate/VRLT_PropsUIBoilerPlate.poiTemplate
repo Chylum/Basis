@@ -17,6 +17,8 @@
 [Header(.          You can filter by errors in the console window.)]
 [Header(.          Often the topmost error points to the erroring script.)]
 [Space(30)][Header(Common Error Causes)]
+[Header(.    Forgot to install Poiyomi Shaders)]
+[Header(.          Make sure you follow the instructions on our Documentation.)]
 [Header(.    Installing multiple Poiyomi Shader packages)]
 [Header(.          Make sure to delete the Poiyomi shader folder before you update Poiyomi.)]
 [Header(.          If a package came with Poiyomi this is bad practice and can cause issues.)]

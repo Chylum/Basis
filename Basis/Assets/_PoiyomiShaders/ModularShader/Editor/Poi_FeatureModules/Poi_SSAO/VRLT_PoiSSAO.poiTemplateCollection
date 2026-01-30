@@ -3,7 +3,7 @@
 
 [HideInInspector] m_start_poiSSAO (" Screen Space Ambient Occlusion--{reference_property:_SSAOEnabled,button_help:{text:Tutorial,action:{type:URL,data:https://www.poiyomi.com/shading/ssao},hover:Documentation}}", Float) = 0
 [HideInInspector][ThryToggle(POI_SSAO)]_SSAOEnabled ("SSAO Enabled", Float) = 0
-[Helpbox(1)]_SSAODepthGetWarning ("SSAO Requires depth. Put the DepthGet.prefab on your avatar so it'll work in every world.", Int) = 0
+[Helpbox(1, 2)]_SSAODepthGetWarning ("SSAO Requires depth. Put the DepthGet.prefab on your avatar so it'll work in every world.", Int) = 0
 [ToggleUI]_SSAOAnimationToggle ("Animatable Toggle--{hover:A toggle you can animate to enable and disable SSAO entirely}", Float) = 1
 _SSAOIntensity ("AO Intensity", Range(0, 5)) = 1.0
 _SSAORadius ("AO Radius", Range(0.001, 0.02)) = 0.002

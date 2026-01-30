@@ -4,7 +4,7 @@
 // UDIM Discard
 [HideInInspector] m_start_udimdiscardOptions (" UV Tile Discard--{reference_property:_EnableUDIMDiscardOptions,button_help:{text:Tutorial,action:{type:URL,data:https://www.poiyomi.com/special-fx/udim-discard},hover:Documentation}}", Float) = 0
 [HideInInspector][ThryToggle(POI_UDIMDISCARD)]_EnableUDIMDiscardOptions ("Enable UDIM Discard Options", Float) = 0
-[Helpbox(1)] _UDIMDiscardHelpbox ("UV Tile Discard requires special model setup. Click for Tutorial on the Documentation.--{onClick:{type:URL,data:https://www.poiyomi.com/special-fx/uv-tile-discard#uv-tile-setup}}", Int) = 0
+[Helpbox(1, 2)] _UDIMDiscardHelpbox ("UV Tile Discard requires special model setup. Click for Tutorial on the Documentation.--{onClick:{type:URL,data:https://www.poiyomi.com/special-fx/uv-tile-discard#uv-tile-setup}}", Int) = 0
 [ThryWideEnum(UV0, 0, UV1, 1, UV2, 2, UV3, 3)]_UDIMDiscardUV ("Discard UV", Int) = 0
 [Enum(Vertex (Faster), 0, Pixel (Slower), 1)] _UDIMDiscardMode ("Discard Mode", Int) = 0
 

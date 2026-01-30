@@ -237,7 +237,7 @@ void geom(triangle VertexOut p[3], inout TriangleStream<VertexOut> triStream)
     UNITY_BRANCH
     if (_GeoDissolveUV == 5)
     {
-        uv = (calculatelocalUV(p[0].localPos, p[0].vertexColor) + calculatelocalUV(p[1].localPos, p[1].vertexColor) + calculatelocalUV(p[2].localPos, p[0].vertexColor)) / 3.0;
+        uv = (calculatelocalUV(p[0].localPos, p[0].vertexColor) + calculatelocalUV(p[1].localPos, p[1].vertexColor) + calculatelocalUV(p[2].localPos, p[2].vertexColor)) / 3.0;
     }
 
     #if defined(PROP_GEODISSOLVEMASK) || !defined(OPTIMIZER_ENABLED)

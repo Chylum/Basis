@@ -24,12 +24,14 @@ MonoBehaviour:
   ModuleDependencies: []
   IncompatibleWith: []
   Templates:
-  - Template: {fileID: 6190473947177011631, guid: db6fb035c5b46e941b0b8ad192fa9aef, type: 3}
+  - Template: {fileID: 6190473947177011631, guid: db6fb035c5b46e941b0b8ad192fa9aef,
+      type: 3}
     Keywords:
     - SPECIALFX_PROPERTIES
     NeedsVariant: 0
     Queue: 100
-  - Template: {fileID: -5769407299779581660, guid: db6fb035c5b46e941b0b8ad192fa9aef, type: 3}
+  - Template: {fileID: -5769407299779581660, guid: db6fb035c5b46e941b0b8ad192fa9aef,
+      type: 3}
     Keywords:
     - DEPTH_PASS_KEYWORDS
     - OUTLINE_PASS_KEYWORDS
@@ -41,7 +43,8 @@ MonoBehaviour:
     - MOTION_VECTORS_PASS_KEYWORDS
     NeedsVariant: 0
     Queue: 100
-  - Template: {fileID: 6485966747919507968, guid: db6fb035c5b46e941b0b8ad192fa9aef, type: 3}
+  - Template: {fileID: 6485966747919507968, guid: db6fb035c5b46e941b0b8ad192fa9aef,
+      type: 3}
     Keywords:
     - BASE_PROPERTY_VARIABLES
     - ADD_PROPERTY_VARIABLES
@@ -52,7 +55,8 @@ MonoBehaviour:
     - MOTION_VECTORS_PROPERTY_VARIABLES
     NeedsVariant: 0
     Queue: 100
-  - Template: {fileID: 3125442523925723980, guid: db6fb035c5b46e941b0b8ad192fa9aef, type: 3}
+  - Template: {fileID: 3125442523925723980, guid: db6fb035c5b46e941b0b8ad192fa9aef,
+      type: 3}
     Keywords:
     - BASE_PROPERTY_VARIABLES_EXPOSED
     - ADD_PROPERTY_VARIABLES_EXPOSED
@@ -63,18 +67,20 @@ MonoBehaviour:
     - MOTION_VECTORS_PROPERTY_VARIABLES_EXPOSED
     NeedsVariant: 0
     Queue: 100
-  - Template: {fileID: -1196677453625105798, guid: db6fb035c5b46e941b0b8ad192fa9aef, type: 3}
+  - Template: {fileID: -1196677453625105798, guid: db6fb035c5b46e941b0b8ad192fa9aef,
+      type: 3}
     Keywords:
-    - FRAGMENT_BASE_FUNCTIONS
-    - FRAGMENT_ADD_FUNCTIONS
-    - FRAGMENT_SHADOW_FUNCTIONS
-    - FRAGMENT_META_FUNCTIONS
-    - FRAGMENT_OUTLINE_FUNCTIONS
-    - FRAGMENT_DEPTH_FUNCTIONS
-    - FRAGMENT_MOTION_VECTORS_FUNCTIONS
+    - VERTEX_BASE_FUNCTIONS
+    - VERTEX_ADD_FUNCTIONS
+    - VERTEX_SHADOW_FUNCTIONS
+    - VERTEX_META_FUNCTIONS
+    - VERTEX_OUTLINE_FUNCTIONS
+    - VERTEX_DEPTH_FUNCTIONS
+    - VERTEX_MOTION_VECTORS_FUNCTIONS
     NeedsVariant: 0
     Queue: 100
-  - Template: {fileID: -5874299761129568229, guid: db6fb035c5b46e941b0b8ad192fa9aef, type: 3}
+  - Template: {fileID: -5874299761129568229, guid: db6fb035c5b46e941b0b8ad192fa9aef,
+      type: 3}
     Keywords:
     - FRAGMENT_BASE_COLOR
     - FRAGMENT_ADD_COLOR
@@ -85,7 +91,14 @@ MonoBehaviour:
     - FRAGMENT_MOTION_VECTORS_COLOR
     NeedsVariant: 0
     Queue: 15
-  - Template: {fileID: -6783918953632530723, guid: db6fb035c5b46e941b0b8ad192fa9aef, type: 3}
+  - Template: {fileID: -6783918953632530723, guid: db6fb035c5b46e941b0b8ad192fa9aef,
+      type: 3}
+    Keywords:
+    - VERTEX_INPUT_MODS
+    NeedsVariant: 0
+    Queue: 100
+  - Template: {fileID: -8376826651685638463, guid: db6fb035c5b46e941b0b8ad192fa9aef,
+      type: 3}
     Keywords:
     - VERTEX_INPUT_MODS
     NeedsVariant: 0

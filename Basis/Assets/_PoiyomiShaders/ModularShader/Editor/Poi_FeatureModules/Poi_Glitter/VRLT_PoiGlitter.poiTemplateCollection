@@ -31,7 +31,7 @@ _GlitterSize ("Glitter Size--{condition_show:(_GlitterRandomSize==0)}", Range(0,
 [ToggleUI]_GlitterRandomLocation ("Random Position", Float) = 1.0
 [ToggleUI]_GlitterRandomSize ("Random Size", Float) = 0
 [MultiSlider]_GlitterMinMaxSize ("Size Range--{condition_show:(_GlitterRandomSize==1)}", Vector) = (0.1, 0.5, 0, 1)
-[ToggleUI]_GlitterFullCoverage ("Full Coverage", Float) = 0
+[ToggleUI]_GlitterFullCoverage ("Allow Overlap (Heavy)", Float) = 0
 [HideInInspector] s_end_GlitterPositionSize ("Position & Size", Float) = 0
 
 [HideInInspector] s_start_GlitterSparkleControl ("Sparkle Control--{persistent_expand:true,default_expand:true,condition_showS:_GlitterMode!=1}", Float) = 1

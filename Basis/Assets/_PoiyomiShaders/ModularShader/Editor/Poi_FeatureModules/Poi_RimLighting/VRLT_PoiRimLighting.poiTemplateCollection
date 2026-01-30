@@ -32,8 +32,9 @@ _Is_LightColor_RimLight ("Mix Light Color--{ condition_showS:_RimStyle==1}", Ran
 
 [HideInInspector] s_start_RimLight0ShapeControls ("Shape Controls--{persistent_expand:true,default_expand:true, condition_showS:_RimStyle==0||_RimStyle==1}", Float) = 1
 _RimWidth ("Width--{ condition_showS:_RimStyle==0}", Range(0, 1)) = 0.8
-_RimSharpness ("Sharpness--{ condition_showS:_RimStyle==0}", Range(0, 1)) = .25
+_RimBlur ("Blur--{ condition_showS:_RimStyle==0}", Range(0, 1)) = 0.55
 _RimPower ("Rim Power--{ condition_showS:_RimStyle==0}", Range(0, 10)) = 1
+[ToggleUI]_RimLinear ("Linear--{ condition_showS:_RimStyle==0}", Float) = 0
 _Is_NormalMapToRimLight ("Normal Strength", Range(0, 1)) = 1
 [ToggleUI]_RimLightingInvert ("Invert Rim--{ condition_showS:_RimStyle==0}", Float) = 0
 _RimLight_Power ("Rim Power--{ condition_showS:_RimStyle==1}", Range(0, 1)) = 0.1
@@ -153,8 +154,9 @@ _Is_LightColor_Rim2Light ("Mix Light Color--{ condition_showS:_Rim2Style==1}", R
 
 [HideInInspector] s_start_RimLight1ShapeControls ("Shape Controls--{persistent_expand:true,default_expand:true, condition_showS:_Rim2Style==0||_Rim2Style==1}", Float) = 1
 _Rim2Width ("Width--{ condition_showS:_Rim2Style==0}", Range(0, 1)) = 0.8
-_Rim2Sharpness ("Sharpness--{ condition_showS:_Rim2Style==0}", Range(0, 1)) = .25
+_Rim2Blur ("Blur--{ condition_showS:_Rim2Style==0}", Range(0, 1)) = 0.55
 _Rim2Power ("Rim Power--{ condition_showS:_Rim2Style==0}", Range(0, 10)) = 1
+[ToggleUI]_Rim2Linear ("Linear--{ condition_showS:_Rim2Style==0}", Float) = 0
 _Is_NormalMapToRim2Light ("Normal Strength", Range(0, 1)) = 1
 [ToggleUI]_Rim2LightingInvert ("Invert Rim Lighting--{ condition_showS:_Rim2Style==0}", Float) = 0
 _Rim2Light_Power ("Rim Power--{ condition_showS:_Rim2Style==1}", Range(0, 1)) = 0.1
@@ -259,7 +261,7 @@ _Rim2ApplyAlphaBlend ("Intensity to Alpha Blend--{ condition_showS:_Rim2Style==0
         float _RimLightingInvert;
         float _RimWidth;
         float _RimStrength;
-        float _RimSharpness;
+        float _RimBlur;
         float _RimBaseColorMix;
         float _EnableRimLighting;
         float _RimWidthNoiseStrength;
@@ -269,6 +271,7 @@ _Rim2ApplyAlphaBlend ("Intensity to Alpha Blend--{ condition_showS:_Rim2Style==0
         float _RimPoiBlendMode;
         float _RimShadowToggle;
         float _RimPower;
+        float _RimLinear;
         float _RimShadowMaskStrength;
         float _RimShadowMaskRampType;
         float _RimShadowMaskInvert;
@@ -365,7 +368,7 @@ _Rim2ApplyAlphaBlend ("Intensity to Alpha Blend--{ condition_showS:_Rim2Style==0
         float _Rim2LightingInvert;
         float _Rim2Width;
         float _Rim2Strength;
-        float _Rim2Sharpness;
+        float _Rim2Blur;
         float _Rim2BaseColorMix;
         float _EnableRim2Lighting;
         float _Rim2WidthNoiseStrength;
@@ -375,6 +378,7 @@ _Rim2ApplyAlphaBlend ("Intensity to Alpha Blend--{ condition_showS:_Rim2Style==0
         float _RimPoi2BlendMode;
         float _Rim2ShadowToggle;
         float _Rim2Power;
+        float _Rim2Linear;
         float _Rim2ShadowMaskStrength;
         float _Rim2ShadowMaskRampType;
         float _Rim2ShadowMaskInvert;
@@ -518,9 +522,10 @@ _Rim2ApplyAlphaBlend ("Intensity to Alpha Blend--{ condition_showS:_Rim2Style==0
 //ifex _EnableRimLighting==0 && _EnableRim2Lighting==0
 #if defined(_GLOSSYREFLECTIONS_OFF) || defined(POI_RIM2)
     #if defined(_RIMSTYLE_POIYOMI) || defined(_RIM2STYLE_POIYOMI)
-        void ApplyPoiyomiRimLighting(inout PoiFragData poiFragData, in PoiMesh poiMesh, in PoiCam poiCam, in PoiLight poiLight, inout PoiMods poiMods, float Is_NormalMapToRimLight, float RimInvert, float RimPower, float RimStrength, float RimShadowWidth, float RimShadowToggle, float RimWidth, float RimBlendStrength, float RimMask, float RimGlobalMask, float RimGlobalMaskBlendType, float4 RimTex, float4 RimLightColor, float RimLightColorThemeIndex, float RimHueShiftEnabled, float RimHueShift, float RimHueShiftColorSpace, float RimHueSelectOrShift, float RimHueShiftSpeed, float RimSharpness, float RimShadowMaskRampType, float RimShadowMaskInvert, float RimShadowMaskStrength, float2 RimShadowAlpha, float RimApplyGlobalMaskIndex, float RimApplyGlobalMaskBlendType, float RimBaseColorMix, float RimBrightness, float RimBlendMode, half AudioLinkRimWidthBand, float2 AudioLinkRimWidthAdd, half AudioLinkRimEmissionBand, float2 AudioLinkRimEmissionAdd, half AudioLinkRimBrightnessBand, float2 AudioLinkRimBrightnessAdd, float rimBias, float rimBiasIntensity, int RimApplyAlpha, float RimApplyAlphaBlend)
+        void ApplyPoiyomiRimLighting(inout PoiFragData poiFragData, in PoiMesh poiMesh, in PoiCam poiCam, in PoiLight poiLight, inout PoiMods poiMods, float Is_NormalMapToRimLight, float RimInvert, float RimPower, float RimLinear, float RimStrength, float RimShadowWidth, float RimShadowToggle, float RimWidth, float RimBlendStrength, float RimMask, float RimGlobalMask, float RimGlobalMaskBlendType, float4 RimTex, float4 RimLightColor, float RimLightColorThemeIndex, float RimHueShiftEnabled, float RimHueShift, float RimHueShiftColorSpace, float RimHueSelectOrShift, float RimHueShiftSpeed, float RimBlur, float RimShadowMaskRampType, float RimShadowMaskInvert, float RimShadowMaskStrength, float2 RimShadowAlpha, float RimApplyGlobalMaskIndex, float RimApplyGlobalMaskBlendType, float RimBaseColorMix, float RimBrightness, float RimBlendMode, half AudioLinkRimWidthBand, float2 AudioLinkRimWidthAdd, half AudioLinkRimEmissionBand, float2 AudioLinkRimEmissionAdd, half AudioLinkRimBrightnessBand, float2 AudioLinkRimBrightnessAdd, float rimBias, float rimBiasIntensity, int RimApplyAlpha, float RimApplyAlphaBlend)
         {
             float viewDotNormal = abs(dot(poiCam.viewDir, lerp(poiMesh.normals[0], poiMesh.normals[1], Is_NormalMapToRimLight)));
+            viewDotNormal = RimLinear ? 1 - acos(viewDotNormal) * 0.63662 : viewDotNormal;
 
             UNITY_BRANCH
             if (RimInvert)
@@ -567,7 +572,9 @@ _Rim2ApplyAlphaBlend ("Intensity to Alpha Blend--{ condition_showS:_Rim2Style==0
                 rimColor.rgb = hueShift(rimColor.rgb, RimHueShift + _Time.x * RimHueShiftSpeed, RimHueShiftColorSpace, RimHueSelectOrShift);
             }
             
-            float rim = 1 - smoothstep(min(RimSharpness, rimWidth), rimWidth, viewDotNormal);
+            float fw = fwidth(viewDotNormal);
+            float borderMin = saturate(rimWidth - RimBlur);
+            float rim = 1 - saturate((viewDotNormal - borderMin) / max(rimWidth - borderMin + fw, 0.0001));
             rim *= RimLightColor.a * rimColor.a * rimMask;
 
             if (RimShadowToggle)
@@ -767,7 +774,7 @@ _Rim2ApplyAlphaBlend ("Intensity to Alpha Blend--{ condition_showS:_Rim2Style==0
             AudioLinkRimBrightnessAdd = _AudioLinkRimBrightnessAdd;
         #endif
         
-        ApplyPoiyomiRimLighting(poiFragData, poiMesh, poiCam, poiLight, poiMods, _Is_NormalMapToRimLight, _RimLightingInvert, _RimPower, _RimStrength, _RimShadowWidth, _RimShadowToggle, _RimWidth, _RimBlendStrength, rimMask, _RimGlobalMask, _RimGlobalMaskBlendType, rimColor, _RimLightColor, _RimLightColorThemeIndex, _RimHueShiftEnabled, _RimHueShift, _RimHueShiftColorSpace, _RimHueSelectOrShift, _RimHueShiftSpeed,  _RimSharpness, _RimShadowMaskRampType, _RimShadowMaskInvert, _RimShadowMaskStrength, _RimShadowAlpha, _RimApplyGlobalMaskIndex, _RimApplyGlobalMaskBlendType, _RimBaseColorMix, _RimBrightness, _RimPoiBlendMode, AudioLinkRimWidthBand, AudioLinkRimWidthAdd, AudioLinkRimEmissionBand, AudioLinkRimEmissionAdd, AudioLinkRimBrightnessBand, AudioLinkRimBrightnessAdd, rimBias, _RimBiasIntensity, _RimApplyAlpha, _RimApplyAlphaBlend);
+        ApplyPoiyomiRimLighting(poiFragData, poiMesh, poiCam, poiLight, poiMods, _Is_NormalMapToRimLight, _RimLightingInvert, _RimPower, _RimLinear, _RimStrength, _RimShadowWidth, _RimShadowToggle, _RimWidth, _RimBlendStrength, rimMask, _RimGlobalMask, _RimGlobalMaskBlendType, rimColor, _RimLightColor, _RimLightColorThemeIndex, _RimHueShiftEnabled, _RimHueShift, _RimHueShiftColorSpace, _RimHueSelectOrShift, _RimHueShiftSpeed, _RimBlur, _RimShadowMaskRampType, _RimShadowMaskInvert, _RimShadowMaskStrength, _RimShadowAlpha, _RimApplyGlobalMaskIndex, _RimApplyGlobalMaskBlendType, _RimBaseColorMix, _RimBrightness, _RimPoiBlendMode, AudioLinkRimWidthBand, AudioLinkRimWidthAdd, AudioLinkRimEmissionBand, AudioLinkRimEmissionAdd, AudioLinkRimBrightnessBand, AudioLinkRimBrightnessAdd, rimBias, _RimBiasIntensity, _RimApplyAlpha, _RimApplyAlphaBlend);
     #endif
     #ifdef _RIMSTYLE_UTS2
         #if defined(PROP_SET_RIMLIGHTMASK) || !defined(OPTIMIZER_ENABLED)
@@ -816,7 +823,7 @@ _Rim2ApplyAlphaBlend ("Intensity to Alpha Blend--{ condition_showS:_Rim2Style==0
             AudioLinkRim2BrightnessBand = _AudioLinkRim2BrightnessBand;
             AudioLinkRim2BrightnessAdd = _AudioLinkRim2BrightnessAdd;
         #endif
-        ApplyPoiyomiRimLighting(poiFragData, poiMesh, poiCam, poiLight, poiMods, _Is_NormalMapToRim2Light, _Rim2LightingInvert, _Rim2Power, _Rim2Strength, _Rim2ShadowWidth, _Rim2ShadowToggle, _Rim2Width, _Rim2BlendStrength, rim2Mask, _Rim2GlobalMask, _Rim2GlobalMaskBlendType, rim2Color, _Rim2LightColor, _Rim2LightColorThemeIndex, _Rim2HueShiftEnabled, _Rim2HueShift, _Rim2HueShiftColorSpace, _Rim2HueSelectOrShift, _Rim2HueShiftSpeed, _Rim2Sharpness, _Rim2ShadowMaskRampType, _Rim2ShadowMaskInvert, _Rim2ShadowMaskStrength, _Rim2ShadowAlpha, _Rim2ApplyGlobalMaskIndex, _Rim2ApplyGlobalMaskBlendType, _Rim2BaseColorMix, _Rim2Brightness, _RimPoi2BlendMode, AudioLinkRim2WidthBand, AudioLinkRim2WidthAdd, AudioLinkRim2EmissionBand, AudioLinkRim2EmissionAdd, AudioLinkRim2BrightnessBand, AudioLinkRim2BrightnessAdd, rim2Bias, _Rim2BiasIntensity, _Rim2ApplyAlpha, _Rim2ApplyAlphaBlend);
+        ApplyPoiyomiRimLighting(poiFragData, poiMesh, poiCam, poiLight, poiMods, _Is_NormalMapToRim2Light, _Rim2LightingInvert, _Rim2Power, _Rim2Linear, _Rim2Strength, _Rim2ShadowWidth, _Rim2ShadowToggle, _Rim2Width, _Rim2BlendStrength, rim2Mask, _Rim2GlobalMask, _Rim2GlobalMaskBlendType, rim2Color, _Rim2LightColor, _Rim2LightColorThemeIndex, _Rim2HueShiftEnabled, _Rim2HueShift, _Rim2HueShiftColorSpace, _Rim2HueSelectOrShift, _Rim2HueShiftSpeed, _Rim2Blur, _Rim2ShadowMaskRampType, _Rim2ShadowMaskInvert, _Rim2ShadowMaskStrength, _Rim2ShadowAlpha, _Rim2ApplyGlobalMaskIndex, _Rim2ApplyGlobalMaskBlendType, _Rim2BaseColorMix, _Rim2Brightness, _RimPoi2BlendMode, AudioLinkRim2WidthBand, AudioLinkRim2WidthAdd, AudioLinkRim2EmissionBand, AudioLinkRim2EmissionAdd, AudioLinkRim2BrightnessBand, AudioLinkRim2BrightnessAdd, rim2Bias, _Rim2BiasIntensity, _Rim2ApplyAlpha, _Rim2ApplyAlphaBlend);
     #endif
     #ifdef _RIM2STYLE_UTS2
         #if defined(PROP_SET_RIM2LIGHTMASK) || !defined(OPTIMIZER_ENABLED)

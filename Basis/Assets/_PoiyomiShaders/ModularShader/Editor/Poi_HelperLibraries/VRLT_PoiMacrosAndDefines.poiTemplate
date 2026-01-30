@@ -121,7 +121,7 @@ SamplerState sampler_point_repeat;
 #define POI_MODE_2XMULTIPLICATIVE 7
 #define POI_MODE_TRANSCLIPPING 9
 
-#define POI_MAX_VISIBLE_LIGHTS 8
+#define POI_MAX_VISIBLE_LIGHTS 64
 #define POI_DIRECTIONAL 1
 #define POI_POINT_SPOT 2
 
