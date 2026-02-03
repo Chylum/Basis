@@ -120,7 +120,6 @@ MonoBehaviour:
   - UnityEngine.MeshRenderer
   - UnityEngine.MeshFilter
   - UnityEngine.Animations.AimConstraint
-  - UnityEngine.Animations.PositionConstraint
   - UnityEngine.Animations.RotationConstraint
   - UnityEngine.Animations.ScaleConstraint
   - UnityEngine.Animations.LookAtConstraint
@@ -177,3 +176,6 @@ MonoBehaviour:
   - UnityEngine.WheelJoint2D
   - Basis.Network.Vehicles.BasisNetworkedVehicle
   - Basis.Scripts.Vehicles.Parts.BasisVehicleEngineAudio
+  - PropSpawner
+  - BasisNetworkChat
+  - TestButton

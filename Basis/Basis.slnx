@@ -35,6 +35,7 @@
   <Project Path="HVR.Basis.Comms.Editor.csproj" />
   <Project Path="Basis.ZeroMessenger.Editor.Tests.csproj" />
   <Project Path="OpusSharp.Core.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="HVR.Basis.Comms.HVRUtility.csproj" />
   <Project Path="BasisShims.csproj" />
   <Project Path="BasisBundleManagement.csproj" />
@@ -64,6 +65,7 @@
   <Project Path="BasisEventDriver.csproj" />
   <Project Path="Basis.ZeroMessenger.Samples.csproj" />
   <Project Path="BasisSDKMIrrorEditor.csproj" />
+  <Project Path="SimpleJSON.csproj" />
   <Project Path="BasisDebug.csproj" />
   <Project Path="BasisNetworkClient.csproj" />
   <Project Path="RNNoiseIntergration.csproj" />

@@ -485,6 +485,7 @@ GameObject:
   - component: {fileID: 303201899784742928}
   - component: {fileID: 4587526044252889482}
   - component: {fileID: 5548795088377030369}
+  - component: {fileID: 1577234736818302151}
   m_Layer: 3
   m_Name: LocalPlayer
   m_TagString: Untagged
@@ -913,3 +914,20 @@ CharacterController:
   m_SkinWidth: 0.01
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1577234736818302151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8538648612911191307}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c3ea27377dd3e24dbbe06803b8652b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BasisNetworkChat
+  HasNetworkID: 0
+  IsOwnedLocallyOnServer: 0
+  IsOwnedLocallyOnClient: 0
+  CurrentOwnerId: 0
+  chatLabel: {fileID: 0}
