@@ -1,5 +1,6 @@
 <linker>
 
+    <assembly fullname="Assembly-CSharp" preserve="all" />
     <assembly fullname="AudioLink" preserve="all" />
     <assembly fullname="Base128" preserve="all" />
     <assembly fullname="Basis Framework" preserve="all" />
@@ -45,6 +46,7 @@
     <assembly fullname="RenderAs2DModule" preserve="all" />
     <assembly fullname="Runtime" preserve="all" />
     <assembly fullname="SimpleBase" preserve="all" />
+    <assembly fullname="SimpleJSON" preserve="all" />
     <assembly fullname="SteamAudioUnity" preserve="all" />
     <assembly fullname="SteamVR" preserve="all" />
     <assembly fullname="SteamVR_Actions" preserve="all" />

@@ -183,3 +183,5 @@ MonoBehaviour:
   - UnityEngine.WheelCollider
   - Basis.Scripts.Vehicles.Parts.BasisVehicleEngineAudio
   - Basis.Network.Vehicles.BasisNetworkedVehicle
+  - TestButton
+  - UnityEngine.UI.Button

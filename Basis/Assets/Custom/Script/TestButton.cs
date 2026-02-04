@@ -1,15 +1,14 @@
 using TMPro;
 using UnityEngine;
 
+[Cilboxable]
 public class TestButton : MonoBehaviour
 {
-    [SerializeField] private TextMeshPro playerChatText;
+    [SerializeField] private TextMeshPro buttonText;
 
     public void OnButtonClick()
     {
-        BasisDebug.Log("TestButton: Button clicked.");
-        string message = "Give me food";
+        buttonText.text = "Clicked!";
 
-        playerChatText.text = message;
     }
 }

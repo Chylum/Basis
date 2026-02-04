@@ -39,7 +39,7 @@ namespace Cilbox
 		public String[] signatureParameters;
 		public Type[]   typeParameters;
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR	
 		ProfilerMarker perfMarkerInterpret;
 #endif
 

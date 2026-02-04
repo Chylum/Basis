@@ -178,4 +178,6 @@ MonoBehaviour:
   - Basis.Scripts.Vehicles.Parts.BasisVehicleEngineAudio
   - PropSpawner
   - BasisNetworkChat
+  - UnityEngine.UI.Button
+  - UIButton
   - TestButton

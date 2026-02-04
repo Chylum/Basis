@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1271097018190091553}
-  - component: {fileID: 5862406101255555227}
   m_Layer: 0
   m_Name: ButtonCode
   m_TagString: Untagged
@@ -32,19 +31,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4736029663759207837}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5862406101255555227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 105425520851382803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a0f1883aa104d444b7e734069720a26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TestButton
-  playerChatText: {fileID: 4716966453581043227}
 --- !u!1 &4189310584287526255
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +333,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5862406101255555227}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: TestButton, Assembly-CSharp
         m_MethodName: OnButtonClick
         m_Mode: 1
@@ -507,8 +493,8 @@ GameObject:
   - component: {fileID: 4736029663759207837}
   - component: {fileID: 7784453128642917077}
   - component: {fileID: 6938103126774716921}
-  - component: {fileID: 7875828427168067996}
   - component: {fileID: 2983459812387390688}
+  - component: {fileID: 3594574533793880496}
   - component: {fileID: 7369442028318032767}
   m_Layer: 5
   m_Name: Chatbox Canvas
@@ -585,21 +571,6 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 1
---- !u!114 &7875828427168067996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5245508047276500304}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0527e1d67ed35fb45a4370e30a7a9f6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Basis Framework::Basis.Scripts.UI.UI_Panels.BasisUIComponent
-  Canvas: {fileID: 7784453128642917077}
-  CanvasScaler: {fileID: 6938103126774716921}
-  GraphicUIRayCaster: {fileID: 2983459812387390688}
 --- !u!114 &2983459812387390688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -613,6 +584,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Basis Framework::Basis.Scripts.UI.BasisGraphicUIRayCaster
   Canvas: {fileID: 7784453128642917077}
+--- !u!114 &3594574533793880496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5245508047276500304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a0f1883aa104d444b7e734069720a26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TestButton
+  playerChatText: {fileID: 4716966453581043227}
 --- !u!114 &7369442028318032767
 MonoBehaviour:
   m_ObjectHideFlags: 0
