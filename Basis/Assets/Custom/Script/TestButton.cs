@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 
-[Cilboxable]
 public class TestButton : MonoBehaviour
 {
     public UnityEngine.UI.Button buttonControl1;
