@@ -102,4 +102,8 @@
 		<type fullname="UnityEngine.UI.Slider" preserve="all"/>
 		<type fullname="UnityEngine.UI.Text" preserve="all"/>
 	</assembly>
+	<assembly fullname="Unity.TextMeshPro">
+		<type fullname="TMPro.TextMeshPro" preserve="all"/>
+		<type fullname="TMPro.TMP_Text" preserve="all"/>
+	</assembly>
 </linker>

@@ -71,7 +71,9 @@ namespace Cilbox
 			"UnityEngine.Transform",
 			"UnityEngine.Vector4",
 			"UnityEngine.Vector3",
-		};
+            "TMPro.TextMeshPro",
+            "TMPro.TMP_Text",
+        };
 
 		static public HashSet<String> GetWhiteListTypes() { return whiteListType; }
 

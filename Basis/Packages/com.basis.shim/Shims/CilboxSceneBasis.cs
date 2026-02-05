@@ -107,6 +107,8 @@ namespace Cilbox
             "UnityEngine.RenderSettings",
             "UnityEngine.Rendering.AmbientMode",
             "UnityEngine.DynamicGI",
+            "TMPro.TextMeshPro",
+            "TMPro.TMP_Text",
         };
 
 		static public HashSet<String> GetWhiteListTypes() { return whiteListType; }

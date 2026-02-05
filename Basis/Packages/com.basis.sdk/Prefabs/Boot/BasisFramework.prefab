@@ -990,9 +990,9 @@ MonoBehaviour:
   SystemScriptSelector: {fileID: 11400000, guid: d6de2f5cd4ac5e246b01ce86d2078282, type: 2}
   PropScriptSelector: {fileID: 11400000, guid: 85698603c757bf749b527a1278cd01ec, type: 2}
   DefaultScene:
-    UnlockPassword: <GENERATED-BEE-PASSWORD>
+    UnlockPassword: 
     BasisRemoteBundleEncrypted:
-      RemoteBeeFileLocation: <GENERATED-BEE-URL>
+      RemoteBeeFileLocation: 
     BasisLocalEncryptedBundle:
       DownloadedBeeFileLocation: 
     BasisBundleConnector:

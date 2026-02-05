@@ -255,8 +255,7 @@ namespace Cilbox
 			}
 
 			// Call interpreted constructor.
-			box.InterpretIID( cls, this, ImportFunctionID.dotCtor, null );
-			box.InterpretIID( cls, this, ImportFunctionID.Awake, null ); // Does this go before or after initialized fields.
+			
 
 			for( int i = 0; i < cls.instanceFieldNames.Length; i++ )
 			{
@@ -272,7 +271,11 @@ namespace Cilbox
 					fields[i].Load( o );
 			}
 
-			box.InterpretIID( cls, this, ImportFunctionID.Start, null );
+            box.InterpretIID(cls, this, ImportFunctionID.dotCtor, null);
+
+            box.InterpretIID(cls, this, ImportFunctionID.Awake, null); // Does this go before or after initialized fields.
+
+            box.InterpretIID( cls, this, ImportFunctionID.Start, null );
 
 			proxyWasSetup = true;
 		}

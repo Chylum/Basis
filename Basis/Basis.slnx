@@ -38,6 +38,7 @@
   <Project Path="Assembly-CSharp.csproj" />
   <Project Path="HVR.Basis.Comms.HVRUtility.csproj" />
   <Project Path="BasisShims.csproj" />
+  <Project Path="ParrelSync.csproj" />
   <Project Path="BasisBundleManagement.csproj" />
   <Project Path="Poi.Tools.csproj" />
   <Project Path="BasisPoolTable.csproj" />

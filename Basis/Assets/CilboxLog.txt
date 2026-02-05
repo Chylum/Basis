@@ -1,0 +1,43 @@
+Cilbox Size: 2924 bytes.
+Class: TestButton
+Imports: .ctor Awake
+Static Fields:
+Instance Fields:
+	UnityEngine.UI.Button buttonControl1
+	TMPro.TextMeshPro buttonText
+TestButton.Awake - Void Awake()
+	Body: Max Stack: 8
+		 0    00 nop       
+		 1    02 ldarg.0   
+		 2    7B ldfld      buttonControl1
+		 7    6F callvirt   UnityEngine.UI.Button Method: get_onClick
+		 12   02 ldarg.0   
+		 13   FE ldftn      TestButton Method: OnButtonClick
+		 19   73 newobj     UnityEngine.Events.UnityAction Method: .ctor
+		 24   6F callvirt   UnityEngine.Events.UnityEvent Method: AddListener
+		 29   00 nop       
+		 30   2A ret       
+TestButton.OnButtonClick - Void OnButtonClick()
+	Body: Max Stack: 8
+		 0    00 nop       
+		 1    02 ldarg.0   
+		 2    7B ldfld      buttonText
+		 7    72 ldstr      Clicked!
+		 12   6F callvirt   TMPro.TMP_Text Method: set_text
+		 17   00 nop       
+		 18   2A ret       
+TestButton..ctor - Void .ctor()
+	Body: Max Stack: 8
+		 0    02 ldarg.0   
+		 1    28 call       UnityEngine.MonoBehaviour Method: .ctor
+		 6    00 nop       
+		 7    2A ret       
+	0001 Field   NR:TestButton buttonControl1
+	0002 Method  get_onClick ButtonClickedEvent get_onClick() UnityEngine.UI
+	0003 Method  OnButtonClick Void OnButtonClick() Assembly-CSharp
+	0004 Method  .ctor Void .ctor(System.Object, IntPtr) UnityEngine.CoreModule
+	0005 Method  AddListener Void AddListener(UnityEngine.Events.UnityAction) UnityEngine.CoreModule
+	0006 Field   NR:TestButton buttonText
+	0007 String  Clicked!
+	0008 Method  set_text Void set_text(System.String) Unity.TextMeshPro
+	0009 Method  .ctor Void .ctor() UnityEngine.CoreModule
