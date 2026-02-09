@@ -799,7 +799,6 @@ MonoBehaviour:
   CurrentOwnerId: 0
   inputField: {fileID: 415099530222167670}
   playerChatText: {fileID: 4838605636796399072}
-  Player: {fileID: 0}
 --- !u!1 &1643131168187879768
 GameObject:
   m_ObjectHideFlags: 0
@@ -2469,7 +2468,6 @@ GameObject:
   - component: {fileID: 6017235181443923419}
   - component: {fileID: 5889533825706967462}
   - component: {fileID: 3038646880145575367}
-  - component: {fileID: 9207501405774682001}
   - component: {fileID: 3589153670019980532}
   m_Layer: 9
   m_Name: ChatboxPanel
@@ -2545,21 +2543,6 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 1
---- !u!114 &9207501405774682001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3879112596380941856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0527e1d67ed35fb45a4370e30a7a9f6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Canvas: {fileID: 5889533825706967462}
-  CanvasScaler: {fileID: 3038646880145575367}
-  GraphicUIRayCaster: {fileID: 3589153670019980532}
 --- !u!114 &3589153670019980532
 MonoBehaviour:
   m_ObjectHideFlags: 0

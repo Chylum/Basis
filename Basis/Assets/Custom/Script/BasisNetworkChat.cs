@@ -10,11 +10,6 @@ public class BasisNetworkChat : BasisNetworkBehaviour
     [SerializeField] private TMP_InputField inputField;
     [SerializeField] private TextMeshPro playerChatText;
 
-    public override void Start()
-    {
-        base.Start();
-    }
-
     public void OnSendChat()
     {
         Debug.Log($"Sending {inputField.text}");
@@ -46,10 +41,5 @@ public class BasisNetworkChat : BasisNetworkBehaviour
         playerChatText.text = message;
         Debug.Log($"Updated chat text to: {message}");
         BasisDebug.Log($"Updated chat text to: {message}", BasisDebug.LogTag.Networking);
-    }
-
-    private void fun()
-    {
-        
     }
 }
