@@ -1,6 +1,7 @@
 <linker>
 
     <assembly fullname="Assembly-CSharp" preserve="all" />
+    <assembly fullname="Assembly-CSharp-Editor-firstpass-testable" preserve="all" />
     <assembly fullname="AudioLink" preserve="all" />
     <assembly fullname="Base128" preserve="all" />
     <assembly fullname="Basis Framework" preserve="all" />
@@ -122,5 +123,6 @@
     <assembly fullname="phonon" preserve="all" />
     <assembly fullname="phonon_fmod" preserve="all" />
     <assembly fullname="ucrtbased" preserve="all" />
+    <assembly fullname="z3y.VRCMarker" preserve="all" />
 
 </linker>

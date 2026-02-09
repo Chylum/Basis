@@ -992,7 +992,7 @@ MonoBehaviour:
   DefaultScene:
     UnlockPassword: hello
     BasisRemoteBundleEncrypted:
-      RemoteBeeFileLocation: https://drive.google.com/uc?export=download&id=15yNzYiFroIrlh2LnxIfmHpiSO73X_AQB
+      RemoteBeeFileLocation: https://drive.google.com/uc?export=download&id=1cONC4Hw9QX7veGgC7RxyvY3dgKIcBvpx
     BasisLocalEncryptedBundle:
       DownloadedBeeFileLocation: 
     BasisBundleConnector:

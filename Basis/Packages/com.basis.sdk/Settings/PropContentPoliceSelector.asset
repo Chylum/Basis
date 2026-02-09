@@ -344,3 +344,9 @@ MonoBehaviour:
   - TestButton
   - SCNE
   - BasisNetworkChat
+  - VRCMarker.Erase
+  - VRCMarker.Marker
+  - VRCMarker.MarkerReset
+  - VRCMarker.MarkerSettings
+  - VRCMarker.MarkerSync
+  - VRCMarker.MarkerTrail
