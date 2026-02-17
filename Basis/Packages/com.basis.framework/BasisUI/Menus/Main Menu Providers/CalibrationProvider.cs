@@ -23,6 +23,8 @@ namespace Basis.BasisUI
         public override string IconAddress => AddressableAssets.Sprites.Calibrate;
         public override int Order => 50;
 
+        public override bool Hidden => false;
+
         private readonly Dictionary<BasisInput, Action> _triggerDelegates = new();
 
         private BasisInput _leftHand;
@@ -32,6 +34,8 @@ namespace Basis.BasisUI
         private bool _rightPressed;
         private bool _calibrated;
 
+        public PanelButton Button;
+        public PanelElementDescriptor HeightDescription;
         public override void RunAction()
         {
             if (BasisMainMenu.ActiveMenuTitle == Title)
@@ -61,7 +65,7 @@ namespace Basis.BasisUI
 
             HeightDescription = PanelElementDescriptor.CreateNew(PanelElementDescriptor.ElementStyles.Group, container);
             HeightDescription.SetTitle("Additional Player Height");
-            HeightDescription.SetDescription(AdditionalHeight);
+            HeightDescription.SetDescription($"{BasisHeightDriver.AdditionalPlayerHeight:F2}");
 
             var Description = PanelElementDescriptor.CreateNew(PanelElementDescriptor.ElementStyles.Group, container);
             Description.SetTitle("Pull Triggers to Calibrate");
@@ -74,22 +78,22 @@ namespace Basis.BasisUI
             PlusButton.OnClicked += IncreasePlayerSize;
             PlusButton.Descriptor.SetTitle("Add 0.01f Height");
         }
-        public PanelButton Button;
-        public PanelElementDescriptor HeightDescription;
-        public string AdditionalHeight = $"{BasisHeightDriver.AdditionalPlayerHeight:F2}";
         /// <summary>
         /// tracker balls
         /// </summary>
         public void IncreasePlayerSize()
         {
             BasisHeightDriver.AdditionalPlayerHeight += 0.1f;
-            HeightDescription.DescriptionLabel.text = AdditionalHeight;
-            BasisHeightDriver.ApplyScaleAndHeight();
+            ApplyAndUpdateUI();
         }
         public void DecreasePlayerSize()
         {
             BasisHeightDriver.AdditionalPlayerHeight -= 0.1f;
-            HeightDescription.DescriptionLabel.text = AdditionalHeight;
+            ApplyAndUpdateUI();
+        }
+        public void ApplyAndUpdateUI()
+        {
+            HeightDescription.SetDescription($"{BasisHeightDriver.AdditionalPlayerHeight:F2}");
             BasisHeightDriver.ApplyScaleAndHeight();
         }
         public void Calibrate()

@@ -114,6 +114,23 @@ namespace Cilbox
             "UnityEngine.DynamicGI",
             "TMPro.TextMeshPro",
             "TMPro.TMP_Text",
+            "TMPro.TMP_InputField",
+            "UnityEngine.Animator",
+            "System.Text.Encoding",
+			"Basis",
+            "Basis.Network.Core",
+            "Basis.Network.Core.DeliveryMethod",
+            "Basis.Scripts.Networking.NetworkedAvatar.BasisNetworkPlayer",
+            "TMPro.TMP_InputField+SubmitEvent",
+            "Basis.BasisNetworkShim",
+            "Basis.SafeUtil",
+            "Basis.BasisNetworkShim+NetworkReadyEvent",
+            "Basis.BasisNetworkShim+PlayerJoinedEvent",
+            "Basis.BasisNetworkShim+PlayerLeftEvent",
+            "Basis.BasisNetworkShim+ServerOwnershipDestroyedE",
+            "Basis.BasisNetworkShim+NetworkMessageEvent",
+            "Basis.BasisNetworkShim+ServerOwnershipDestroyedEvent",
+            "Basis.BasisNetworkShim+OwnershipTransferEvent",
         };
 
 		static public HashSet<String> GetWhiteListTypes() { return whiteListType; }

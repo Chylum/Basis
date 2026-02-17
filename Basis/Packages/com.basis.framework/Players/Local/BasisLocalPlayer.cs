@@ -11,6 +11,7 @@ using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static BasisHeightDriver;
 
 namespace Basis.Scripts.BasisSdk.Players
 {
@@ -73,7 +74,7 @@ namespace Basis.Scripts.BasisSdk.Players
         /// <summary>
         /// Fired on the frame after a player height change is requested.
         /// </summary>
-        public static Action OnPlayersHeightChangedNextFrame;
+        public static Action<HeightModeChange> OnPlayersHeightChangedNextFrame;
 
         /// <summary>
         /// Fires Just Before the Apply of the remote player, good for chair movement
@@ -317,7 +318,6 @@ namespace Basis.Scripts.BasisSdk.Players
                 BasisSceneFactory.SpawnPlayer(this);
             }
         }
-
         /// <summary>
         /// Creates or replaces the local avatar using the specified load mode and bundle, then persists the selection.
         /// </summary>
@@ -326,8 +326,8 @@ namespace Basis.Scripts.BasisSdk.Players
         public async Task CreateAvatar(byte LoadMode, BasisLoadableBundle BasisLoadableBundle)
         {
             await BasisAvatarFactory.LoadAvatarLocal(this, LoadMode, BasisLoadableBundle, this.transform.position, Quaternion.identity);
-            BasisDataStore.SaveAvatar(BasisLoadableBundle.BasisRemoteBundleEncrypted.RemoteBeeFileLocation, LoadMode, LoadFileNameAndExtension);
             OnLocalAvatarChanged?.Invoke();
+            BasisDataStore.SaveAvatar(BasisLoadableBundle.BasisRemoteBundleEncrypted.RemoteBeeFileLocation, LoadMode, LoadFileNameAndExtension);
         }
 
         /// <summary>
@@ -397,10 +397,7 @@ namespace Basis.Scripts.BasisSdk.Players
         /// </summary>
         public void DriveAudioToViseme()
         {
-            LocalVisemeDriver.ProcessAudioSamples(
-                BasisLocalMicrophoneDriver.processBufferArray,
-                1,
-                BasisLocalMicrophoneDriver.processBufferArray.Length);
+            LocalVisemeDriver.ProcessAudioSamples(BasisLocalMicrophoneDriver.processBufferArray,1,BasisLocalMicrophoneDriver.processBufferArray.Length);
         }
         public void Simulate(float DeltaTime)
         {
@@ -435,6 +432,10 @@ namespace Basis.Scripts.BasisSdk.Players
             LocalHandDriver.UpdateFingers(DeltaTime);
 
             AfterSimulateOnLate?.Invoke();
+        }
+        public void OnDrawGizmosSelected()
+        {
+            LocalSeatDriver.DrawGizmosSelected();
         }
         public static void FireJustBeforeNetworkApply()
         {

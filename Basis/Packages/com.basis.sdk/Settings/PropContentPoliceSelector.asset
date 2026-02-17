@@ -350,3 +350,5 @@ MonoBehaviour:
   - VRCMarker.MarkerSettings
   - VRCMarker.MarkerSync
   - VRCMarker.MarkerTrail
+  - RotateCube
+  - CustomAnimation

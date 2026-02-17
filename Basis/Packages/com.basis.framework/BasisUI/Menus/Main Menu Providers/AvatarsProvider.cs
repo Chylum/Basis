@@ -1,4 +1,3 @@
-using Basis.Scripts.UI.UI_Panels;
 using UnityEngine;
 
 namespace Basis.BasisUI
@@ -14,6 +13,8 @@ namespace Basis.BasisUI
         public override string Title => "Avatars";
         public override string IconAddress => AddressableAssets.Sprites.Avatars;
         public override int Order => 2;
+
+        public override bool Hidden => false;
 
         public override void RunAction()
         {

@@ -16,11 +16,11 @@
 		<type fullname="System.DayOfWeek" preserve="all"/>
 		<type fullname="System.Double" preserve="all"/>
 		<type fullname="System.Exception" preserve="all"/>
-        <type fullname="System.IO.BinaryReader" preserve="all"/>
-        <type fullname="System.IO.BinaryWriter" preserve="all"/>
-        <type fullname="System.IO.MemoryStream" preserve="all"/>
-        <type fullname="System.IO.Stream" preserve="all"/>
-        <type fullname="System.IDisposable" preserve="all"/>
+		<type fullname="System.IO.BinaryReader" preserve="all"/>
+		<type fullname="System.IO.BinaryWriter" preserve="all"/>
+		<type fullname="System.IO.MemoryStream" preserve="all"/>
+		<type fullname="System.IO.Stream" preserve="all"/>
+		<type fullname="System.IDisposable" preserve="all"/>
 		<type fullname="System.Int16" preserve="all"/>
 		<type fullname="System.Int32" preserve="all"/>
 		<type fullname="System.Int64" preserve="all"/>
@@ -36,6 +36,7 @@
 		<type fullname="System.ValueTuple" preserve="all"/>
 		<type fullname="System.Void" preserve="all"/>
 		<type fullname="<PrivateImplementationDetails>" preserve="all"/>
+		<type fullname="System.Text.Encoding" preserve="all"/>
 	</assembly>
 	<assembly fullname="UnityEngine">
 		<type fullname="UnityEngine.CustomRenderTexture" preserve="all"/>
@@ -72,6 +73,7 @@
 		<type fullname="UnityEngine.RenderSettings" preserve="all"/>
 		<type fullname="UnityEngine.Rendering.AmbientMode" preserve="all"/>
 		<type fullname="UnityEngine.DynamicGI" preserve="all"/>
+		<type fullname="UnityEngine.Animator" preserve="all"/>
 	</assembly>
 	<assembly fullname="BasisShims">
 		<type fullname="Basis.BasisUrl" preserve="all"/>
@@ -110,5 +112,6 @@
 	<assembly fullname="Unity.TextMeshPro">
 		<type fullname="TMPro.TextMeshPro" preserve="all"/>
 		<type fullname="TMPro.TMP_Text" preserve="all"/>
+		<type fullname="TMPro.TMP_InputField" preserve="all"/>
 	</assembly>
 </linker>

@@ -181,3 +181,5 @@ MonoBehaviour:
   - UnityEngine.UI.Button
   - UIButton
   - TestButton
+  - RotateCube
+  - CustomAnimation

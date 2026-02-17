@@ -2,10 +2,8 @@ using Basis.Scripts.BasisSdk.Players;
 using Basis.Scripts.Common;
 using Basis.Scripts.Drivers;
 using Basis.Scripts.Networking;
-using System;
 using System.Threading.Tasks;
 using UnityEngine;
-using static uLipSync.BasisLipSyncJob;
 
 namespace Basis.BasisUI
 {
@@ -20,6 +18,8 @@ namespace Basis.BasisUI
         public override string Title => TitleStatic;
         public override string IconAddress => AddressableAssets.Sprites.Servers;
         public override int Order => 1;
+
+        public override bool Hidden => false;
 
         public override void RunAction()
         {
@@ -142,7 +142,8 @@ namespace Basis.BasisUI
             connectButton.ButtonComponent.interactable = false;
             Info.SetTitle("Connecting");
             Info.SetDescription("Initalizing...");
-            if (!string.IsNullOrEmpty(usernameField.Value))
+            string UserName = usernameField._inputField.text;
+            if (!string.IsNullOrEmpty(UserName))
             {
                 if (BasisNetworkConnection.LocalPlayerIsConnected)
                 {
@@ -153,7 +154,7 @@ namespace Basis.BasisUI
                 }
                 Info.SetTitle("Connecting");
                 Info.SetDescription("Preparing...");
-                BasisLocalPlayer.Instance.DisplayName = usernameField.Value;
+                BasisLocalPlayer.Instance.DisplayName = UserName;
                 BasisLocalPlayer.Instance.SetSafeDisplayname();
                 BasisDataStore.SaveString(BasisLocalPlayer.Instance.DisplayName, LoadFileName);
                 if (BasisNetworkManagement.Instance)

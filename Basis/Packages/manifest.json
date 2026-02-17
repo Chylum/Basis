@@ -1,8 +1,9 @@
 {
   "dependencies": {
     "com.llealloo.audiolink": "https://github.com/llealloo/audiolink.git?path=Packages/com.llealloo.audiolink#3.0.0",
+    "com.needle.compilation-visualizer": "1.8.8",
     "com.unity.2d.sprite": "1.0.0",
-    "com.unity.addressables": "2.8.0",
+    "com.unity.addressables": "2.8.1",
     "com.unity.animation.rigging": "1.4.1",
     "com.unity.device-simulator.devices": "1.0.1",
     "com.unity.ide.rider": "3.0.39",
@@ -61,5 +62,13 @@
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
   },
-  "scopedRegistries": []
+  "scopedRegistries": [
+    {
+      "name": "OpenUPM",
+      "url": "https://package.openupm.com/",
+      "scopes": [
+        "com.needle.compilation-visualizer"
+      ]
+    }
+  ]
 }
